@@ -1,0 +1,25 @@
+commentout.vimで設定されているコマンドの一覧
+コメントアウトが格段にやりやすくなる
+,/    Java, C++の一行コメント
+,#    shell, perl,他
+,>    mail, quote
+,"    vimスクリプト
+,%    latex, prolog
+,!    assembly
+,;    scheme
+,-    SQL, Haskell
+,c    上記の種類のコメントを削除するコマンド
+
+複数行コマンド
+コマンド    コメントの種類
+,*    Java, C++の複数行コメント
+,(    Standard ML
+,<    HTML
+,{    Haskell
+,d    上記の種類のコメントを削除するコマンド
+
+複数行一括コメント
+コマンド    コメントの種類
+,b    Java, C++の複数行コメント
+,h    HTML, XMLの複数コメント
+
