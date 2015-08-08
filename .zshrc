@@ -1,8 +1,6 @@
 # 基本設定
 # ----------------------------
 
-# for emscripten
-export LLVM_ROOT="$HOME/workspace/C/wvc/myfastcomp/emscripten-fastcomp/build/bin"
 # xmonadのModキー変更を適用
 export PATH=$PATH:$HOME/.cabal/bin
 xmodmap $HOME/.Xmodmap

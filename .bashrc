@@ -2,8 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# for emscripten
-export LLVM_ROOT="$HOME/workspace/C/wvc/myfastcomp/emscripten-fastcomp/build/bin"
 # If not running interactively, don't do anything
 # xmonadのModキー変更を適用
 export PATH=$PATH:$HOME/.cabal/bin
