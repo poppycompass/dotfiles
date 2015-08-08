@@ -14,7 +14,7 @@ URxvt.depth:                32
 URxvt.geometry:             90x30
 URxvt.transparent:          false
 ! 選択していないときに色が変わる
-URxvt.fading:               70
+URxvt.fading:               60
 ! URxvt.urgentOnBell:         true
 ! URxvt.visualBell:           true
 URxvt.loginShell:           true
@@ -33,16 +33,6 @@ urxvt*letterSpace: 0
 ! Scrollbar
 URxvt.scrollStyle:          rxvt
 URxvt.scrollBar:            false
-
-! Perl extensions
-!URxvt.perl-ext-common:      default,tabbedex,clipboard
-!URxvt.matcher.button:       1
-!URxvt.urlLauncher:          google-chrome
-!URxvt.keysym.M-t:           perl:tabbedex:new_tab
-!URxvt.keysym.M-n:           perl:tabbedex:next_tab
-!URxvt.keysym.M-p:           perl:tabbedex:prev_tab
-!URxvt.tabbed.no-tabbedex-keys: true
-!URxvt.tabbed.not-consumable-keys: 0xff22, 0xff23, 0xff2a
 
 ! Cursor
 URxvt.cursorBlink:          true
@@ -103,15 +93,3 @@ URxvt*color14:      #4eb4fa
 !white
 URxvt*color7:       #5f5f5f
 URxvt*color15:      #d0d0d0
-
-!-------------------------------------------------------------------------------
-! Emacs settings
-!-------------------------------------------------------------------------------
-! 透明にできない...
-Emacs*foreground: white
-Emacs*background: black
-
-!emacs.transparent: false
-!emacs*shading: 10
-
-Emacs*useXIM: true
