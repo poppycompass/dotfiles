@@ -1,9 +1,10 @@
 #!/bin/sh
-# NeoBundle install, use first execution
+# NeoBundle install, use only first
 # git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+# mkdir ~/.xmonad
 ln -sf ~/dotfiles/colors ~/.vim/
 ln -sf ~/dotfiles/userautoload ~/.vim/
-ln -sf ~/dotfiles/xmonad.hs ~/.xmonad
+ln -sf ~/dotfiles/xmonad.hs ~/.xmonad/xmonad.hs
 ln -sf ~/dotfiles/.Xmodmap ~/.Xmodmap
 ln -sf ~/dotfiles/.Xresources ~/.Xresources
 ln -sf ~/dotfiles/.conkyrc ~/.conkyrc
