@@ -139,6 +139,8 @@ au BufEnter * execute ":lcd" . expand("%:p:h")
 nmap <silent> ,r :w<CR>:QuickRun<CR>
 " quit
 nmap ,c :q<CR>
+" quit all
+nmap ,q :qa<CR>
 " write
 nmap ,w :w<CR>
 " ファイルタイプの設定

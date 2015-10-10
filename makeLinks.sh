@@ -8,7 +8,6 @@ ln -sf ~/dotfiles/xmonad.hs ~/.xmonad/xmonad.hs
 ln -sf ~/dotfiles/.Xmodmap ~/.Xmodmap
 ln -sf ~/dotfiles/.Xresources ~/.Xresources
 ln -sf ~/dotfiles/.conkyrc ~/.conkyrc
-ln -sf ~/dotfiles/.ghci ~/.ghci
 ln -sf ~/dotfiles/.kterm.kmp ~/.kterm.kmp
 ln -sf ~/dotfiles/.screenrc ~/.screenrc
 ln -sf ~/dotfiles/.xmobarrc ~/.xmobarrc
