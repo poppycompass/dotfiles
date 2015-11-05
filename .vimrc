@@ -143,12 +143,16 @@ nmap ,c :q<CR>
 nmap ,q :qa<CR>
 " write
 nmap ,w :w<CR>
+" write and quit
+nmap ,s :w<CR>:q<CR>
 " ファイルタイプの設定
 nmap ,f :set ft=
 " エンコード設定(utf8, sjis...)
 nmap ,e :e ++enc=
 " バイナリ編集, rで書き換え
 nmap ,V :Vinarise<CR>
+" tabnew
+nmap ,t :tabnew<CR>:Explore<CR>
 " .vimrcの反映
 nmap <silent> .s :w<CR>:source ~/.vimrc<CR>:noh<CR>
 " GNU Make

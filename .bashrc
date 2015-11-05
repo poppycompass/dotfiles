@@ -3,9 +3,7 @@
 # for examples
 
 # If not running interactively, don't do anything
-# xmonadのModキー変更を適用
-export PATH=$PATH:$HOME/.cabal/bin
-xmodmap $HOME/.Xmodmap
+# export PATH=$PATH:$HOME/.cabal/bin
 alias nautilus='nautilus --no-desktop --browser'
 case $- in
     *i*) ;;

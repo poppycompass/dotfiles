@@ -1,9 +1,7 @@
 # 基本設定
 # ----------------------------
 
-# xmonadのModキー変更を適用
-export PATH=$PATH:$HOME/.cabal/bin
-xmodmap $HOME/.Xmodmap
+# export PATH=$PATH:$HOME/.cabal/bin
 # ファイルにはless, ディレクトリにはlsを実行する
 function l() {
    # if the argument is a single file or stdin is pipe
