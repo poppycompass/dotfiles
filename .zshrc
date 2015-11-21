@@ -176,6 +176,7 @@ alias 'vi'='vim'
 alias 'v'='vim'
 alias gh='ghci'
 
+alias 'hd'='hexdump -C'
 alias d='cd'
 alias rm='rm -i'
 alias mv='mv -i'
