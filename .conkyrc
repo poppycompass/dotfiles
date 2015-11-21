@@ -1,73 +1,172 @@
 # conky configuration
-#
-# The list of variables has been removed from this file in favour
-# of keeping the documentation more maintainable.
-# Check http://conky.sf.net for an up-to-date-list.
-#
-# For ideas about how to modify conky, please see:
-# http://crunchbanglinux.org/forums/topic/59/my-conky-config/
-#
-# For help with conky, please see:
-# http://crunchbanglinux.org/forums/topic/2047/conky-help/
-#
-# Enjoy! :)
-##############################################
-# Settings
-##############################################
-background yes
+# edited by darcon@gmail.com
+ 
+# set to yes if you want Conky to be forked in the background
+background no
+ 
+# X font when Xft is disabled, you can pick one with program xfontsel
+#font 5x7
+#font 6x10
+#font 7x13
+#font 8x13
+#font 9x15
+#font *mintsmild.se*
+#font -*-*-*-*-*-*-34-*-*-*-*-*-*-*
+ 
+ 
+# Use Xft?
 use_xft yes
-#xftfont Liberation Sans:size=9 # default
-#override_utf8_locale no   # default
-override_utf8_locale yes   # add
-xftfont TakaoGothic:style=Regular:size=10.5 # add
-xftalpha 1
-update_interval 1.0
+ 
+# Xft font when Xft is enabled
+xftfont terminus:size=10
+#xftfont Dejavu Sans Mono:size=9
+ 
+# Text alpha when using Xft
+xftalpha 0.8
+ 
+# Print everything to console?
+# out_to_console no
+ 
+# mail spool
+#mail_spool $MAIL
+ 
+# Update interval in seconds
+update_interval 5.0
+ 
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
 total_run_times 0
+ 
+# Create own window instead of using desktop (required in nautilus)
+#own_window_colour brown
+own_window_class Conky
 own_window yes
+own_window_type conky
 own_window_transparent yes
-own_window_type desktop
-#own_window_argb_visual yes
 own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_argb_visual yes
+own_window_argb_value 255
+ 
+# Use double buffering (reduces flicker, may not work for everyone)
 double_buffer yes
-minimum_size 200 200
-#maximum_width 240   # default
-maximum width 280    # add
-draw_shades no
+ 
+# Minimum size of text area
+minimum_size 210 5
+maximum_width 220
+ 
+# Draw shades?
+draw_shades yes
+ 
+# Draw outlines?
 draw_outline no
+ 
+# Draw borders around text
 draw_borders no
-draw_graph_borders no
-#default_color 656667 #default
-default_color 000000  # add
-default_shade_color 000000
-default_outline_color 828282
-alignment top_right
-gap_x 12
-gap_y 56
+ 
+# Stippled borders?
+stippled_borders 8
+ 
+# border margins
+#border_margin 4
+ 
+# border width
+border_width 1
+ 
+# Default colors and also border colors
+default_color white
+default_shade_color black
+default_outline_color white
+ 
+# Text alignment, other possible values are commented
+#alignment top_left
+#alignment top_right
+alignment bottom_left
+#alignment bottom_right
+ 
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 1695
+gap_y 10
+ 
+# Subtract file system buffers from used memory?
 no_buffers yes
+ 
+# set to yes if you want all text to be in uppercase
 uppercase no
+ 
+# number of cpu samples to average
+# set to 1 to disable averaging
 cpu_avg_samples 2
-##############################################
-#  Output
-##############################################
-TEXT
-S Y S T E M    I N F O
-${hr}
-#Host:$alignr$nodename # default
-# add Date
-Kernel Version:$kernel | Architecture:$machine
-Date:$alignr${time %Y/%m/%d %A}
-Uptime:$alignr$uptime
-Freq: ${freq_g} GHz  |  Processes: $processes  |  Running: $running_processes
-CPU  usage:$alignr${cpu cpu0}%
-RAM  usage:$alignr$mem/$memmax($memperc%)
-Swap usage:$alignr$swap/$swapmax($swapperc%)
-Disk usage:$alignr${fs_used /}/${fs_size /}($fs_used_perc%)
-
-
-N E T W O R K I N G
-${hr}
-IP:${alignr}${addr eth0}
-Up size:$alignr$totalup
-Down size:$alignr$totaldown
-Up speed:$alignr$totaldown
-Down speed:$alignr${downspeed eth0}
+ 
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+ 
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+ 
+ 
+# Add spaces to keep things from moving about?  This only affects certain objects.
+#use_spacer left
+#Note: doesn't work in conky 1.2 =(
+         
+#   mldonkey_hostname     Hostname for mldonkey stuff, defaults to localhost
+#   mldonkey_port         Mldonkey port, 4001 default
+#   mldonkey_login        Mldonkey login, default none
+#   mldonkey_password     Mldonkey password, default none
+         
+# stuff after 'TEXT' will be formatted on screen
+         
+        TEXT
+         
+         
+        ${font Droid Sans:size=11}[SYSTEM] ${font }${hr 1}${voffset 5}
+        ${color #ffd700}${font openlogos:size=26}t${font }${color } ${alignr}${voffset -7}Sys: ${color lightgrey}$sysname on $machine${color }
+        ${voffset 7}${color #1793d1}${font openlogos:size=24}B${font }${color } ${alignr}${voffset -7}Kern: ${color lightgrey}$kernel${color }
+        ${voffset 13}Date: $alignr${color lightgrey}${time  %D}${color }
+Time: $alignr${color lightgrey}${time %Z, }${time %H:%M}${color }
+UpTime: $alignr${color lightgrey}$uptime${color }
+ 
+${font Droid Sans:size=11}[PROCESSOR] ${font }${hr 1}${voffset 5}
+Proc: ${alignr}${color lightgrey}i5-M540 2.53GHz${color }
+Freq: ${alignr}${color lightgrey}${freq}MHz${color }
+Load: ${alignr}${color lightgrey}${loadavg}${color }
+Core: ${alignr}${color lightgrey}$cpu% (${execi 10 sensors | grep ^"Core 0" | cut -c 17-24})${color }
+# ${alignr}${cpugraph 20,170 000000 ffffff}
+#Load: $alignr${color lightgrey}$loadavg${color }
+#Processes: $alignr${color lightgrey}$processes${color }
+#Running: $alignr${color lightgrey}$running_processes${color }
+Highest CPU:
+${color #ddaa00} ${top name 1}${top_mem cpu 1}${color }
+${color lightgrey} ${top name 2}${top cpu 2}${color }
+${color lightgrey} ${top name 3}${top cpu 3}${color }
+#${color lightgrey} ${top name 4}${top cpu 4}${color }
+ 
+${font Droid Sans:size=11}[MEMORY] ${font }${hr 1}${voffset 5}
+MEM: $alignr${color lightgrey}$memperc% ($mem/$memmax)${color }
+$alignr${color lightgrey}${membar 5,170}${color }
+Highest MEM:
+${color #ddaa00} ${top_mem name 1}${top_mem mem 1}${color }
+${color lightgrey} ${top_mem name 2}${top_mem mem 2}${color }
+${color lightgrey} ${top_mem name 3}${top_mem mem 3}${color }
+#${color lightgrey} ${top_mem name 4}${top_mem mem 4}${color }
+ 
+${font Droid Sans:size=11}[NETWORK] ${font }${hr 1}${voffset 5}
+#External IP: ${execi 36000 wget -O - http://www.whatismyip.com/automation/n09230945.asp}
+LAN IP: $alignr${color lightgrey}${addr enp0s25}${color}
+Up: $alignr${color lightgrey}${upspeed enp0s25} /s${color}
+# $alignr${upspeedgraph enp0s25 20,170 000000 ffffff}
+Down: $alignr${color lightgrey}${downspeed enp0s25} /s${color}
+#$alignr${downspeedgraph enp0s25 20,170 000000 ffffff}
+#        ${font Droid Sans:size=11}[STORAGE] ${font}${hr 1}${voffset 5}
+Swap: $alignr${color lightgrey}$swapperc% ($swap/$swapmax)${color }
+$alignr${color lightgrey}${swapbar 5,170}${color }
+ 
+/boot: $alignr${color lightgrey}${fs_used_perc /boot}% (${fs_used /boot}/${fs_size /boot})${color }
+$alignr${color lightgrey}${fs_bar 5,170 /boot}${color }
+ 
+/: $alignr${color lightgrey}${fs_used_perc /}% (${fs_used /}/${fs_size /})${color }
+$alignr${color lightgrey}${fs_bar 5,170 /}${color }
+ 
+/home: $alignr${color lightgrey}${fs_used_perc /home}% (${fs_used /home}/${fs_size /home})${color }
+$alignr${color lightgrey}${fs_bar 5,170 /home}${color }

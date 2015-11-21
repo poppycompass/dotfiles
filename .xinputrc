@@ -1,3 +1,15 @@
-# im-config(8) generated on Tue, 09 Dec 2014 02:43:27 +0900
-run_im ibus
-# im-config signiture: 9859ad6c959548215bc46c785be1c871  -
+#!/bin/sh
+
+# $HOME/.xinitrc
+#
+# User xinitrc file, used by all X sessions started by xinit (startx)
+
+# invoke global X session script
+# . /etc/X11/Xsession
+
+# xmonadのModキー変更を適用
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS="@im=ibus"
+#export QT_IM_MODULE=ibus
+#export PATH=$PATH:$HOME/.cabal/bin
+#xmodmap $HOME/.Xmodmap

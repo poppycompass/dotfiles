@@ -3,10 +3,12 @@
 
 export PATH=$PATH:$HOME/.cabal/bin
 export SDL_VIDEO_X11_DGAMOUSE=0
+export VIDEO_FORMAT="NISC"
+xmodmap .Xmodmap
 
 # cd && ls
 function cd() {
-    builtin cd $@ && ls;
+    builtin cd $@ && ls --color=auto;
 }
 # ファイルにはless, ディレクトリにはlsを実行する
 function l() {
@@ -170,8 +172,9 @@ alias egrep='egrep --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 
-alias vi='vim'
-alias v='vim'
+alias 'vi'='vim'
+alias 'v'='vim'
+alias gh='ghci'
 
 alias d='cd'
 alias rm='rm -i'
@@ -263,8 +266,8 @@ setopt interactive_comments
 # プロンプトが表示されるたびにプロンプト文字列を評価、置換する
 setopt prompt_subst
 
-# プロンプトの表示をBashと同じようにする
-PROMPT="%n@ubuntu:%~$ % "
+# プロンプトの表示
+PROMPT="%F{yellow}%B%n%f%b@%F{green}%U%m%f%u:%F{blue}%B%~%f%b$ % "
 
 # プロンプト指定(コマンドの続き)
 PROMPT2='[%n]> '

@@ -10,35 +10,38 @@ case $- in
       *) return;;
 esac
 
+# cd && ls
+function cd() {
+    builtin cd $@ && ls --color=auto;
+}
 # ファイルにはless, ディレクトリにはlsを実行する
-l() {
+function l() {
    # if the argument is a single file or stdin is pipe
    if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
-      ${PAGER:-less -R} "$@"
+      ${PAGER:-less} "$@"
    else
       ls -alF --color=auto "$@"
    fi
 }
 
 # プロセスリストをgrep する ex: p apache2
-p() {
-#libc_base = 0xb7e11000
+function p() {
    if [[ $# -gt 0 ]]; then
-      ps auxww | grep "$@"
+      ps aux | grep "$@"
    else
       ps aux
    fi
 }
 
-# コマンドヒストリをgrepする．引数がないときは，直近50件のみを表示する
-h() {
+# コマンドヒストリをgrepする．
+function h() {
    if [[ $# -gt 0 ]]; then
-      history | tac | sort -k2 -u | sort | grep "$@"
+#      history | tac | sort -k2 -u | sort | grep "$@"
+      history | grep "$@"
    else
-      history 50
+      history
    fi
 }
-
 # 通常シェルが終了する時に更新される.bash_historyをコマンド実行後とに更新する 複数シェルを起動している状態で，他のシェルのヒストリを手元に反映させたいときはhisotry -n
 if [[ -n "$PS1" ]]; then
    shopt -s histappend
@@ -139,7 +142,15 @@ alias ll='ls -alF'
 alias la='ls -A'
 #alias l='ls -CF'
 
-alias vi='vim'
+alias 'vi'='vim'
+alias 'v'='vim'
+alias gh='ghci'
+
+alias d='cd'
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -ir'
+alias mkdir='mkdir -p'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

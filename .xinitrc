@@ -9,4 +9,8 @@
 
 # xmonadのModキー変更を適用
 #xmodmap $HOME/.Xmodmap
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus-daemon -drx
 export PATH=$PATH:$HOME/.cabal/bin

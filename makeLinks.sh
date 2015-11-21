@@ -16,7 +16,7 @@ fi
 
 for file in .?*
 do
-    if [ $file != '..' ] && [ $file != '.git' ]; then
+    if [ $file != '..' ] && [ $file != '.Xmodmap' ] && [ $file != '.git' ]; then
         ln -sf $HOME/dotfiles/$file $HOME
     fi
 done
