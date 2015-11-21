@@ -135,48 +135,71 @@ set wildmenu wildmode=list:full "タブによるファイル名補完.マッチ�
 au BufEnter * execute ":lcd" . expand("%:p:h")
 
 " キーバインド
+" 文字移動
+noremap j gj
+noremap k gk
+" 改行
+nmap <CR> o<Esc>
+" 押しやすいEsc
+inoremap <C-k> <Esc>
+cnoremap <C-k> <Esc>
+nnoremap <C-k> <Esc>
+" nohlsearch
+nmap <silent> ,, :nohlsearch<CR>
+" only
+nmap <silent> ,o :only<CR>
 " Quickrun
 nmap <silent> ,r :w<CR>:QuickRun<CR>
 " quit
-nmap ,c :q<CR>
+nmap <silent> ,c :q<CR>
 " quit all
-nmap ,q :qa<CR>
+nmap <silent> ,q :qa<CR>
 " write
-nmap ,w :w<CR>
+nmap <silent> ,w :w<CR>
 " write and quit
-nmap ,s :w<CR>:q<CR>
+nmap <silent> ,s :w<CR>:q<CR>
 " ファイルタイプの設定
 nmap ,f :set ft=
 " エンコード設定(utf8, sjis...)
 nmap ,e :e ++enc=
 " バイナリ編集, rで書き換え
-nmap ,V :Vinarise<CR>
+nmap <silent> ,V :Vinarise<CR>
 " tabnew
-nmap ,t :tabnew<CR>:Explore<CR>
+nmap <silent> ,t :tabnew<CR>:Explore<CR>
 " .vimrcの反映
 nmap <silent> .s :w<CR>:source ~/.vimrc<CR>:noh<CR>
 " GNU Make
-nmap ,d :w<CR>:copen<CR>:make<CR><CR>
+nmap <silent> ,d :w<CR>:copen<CR>:make<CR><CR>
 " GNU Make test
-nmap ,D :w<CR>:copen<CR>:make<CR><CR>:make test<CR><CR>
+nmap <silent> ,D :w<CR>:copen<CR>:make<CR><CR>:make test<CR><CR>
+" 単語の小文字化
+nmap ,u bguwA
+" 単語の大文字化
+nmap ,U bgUwA
 " 畳み込み 現在畳み込まれている行で行うと一行追加できる. 
 nmap ,z zfj
 " C等の関数向け畳み込み
 nmap ,{ zfa{
 " 水平分割してしたのウィンドウでブラウジング開始 -> Netrwの利用コマンド
-nmap ,h :Hexplore<CR>
+nmap <silent> ,h :Hexplore<CR>
+" Explore
+nmap <silent> ,E :Explore<CR>
 " Haskellの型推測
-nmap \t :w<CR>:GhcModType<CR>
+nmap <silent> \t :w<CR>:GhcModType<CR>
 " 型推測によるハイライトを消す
-nmap \n :GhcModTypeClear<CR>
+nmap <silent> \n :GhcModTypeClear<CR>
 " 現在のバッファで開いているHaskellのコードに対してコンパイルエラー・警告をquickfixウィンドウに表示
-nmap \c :w<CR>:GhcModCheck<CR>
+nmap <silent> \c :w<CR>:GhcModCheck<CR>
 " hlintからのメッセージをquickfixウィンドウに表示する
-nmap \h :w<CR>:GhcModLint<CR>
+nmap <silent> \h :w<CR>:GhcModLint<CR>
 " <Tab>で現在行をインデント
 nnoremap <Tab> >>
 " Virsual modeで選択した部分を * で検索できる
 vnoremap * "zy:let @/ = @z<CR>n
+
+" For Arch Linux
+" xlock
+" nmap <C-l> :!xlock<CR>
 
 if &term == "rxvt-unicode-256color"
    " ~/.vim/colors/urxvt.vim
