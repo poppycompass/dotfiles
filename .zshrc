@@ -174,13 +174,17 @@ alias la='ls -A'
 
 alias 'vi'='vim'
 alias 'v'='vim'
-alias gh='ghci'
+alias 'gh'='ghci'
 
-alias d='cd'
-alias rm='rm -i'
-alias mv='mv -i'
-alias cp='cp -ir'
-alias mkdir='mkdir -p'
+alias 'hd'='hexdump -C'
+alias 'd'='cd'
+alias 'f'='file'
+alias 'ob'='objdump -M intel -d'
+alias 'rm'='rm -i'
+alias 'mv'='mv -i'
+alias 'cp'='cp -ir'
+alias 'mkdir'='mkdir -p'
+alias '| l'='| less'
 
 # Xmonad for GNOME
 alias nautilus='nautilus --no-desktop --browser'
@@ -270,9 +274,9 @@ setopt prompt_subst
 PROMPT="%F{yellow}%n%f@%F{green}%U%m%f%u:%F{blue}%B%~%f%b$ % "
 
 # プロンプト指定(コマンドの続き)
-PROMPT2='[%n]> '
+PROMPT2='[%F{yellow}%n%f]> '
 
 # もしかして時のプロンプト指定
-SPROMPT="%{$fg[blue]%}%{$suggest%}possible : %B%r%b %{$fg[blue]%}? [y,n,a,e]:${reset_color} "
+SPROMPT="%{$fg[green]%}%{$suggest%}possible : %B%r%b %{$fg[green]%}? [y,n,a,e]:${reset_color} "
 
 RPROMPT="%1(v|%F{green}%1v%f|)"

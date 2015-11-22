@@ -141,9 +141,10 @@ noremap k gk
 " 改行
 nmap <CR> o<Esc>
 " 押しやすいEsc
+nnoremap <C-k> <Esc>
 inoremap <C-k> <Esc>
 cnoremap <C-k> <Esc>
-nnoremap <C-k> <Esc>
+vnoremap <C-k> <Esc>
 " nohlsearch
 nmap <silent> ,, :nohlsearch<CR>
 " only
@@ -199,7 +200,7 @@ vnoremap * "zy:let @/ = @z<CR>n
 
 " For Arch Linux
 " xlock
-" nmap <C-l> :!xlock<CR>
+nmap <C-l> :!xlock<CR>
 
 if &term == "rxvt-unicode-256color"
    " ~/.vim/colors/urxvt.vim
