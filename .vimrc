@@ -141,7 +141,10 @@ noremap k gk
 " 改行
 nmap <CR> o<Esc>
 " 押しやすいEsc
-noremap <C-k> <Esc>
+nnoremap <C-k> <Esc>
+inoremap <C-k> <Esc>
+cnoremap <C-k> <Esc>
+vnoremap <C-k> <Esc>
 " nohlsearch
 nmap <silent> ,, :nohlsearch<CR>
 " only
