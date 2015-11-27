@@ -181,8 +181,10 @@ nmap ,U bgUwA
 nmap ,z zfj
 " C等の関数向け畳み込み
 nmap ,{ zfa{
-" 水平分割してしたのウィンドウでブラウジング開始 -> Netrwの利用コマンド
+" 水平分割して下のウィンドウでブラウジング開始 -> Netrwの利用コマンド
 nmap <silent> ,h :Hexplore<CR>
+" 縦分割してExplore
+nmap <silent> ,v :Vexplore<CR>
 " Explore
 nmap <silent> ,E :Explore<CR>
 " Haskellの型推測
