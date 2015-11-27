@@ -139,7 +139,7 @@ au BufEnter * execute ":lcd" . expand("%:p:h")
 noremap j gj
 noremap k gk
 " 改行
-nmap <CR> o<Esc>
+nmap <C-j> o<Esc>
 " 押しやすいEsc
 nnoremap <C-k> <Esc>
 inoremap <C-k> <Esc>
