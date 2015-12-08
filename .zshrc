@@ -4,6 +4,9 @@
 export PATH=$PATH:$HOME/.cabal/bin
 export SDL_VIDEO_X11_DGAMOUSE=0
 export VIDEO_FORMAT="NISC"
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
 xmodmap .Xmodmap
 
 # cd && ls
