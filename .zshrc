@@ -189,6 +189,9 @@ alias 'cp'='cp -ir'
 alias 'mkdir'='mkdir -p'
 alias '| l'='| less'
 
+# for arch
+alias 'pac'='pacman'
+
 # Xmonad for GNOME
 alias nautilus='nautilus --no-desktop --browser'
 # set a fancy prompt (non-color, unless we know we "want" color)

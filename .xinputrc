@@ -8,8 +8,8 @@
 # . /etc/X11/Xsession
 
 # xmonadのModキー変更を適用
-#export GTK_IM_MODULE=ibus
-#export XMODIFIERS="@im=ibus"
-#export QT_IM_MODULE=ibus
-#export PATH=$PATH:$HOME/.cabal/bin
-#xmodmap $HOME/.Xmodmap
+export GTK_IM_MODULE=ibus
+export XMODIFIERS="@im=ibus"
+export QT_IM_MODULE=ibus
+export PATH=$PATH:$HOME/.cabal/bin
+# xmodmap $HOME/.Xmodmap
