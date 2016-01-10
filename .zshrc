@@ -188,6 +188,7 @@ alias 'mv'='mv -i'
 alias 'cp'='cp -ir'
 alias 'mkdir'='mkdir -p'
 alias '| l'='| less'
+alias '../'='cd ../'
 
 # for arch
 alias 'pac'='pacman'
