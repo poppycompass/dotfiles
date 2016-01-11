@@ -199,6 +199,9 @@ nmap <silent> \h :w<CR>:GhcModLint<CR>
 nnoremap <Tab> >>
 " Virsual modeで選択した部分を * で検索できる
 vnoremap * "zy:let @/ = @z<CR>n
+" バッファ移動
+nmap <silent> <C-o> :bp<CR>
+nmap <silent> <C-i> :bn<CR>
 
 " For Arch Linux
 " xlock
