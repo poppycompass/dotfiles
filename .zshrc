@@ -7,6 +7,8 @@ export VIDEO_FORMAT="NISC"
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
+export CTF=$HOME/Downloads/ctf
+export TC=$HOME/work/templates/ctf
 xmodmap .Xmodmap
 
 # cd && ls
@@ -50,6 +52,33 @@ if [[ -n "$PS1" ]]; then
       find "${2:-.}" \! -type d \! -path "*/.*" -path "*$1*" |& grep -v -F ": Permission denied" | sort
    }
 fi
+
+# ctf
+# plt一覧表示
+function plt() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | grep "@plt>:"
+    else
+        echo "Usage: plt ./bin"
+    fi
+}
+# gotアドレスの表示
+function got() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | grep "@plt>:" -A1
+    else
+        echo "Usage: got ./bin"
+    fi
+}
+# objdump -M intel -d ./bin | less
+function ob() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | less
+    else
+        echo "Usage: ob ./bin"
+    fi
+}
+
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -182,13 +211,16 @@ alias 'gh'='ghci'
 alias 'hd'='hexdump -C'
 alias 'd'='cd'
 alias 'f'='file'
-alias 'ob'='objdump -M intel -d'
 alias 'rm'='rm -i'
 alias 'mv'='mv -i'
 alias 'cp'='cp -ir'
 alias 'mkdir'='mkdir -p'
 alias '| l'='| less'
 alias '../'='cd ../'
+alias 'st'='strings'
+alias 'gdb'='gdb -q'
+alias 'ctf'="cd $CTF"
+alias 'ct'="cd $HOME/work/test"
 
 # for arch
 alias 'pac'='pacman'

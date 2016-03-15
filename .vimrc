@@ -31,11 +31,11 @@ else
 
    " 補完 "
    if has('lua') && ( (v:version >= 703 && has('patch885')) || v:version >= 704)
-"      NeoBundle 'Shougo/neocomplete'
-"      let g:neocomplete#enable_at_startup = 1
+      NeoBundle 'Shougo/neocomplete'
+      let g:neocomplete#enable_at_startup = 1
    else
-"      NeoBundle 'Shougo/neocomplcache'
-"      let g:neocomplcache_enable_at_startup = 1
+      NeoBundle 'Shougo/neocomplcache'
+      let g:neocomplcache_enable_at_startup = 1
    endif
 
    " 以下各種プラグイン "
@@ -63,6 +63,10 @@ else
    NeoBundle 'Align'
    " バイナリ編集 "
    NeoBundle 'Shougo/vinarise'
+   " VimShell
+   NeoBundle 'Shougo/vimshell'
+   " Unite
+   NeoBundle 'Shougo/unite.vim'
 
    " プラグインここまで "
    call neobundle#end()
@@ -111,6 +115,13 @@ set cindent "改造が可能なインデント。詳しくはググれ"
 " バックアップ
 set history=1000
 
+" エンコード
+" エラーが出たら順次次のエンコードを試していく．もし日本語で上手く表示できなければ以下を順次試してみること
+" ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,cp932
+" set fileencodings=utf-8, sjis,
+" euc-jpと書くとエラーが出る．とにかく','の後にスペースを入れないこと．下手に綺麗に書こうとすると痛い目にあう
+set fileencodings=utf-8,sjis,euc-jp
+
 "カーソル移動関連設定"
 set whichwrap=b,s,h,l,<,>,[,] "行頭行末の左右移動で行をまたぐ"
 set scrolloff=8 "上下8行の視界を確保"
@@ -119,6 +130,8 @@ set sidescroll=1 "左右スクロールは一文字づつ行う"
 " 巨大整数などを扱ったときにスクロールが遅くなることを防ぐ・・・はず？
 set lazyredraw
 set ttyfast
+" ブロック指定モードで書いていないところも進める
+set virtualedit+=block
 
 
 "ファイル処理関連設定"
@@ -127,6 +140,8 @@ set hidden  " ファイル変更中でも他のファイルを開けるように
 set autoread "外部でファイルに変更があった場合は読み直す"
 set noswapfile "ファイル編集中にスワップファイルを作らない"
 
+" パス
+set path+=/usr/local/include
 
 "コマンドラインモードでのTABキーによるファイル名補完を有効にする"
 set wildmenu wildmode=list:full "タブによるファイル名補完.マッチした候補を表示しつつ順番に候補を変えていく" 
@@ -167,6 +182,10 @@ nmap ,e :e ++enc=
 nmap <silent> ,V :Vinarise<CR>
 " tabnew
 nmap <silent> ,t :tabnew<CR>:Explore<CR>
+" tab移動
+nmap <silent> <C-n> gt
+" ファイル移動
+nmap <silent> <C-a> gf
 " .vimrcの反映
 nmap <silent> .s :w<CR>:source ~/.vimrc<CR>:noh<CR>
 " GNU Make
@@ -201,7 +220,17 @@ nnoremap <Tab> >>
 vnoremap * "zy:let @/ = @z<CR>n
 " バッファ移動
 nmap <silent> <C-o> :bp<CR>
-nmap <silent> <C-i> :bn<CR>
+nmap <silent> <C-O> :bn<CR>
+" ファイルテンプレートの挿入
+nmap <silent> ,/ Go/* E.O.F. */<Esc>ggO/* <C-r>% */<CR>
+nmap <silent> ,- Go-- E.O.F.<Esc>ggO-- <C-r>%<CR>
+nmap <silent> ,# Go# E.O.F.<Esc>ggO#!/bin/sh<CR># <C-r>%<CR>
+" path
+nmap <silent> <C-p> :set path?<CR>
+" コピー時に挿入された文頭の空白を消す
+nmap <silent> ,<SPACE> :%s/^ *//g<CR>:noh<CR>
+" VimShell
+nnoremap <silent> .v :Hexplore<CR>:VimShell<CR>
 
 " For Arch Linux
 " xlock

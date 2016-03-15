@@ -1,0 +1,26 @@
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias l='ls -lga'
+alias la='ls -A'
+
+alias vi='vim'
+alias v='vim'
+alias gh='ghci'
+
+alias hd='hexdump -C'
+alias d='cd'
+alias f='file'
+alias ob='objdump -M intel -d'
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -ir'
+alias mkdir='mkdir -p'
+alias pac='pacman'
