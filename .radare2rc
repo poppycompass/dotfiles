@@ -1,5 +1,5 @@
-(peda32,"",drr,pd 10@ eip,pxr 40@esp)
-(peda64,"",drr,pd 10@ rip,pxr 40@rsp)
+(peda32,"",drr,pd 10@eip,pxr 40@esp)
+(peda64,"",drr,pd 10@rip,pxr 40@rsp)
 (stepOut64,"",dso,drr,pd 10@rip,pxq 64@rsp)
 (stepIn64,"",ds,drr,pd 10@rip,pxq 64@rsp)
 (stepOut32,"",dso,drr,pd 10@eip,pxw 64@esp)
@@ -7,13 +7,18 @@
 (outputStack64,"",pxq 64@rsp)
 (outputStack32,"",pxw 64@esp)
 
-nn=.(stepIn64)
-ni=.(stepOut64)
 nnw=.(stepIn32)
 niw=.(stepOut32)
 nw=.(outputStack32)
+npw=.(peda32)
+nsw='do;db main;dc;db- main;npw'
+nrw='do;dc;npw'
+ncw='dc;npw'
+
+nn=.(stepIn64)
+ni=.(stepOut64)
 nq=.(outputStack64)
 np=.(peda64)
-npw=.(peda32)
-ns='do;db main;dc;db- main'
-nr='do;dc'
+ns='do;db main;dc;db- main;np'
+nr='do;dc;np'
+nc='dc;np'

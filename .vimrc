@@ -31,11 +31,12 @@ else
 
    " 補完 "
    if has('lua') && ( (v:version >= 703 && has('patch885')) || v:version >= 704)
-      NeoBundle 'Shougo/neocomplete'
-      let g:neocomplete#enable_at_startup = 1
+      " 鬱陶しいほどの自動補完
+      "NeoBundle 'Shougo/neocomplete'
+      "let g:neocomplete#enable_at_startup = 1
    else
-      NeoBundle 'Shougo/neocomplcache'
-      let g:neocomplcache_enable_at_startup = 1
+      "NeoBundle 'Shougo/neocomplcache'
+      "let g:neocomplcache_enable_at_startup = 1
    endif
 
    " 以下各種プラグイン "
@@ -184,8 +185,37 @@ nmap <silent> ,V :Vinarise<CR>
 nmap <silent> ,t :tabnew<CR>:Explore<CR>
 " tab移動
 nmap <silent> <C-n> gt
-" ファイル移動
-nmap <silent> <C-a> gf
+nmap <silent> <C-N> gT
+" ウィンドウ移動 <C-w> -> s
+nnoremap <silent> sh <C-w>h
+nnoremap <silent> sj <C-w>j
+nnoremap <silent> sk <C-w>k
+nnoremap <silent> sl <C-w>l
+nnoremap <silent> sw <C-w>w
+" ウィンドウの配置移動
+nnoremap <silent> sH <C-w>H
+nnoremap <silent> sJ <C-w>J
+nnoremap <silent> sK <C-w>K
+nnoremap <silent> sL <C-w>L
+nnoremap <silent> sr <C-w>r
+" ウィンドウの大きさ変更
+" 縦横最大化
+nnoremap <silent> so <C-w>_<C-w>|
+" 大きさを揃える
+nnoremap <silent> s= <C-w>=
+" 幅の増減
+nnoremap <silent> s> <C-w>>
+nnoremap <silent> s< <C-w><
+" 高さの増減
+nnoremap <silent> s+ <C-w>+
+nnoremap <silent> s- <C-w>-
+" ウィンドウ分割
+nnoremap <silent> sv <C-w>v
+
+" ウィンドウ移動で消えた's'を復元 s -> <C-s>
+nmap <silent> <C-s> cl
+" ノーマルモードで';'と':'を入れ替え
+nnoremap ; :
 " .vimrcの反映
 nmap <silent> .s :w<CR>:source ~/.vimrc<CR>:noh<CR>
 " GNU Make
@@ -243,9 +273,15 @@ else
    highlight CursorLine term=none cterm=none ctermfg=none ctermbg=black "カーソルがある行のハイライト表示.ctermbgはバックグラウンドの色を決定.端末の背景色が黒に近いため、設定の黒が結果的には白に見える.これを実現するには、デスクトップの背景画像が少し透けるくらいの暗さにしておく。設定は端末の編集で行う."
 endif
 
-" Schemeの場合に()の色を付ける
-"let lisp_rainbow = 1
-"au BufNewFile,BufRead *.scm set ft=lisp
+" ファイルタイプごとの設定．追加するときはaugroup内に追記していく
+augroup fileTypeIndent
+    autocmd!
+    " LaTex用のタブ幅
+    autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    " Schemeの場合に()の色を付ける
+    "let lisp_rainbow = 1
+    "autocmd BufNewFile,BufRead *.scm set ft=lisp
+augroup END
 
 "バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）"
 "テキスト表示に戻したいときは　:autocmd! BinaryXXD と入力。これでaugroupが無効化.新しく開いたファイルはテキストファイルとして表示される, 

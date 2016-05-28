@@ -10,6 +10,7 @@ export QT_IM_MODULE=ibus
 export CTF=$HOME/Downloads/ctf
 export TC=$HOME/work/templates/ctf
 xmodmap .Xmodmap
+#setxkbmap -option ctrl:nocaps
 
 # cd && ls
 function cd() {
@@ -78,7 +79,6 @@ function ob() {
         echo "Usage: ob ./bin"
     fi
 }
-
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -203,6 +203,7 @@ alias egrep='egrep --color=auto'
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
+alias lr='ls -R'
 
 alias 'vi'='vim'
 alias 'v'='vim'
@@ -220,7 +221,10 @@ alias '../'='cd ../'
 alias 'st'='strings'
 alias 'gdb'='gdb -q'
 alias 'ctf'="cd $CTF"
+alias 'bd'="base64 -d"
 alias 'ct'="cd $HOME/work/test"
+alias 'down'="cd $HOME/Downloads"
+alias 'r32'="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
 
 # for arch
 alias 'pac'='pacman'

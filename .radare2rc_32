@@ -1,0 +1,11 @@
+(peda32,"",drr,pd 10@eip,pxr 40@esp)
+(stepOut32,"",dso,drr,pd 10@eip,pxw 64@esp)
+(stepIn32,"",ds,drr,pd 10@eip,pxw 64@esp)
+(outputStack32,"",pxw 64@esp)
+nn=.(stepIn32)
+ni=.(stepOut32)
+nw=.(outputStack32)
+np=.(peda32)
+ns='do;db main;dc;db- main;np'
+nr='do;dc;np'
+nc='dc;np'
