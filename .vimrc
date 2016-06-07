@@ -1,98 +1,166 @@
-set title
 " .vimrc
+set title
 set nocompatible "vi との互換性を優先しない"
-filetype off
+filetype plugin indent on
+filetype indent on
 
-" ----- Neobundle Settings -----"
+" nvim/vim固有の設定
+if has('nvim') " nvim
+    set mouse=
+    " builtin termialでの<Esc>
+    tnoremap <C-k> <C-\><C-n><C-w>
+    nnoremap <silent> .v :Hexplore<CR>:terminal<CR>
 
-let s:noplugin = 0
-let s:bundle_root = expand('~/.vim/bundle')
-let s:neobundle_root = s:bundle_root . '/neobundle.vim'
-if !isdirectory(s:neobundle_root) || v:version < 702
-   " NeoBundleがない場合またはvimのバージョンが古い場合はNeoBundleを読み込まない "
-   let s:noplugin = 1
-else
-" プラグイン管理のNeoBundle起動+bundle関係のディレクトリ指定"
-   if has('vim_starting')
-      set runtimepath+=~/.vim/bundle/neobundle.vim
-      "execute "set runtimepath+=" . s:neobundle_root
-   endif
-   call neobundle#begin(expand('~/.vim/bundle/'))
-   NeoBundleFetch 'Shougo/neobundle.vim'
+    " ----- dein settings -----
+    " dein.vimのディレクトリ
+    let s:dein_dir = expand('~/.cache/dein')
+    let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+    execute 'set runtimepath^=' . s:dein_repo_dir
 
-   " vimで非同期操作を可能にする。NeoBundleと連携可能 "
-   NeoBundle 'Shougo/vimproc', {
-      \ 'build': {
-      \     'windows': 'make -f make_mingw32.mak',
-      \      'cygwin' : 'make -f make_cygwin.mak',
-      \      'mac'    : 'make -f make_mac.mak',
-      \      'unix'   : 'make -fmake_unix.mak',
-      \ }}
+    call dein#begin(s:dein_dir)
 
-   " 補完 "
-   if has('lua') && ( (v:version >= 703 && has('patch885')) || v:version >= 704)
-      " 鬱陶しいほどの自動補完
-      "NeoBundle 'Shougo/neocomplete'
-      "let g:neocomplete#enable_at_startup = 1
-   else
-      "NeoBundle 'Shougo/neocomplcache'
-      "let g:neocomplcache_enable_at_startup = 1
-   endif
+    if dein#load_state(s:dein_dir)
+        call dein#begin(s:dein_dir)
 
-   " 以下各種プラグイン "
+        " 管理するプラグインを記述したファイル
+        let s:toml = '~/.dein.toml'
+        let s:lazy_toml = '~/.dein_lazy.toml'
+        call dein#load_toml(s:toml, {'lazy': 0})
+        call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-   " haskell"
-   " ghc-mod
-    NeoBundleLazy "eagletmt/ghcmod-vim",         {"autoload" : { "filetypes" : ["haskell"] }}
-    " Haskell補完
-    NeoBundleLazy "ujihisa/neco-ghc",            {"autoload" : { "filetypes" : ["haskell"] }}
-    " Unite でモジュールを挿入
-    NeoBundleLazy "ujihisa/unite-haskellimport", {"autoload" : { "filetypes" : ["haskell"] }}
-   " Vimのシンタックスハイライト設定　長い配列を取り扱ったりすると動作が極めて遅くなる原因
-    NeoBundleLazy "dag/vim2hs",                  {"autoload" : { "filetypes" : ["haskell"] }}
-    " 本来はHoogleドキュメントを閲覧するためのものらしいが，使い方が分からないため放置
-"    NeoBundleLazy "eagletmt/unite-haddock",      {"autoload" : { "filetypes" : ["haskell"] }}
+        call dein#end()
+        call dein#save_state()
+    endif
+    " プラグインを追加・削除やtomlファイルを編集した後は
+    " 適宜 call dein#update, call dein#clear_stateを呼ぶ
+    if dein#check_install(['vimproc'])
+        call dein#install(['vimproc'])
+    endif
+    if dein#check_install(['eagletmt/ghcmod-vim'])
+        call dein#install(['eagletmt/ghcmod-vim'])
+    endif
+    if dein#check_install(['ujihisa/neco-ghc'])
+        call dein#install(['ujihisa/neco-ghc'])
+    endif
+    if dein#check_install(['dag/vim2hs'])
+        call dein#install(['dag/vim2hs'])
+    endif
+    if dein#check_install(['thinca/vim-quickrun'])
+        call dein#install(['thinca/vim-quickrun'])
+    endif
+    if dein#check_install(['vim-scripts/Align'])
+        call dein#install(['vin-scripts/Align')
+    endif
+    if dein#check_install(['Shougo/vinarise'])
+        call dein#install(['Shougo/vinarise')
+    endif
+    if dein#check_install(['Shougo/unite.vim'])
+        call dein#install(['Shougo/unite.vim')
+    endif
+    if dein#check_install(['Shougo/neomru.vim'])
+        call dein#install(['Shougo/neomru.vim'])
+    endif
 
-   " Scheme(Gauche)なんだが，lisp_rainbowを使うためにLisp扱い
-   " Vim 内でGoshを起動できる
-   "NeoBundleLazy 'aharisu/vim_goshrepl',         {"autoload" : { "filetypes" : ["lisp"] }}
-   "NeoBundleLazy 'aharisu/vim-gdev',             {"autoload" : { "filetypes" : ["lisp"] }}
+else " vim
+    " nvimデフォルト有効/バックアップ(history)
+    set ttyfast
+    set history=10000
+    " VimShell
+    nnoremap <silent> .v :Hexplore<CR>:VimShell<CR>
 
-   " quickrun "
-   NeoBundle 'thinca/vim-quickrun'
-   " Align "
-   NeoBundle 'Align'
-   " バイナリ編集 "
-   NeoBundle 'Shougo/vinarise'
-   " VimShell
-   NeoBundle 'Shougo/vimshell'
-   " Unite
-   NeoBundle 'Shougo/unite.vim'
+    " ----- Neobundle Settings -----"
+    let s:noplugin = 0
+    let s:bundle_root = expand('~/.vim/bundle')
+    let s:neobundle_root = s:bundle_root . '/neobundle.vim'
+    if !isdirectory(s:neobundle_root) || v:version < 702
+        " NeoBundleがない場合またはvimのバージョンが古い場合はNeoBundleを読み込まない "
+        let s:noplugin = 1
+    else
+        " プラグイン管理のNeoBundle起動+bundle関係のディレクトリ指定"
+        if has('vim_starting')
+            set runtimepath+=~/.vim/bundle/neobundle.vim
+            "execute "set runtimepath+=" . s:neobundle_root
+        endif
+        call neobundle#begin(expand('~/.vim/bundle/'))
+        NeoBundleFetch 'Shougo/neobundle.vim'
 
-   " プラグインここまで "
-   call neobundle#end()
+        " vimで非同期操作を可能にする。NeoBundleと連携可能 "
+        NeoBundle 'Shougo/vimproc', {
+                    \ 'build': {
+                    \     'windows': 'make -f make_mingw32.mak',
+                    \      'cygwin' : 'make -f make_cygwin.mak',
+                    \      'mac'    : 'make -f make_mac.mak',
+                    \      'unix'   : 'make -fmake_unix.mak',
+                    \ }}
 
-   filetype plugin indent on  "ファイル形式ごとのインデントを設定する。(あった場合のみ) NeoBundle起動に必要 "
-   filetype indent on
-   " vim起動時に未インストールのNeoBundleがあればプロンプトを出す "
-   NeoBundleCheck
+        " 補完 "
+        if has('lua') && ( (v:version >= 703 && has('patch885')) || v:version >= 704)
+            " 鬱陶しいほどの自動補完
+            "NeoBundle 'Shougo/neocomplete'
+            "let g:neocomplete#enable_at_startup = 1
+        else
+            "NeoBundle 'Shougo/neocomplcache'
+            "let g:neocomplcache_enable_at_startup = 1
+        endif
+
+        " 以下各種プラグイン "
+
+        " haskell"
+        " ghc-mod
+        NeoBundleLazy "eagletmt/ghcmod-vim",         {"autoload" : { "filetypes" : ["haskell"] }}
+        " Haskell補完
+        NeoBundleLazy "ujihisa/neco-ghc",            {"autoload" : { "filetypes" : ["haskell"] }}
+        " Unite でモジュールを挿入
+        NeoBundleLazy "ujihisa/unite-haskellimport", {"autoload" : { "filetypes" : ["haskell"] }}
+        " Vimのシンタックスハイライト設定　長い配列を取り扱ったりすると動作が極めて遅くなる原因
+        NeoBundleLazy "dag/vim2hs",                  {"autoload" : { "filetypes" : ["haskell"] }}
+        " 本来はHoogleドキュメントを閲覧するためのものらしいが，使い方が分からないため放置
+        "    NeoBundleLazy "eagletmt/unite-haddock",      {"autoload" : { "filetypes" : ["haskell"] }}
+
+        " Scheme(Gauche)なんだが，lisp_rainbowを使うためにLisp扱い
+        " Vim 内でGoshを起動できる
+        "NeoBundleLazy 'aharisu/vim_goshrepl',         {"autoload" : { "filetypes" : ["lisp"] }}
+        "NeoBundleLazy 'aharisu/vim-gdev',             {"autoload" : { "filetypes" : ["lisp"] }}
+        " neomru.vim
+        NeoBundleLazy 'Shougo/neomru.vim'
+
+        " quickrun "
+        NeoBundle 'thinca/vim-quickrun'
+        " Align "
+        NeoBundle 'Align'
+        " バイナリ編集 "
+        NeoBundle 'Shougo/vinarise'
+        " VimShell
+        NeoBundle 'Shougo/vimshell'
+        " Unite depends neomru
+        NeoBundle 'Shougo/unite.vim'
+
+        " プラグインここまで "
+        call neobundle#end()
+
+        "filetype plugin indent on  "ファイル形式ごとのインデントを設定する。(あった場合のみ) NeoBundle起動に必要 "
+        "filetype indent on
+        " vim起動時に未インストールのNeoBundleがあればプロンプトを出す "
+        NeoBundleCheck
+    endif
+    " ----- Neobundle Settings end -----"
 endif
 
-" ----- Neobundle Settings end -----"
 
+" ----- vim/nvim共通設定 -----
+"
 " quickrunで開く窓を水平分割にする
 let g:quickrun_config={'*': {'split': ''}}
 " quickrun横分割時は下へ，縦分割時は右に新しいウィンドウが開く
 set splitbelow
 set splitright
-
 syntax on "文字に色をつける"
 
 "画面表示の設定"
 set number "行番号の表示"
 set cursorline "カーソル行の背景色を変える"
 set list "不可視文字の可視化 現在無効化"
-set showmatch " () {} の対応を報告"
+"set showmatch " () {} の対応を報告"
 set textwidth=0 " 入力中のテキスト最大幅．幅を越えると空白の後で改行される．値を0にすると無効化
 
 
@@ -108,13 +176,9 @@ set tabstop=4 "画面上でタブ文字が占める幅"
 set expandtab "タブ入力を複数の空白入力に置き換える"
 set shiftwidth=4 "自動インデントでずれる幅"
 set softtabstop=4 "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅"
-
 set autoindent "改行時に前の行のインデントを継続"
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する"
 set cindent "改造が可能なインデント。詳しくはググれ"
-
-" バックアップ
-set history=1000
 
 " エンコード
 " エラーが出たら順次次のエンコードを試していく．もし日本語で上手く表示できなければ以下を順次試してみること
@@ -130,15 +194,14 @@ set sidescrolloff=16 "左右スクロール時の視界を確保"
 set sidescroll=1 "左右スクロールは一文字づつ行う"
 " 巨大整数などを扱ったときにスクロールが遅くなることを防ぐ・・・はず？
 set lazyredraw
-set ttyfast
-" ブロック指定モードで書いていないところも進める
+" ブロック指定モードで書いていないところも進める(=all)
 set virtualedit+=block
-
 
 "ファイル処理関連設定"
 set confirm "保存されていないファイルがある時は終了前に保存確認"
 set hidden  " ファイル変更中でも他のファイルを開けるようにする
 set autoread "外部でファイルに変更があった場合は読み直す"
+set autochdir "開いたファイルのディレクトリがカレントディレクトリになる
 set noswapfile "ファイル編集中にスワップファイルを作らない"
 
 " パス
@@ -147,8 +210,6 @@ set path+=/usr/local/include
 "コマンドラインモードでのTABキーによるファイル名補完を有効にする"
 set wildmenu wildmode=list:full "タブによるファイル名補完.マッチした候補を表示しつつ順番に候補を変えていく" 
 
-" 開いたファイルのディレクトリがカレントディレクトリになる
-au BufEnter * execute ":lcd" . expand("%:p:h")
 
 " キーバインド
 " 文字移動
@@ -212,8 +273,6 @@ nnoremap <silent> s- <C-w>-
 " ウィンドウ分割
 nnoremap <silent> sv <C-w>v
 
-" ウィンドウ移動で消えた's'を復元 s -> <C-s>
-nmap <silent> <C-s> cl
 " ノーマルモードで';'と':'を入れ替え
 nnoremap ; :
 " .vimrcの反映
@@ -259,14 +318,12 @@ nmap <silent> ,# Go# E.O.F.<Esc>ggO#!/bin/sh<CR># <C-r>%<CR>
 nmap <silent> <C-p> :set path?<CR>
 " コピー時に挿入された文頭の空白を消す
 nmap <silent> ,<SPACE> :%s/^ *//g<CR>:noh<CR>
-" VimShell
-nnoremap <silent> .v :Hexplore<CR>:VimShell<CR>
 
 " For Arch Linux
 " xlock
 nmap <C-l> :!xlock<CR>
 
-if &term == "rxvt-unicode-256color"
+if &term == "rxvt-unicode-256color" || &term == "nvim"
    " ~/.vim/colors/urxvt.vim
    colorscheme urxvt
 else
@@ -283,20 +340,6 @@ augroup fileTypeIndent
     "autocmd BufNewFile,BufRead *.scm set ft=lisp
 augroup END
 
-"バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）"
-"テキスト表示に戻したいときは　:autocmd! BinaryXXD と入力。これでaugroupが無効化.新しく開いたファイルはテキストファイルとして表示される, 
-"Vinariseの方が便利であるため現在消去"
-"augroup BinaryXXD
-"  autocmd!
-"  autocmd BufReadPre  *.bin let &binary = 1
-"  autocmd BufReadPost * if &binary | silent %!xxd -g 1
-"  autocmd BufReadPost * set ft=xxd | endif
-"  autocmd BufWritePre * if &binary | %!xxd -r | endif
-"  autocmd BufWritePost * if &binary | silent %!xxd -g 1
-"  autocmd BufWritePost * set nomod | endif
-"augroup END
-
-" END binary "
 " vimgrep and open cwindow
 autocmd QuickFixCmdPost *grep* cwindow
 

@@ -9,6 +9,7 @@ export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 export CTF=$HOME/Downloads/ctf
 export TC=$HOME/work/templates/ctf
+export XDG_CONFIG_HOME=$HOME/dotfiles
 xmodmap .Xmodmap
 #setxkbmap -option ctrl:nocaps
 
@@ -224,6 +225,7 @@ alias 'ctf'="cd $CTF"
 alias 'bd'="base64 -d"
 alias 'ct'="cd $HOME/work/test"
 alias 'down'="cd $HOME/Downloads"
+alias 'dg'="cd $HOME/Downloads/git"
 alias 'r32'="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
 
 # for arch

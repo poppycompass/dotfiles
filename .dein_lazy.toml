@@ -1,0 +1,15 @@
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_path = '.*'
+
+[[plugins]]
+repo = 'eagletmt/ghcmod-vim'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'ujihisa/neco-ghc'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'dag/vim2hs'
+on_ft = 'haskell'
