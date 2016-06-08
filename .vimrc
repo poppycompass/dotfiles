@@ -131,7 +131,7 @@ endif
 
 " lightline設定, 自動構文チェック(c/cpp)
 let g:lightline = {
-      \ 'colorscheme': 'default',
+      \ 'colorscheme': 'wombat',
       \ 'separator': { 'left': "〉", 'right': "〈" },
       \ 'subseparator': { 'left': "〈", 'right': "〈" },
       \ 'component': {
