@@ -206,8 +206,10 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias lr='ls -R'
 
-alias 'vi'='vim'
-alias 'v'='vim'
+alias 'vim'='nvim'
+alias 'vi'='nvim'
+alias 'v'='nvim'
+alias 'emacs'='nvim'
 alias 'gh'='ghci'
 
 alias 'hd'='hexdump -C'

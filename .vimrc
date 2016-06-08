@@ -6,61 +6,42 @@ filetype indent on
 
 " nvim/vim固有の設定
 if has('nvim') " nvim
+    set clipboard=unnamed,unnamedplus
     set mouse=
     " builtin termialでの<Esc>
-    tnoremap <C-k> <C-\><C-n><C-w>
+    tnoremap <C-k> <C-\><C-n>
     nnoremap <silent> .v :Hexplore<CR>:terminal<CR>
 
     " ----- dein settings -----
-    " dein.vimのディレクトリ
-    let s:dein_dir = expand('~/.cache/dein')
+    " プラグインが実際にインストールされるディレクトリ
+    let s:dein_dir = expand('~/.vim/dein')
+    " dein.vim 本体
     let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-    execute 'set runtimepath^=' . s:dein_repo_dir
+    execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 
-    call dein#begin(s:dein_dir)
-
+    " 設定開始
     if dein#load_state(s:dein_dir)
         call dein#begin(s:dein_dir)
 
-        " 管理するプラグインを記述したファイル
-        let s:toml = '~/.dein.toml'
-        let s:lazy_toml = '~/.dein_lazy.toml'
-        call dein#load_toml(s:toml, {'lazy': 0})
+        " プラグインリストを収めた TOML ファイル
+        " 予め TOML ファイル（後述）を用意しておく
+        let g:rc_dir    = expand('~')
+        let s:toml      = g:rc_dir . '/.dein.toml'
+        let s:lazy_toml = g:rc_dir . '/.dein_lazy.toml'
+
+        " TOML を読み込み、キャッシュしておく
+        call dein#load_toml(s:toml,      {'lazy': 0})
         call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
+        " 設定終了
         call dein#end()
         call dein#save_state()
     endif
     " プラグインを追加・削除やtomlファイルを編集した後は
     " 適宜 call dein#update, call dein#clear_stateを呼ぶ
-    if dein#check_install(['vimproc'])
-        call dein#install(['vimproc'])
+    if dein#check_install()
+        call dein#install()
     endif
-    if dein#check_install(['eagletmt/ghcmod-vim'])
-        call dein#install(['eagletmt/ghcmod-vim'])
-    endif
-    if dein#check_install(['ujihisa/neco-ghc'])
-        call dein#install(['ujihisa/neco-ghc'])
-    endif
-    if dein#check_install(['dag/vim2hs'])
-        call dein#install(['dag/vim2hs'])
-    endif
-    if dein#check_install(['thinca/vim-quickrun'])
-        call dein#install(['thinca/vim-quickrun'])
-    endif
-    if dein#check_install(['vim-scripts/Align'])
-        call dein#install(['vin-scripts/Align')
-    endif
-    if dein#check_install(['Shougo/vinarise'])
-        call dein#install(['Shougo/vinarise')
-    endif
-    if dein#check_install(['Shougo/unite.vim'])
-        call dein#install(['Shougo/unite.vim')
-    endif
-    if dein#check_install(['Shougo/neomru.vim'])
-        call dein#install(['Shougo/neomru.vim'])
-    endif
-
 else " vim
     " nvimデフォルト有効/バックアップ(history)
     set ttyfast
@@ -134,6 +115,8 @@ else " vim
         NeoBundle 'Shougo/vimshell'
         " Unite depends neomru
         NeoBundle 'Shougo/unite.vim'
+        " colorfull statusbar
+        NeoBundle 'itchyny/lightline.vim'
 
         " プラグインここまで "
         call neobundle#end()
@@ -146,9 +129,38 @@ else " vim
     " ----- Neobundle Settings end -----"
 endif
 
+" lightline設定, 自動構文チェック(c/cpp)
+let g:lightline = {
+      \ 'colorscheme': 'default',
+      \ 'separator': { 'left': "〉", 'right': "〈" },
+      \ 'subseparator': { 'left': "〈", 'right': "〈" },
+      \ 'component': {
+      \   'readonly': '%{&readonly?"!RO!":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
+      \ },
+      \ 'active': {
+      \   'right': [ [ 'syntastic', 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ }
+      \ }
+let g:syntastic_mode_map = { 'mode': 'passive' }
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
 
 " ----- vim/nvim共通設定 -----
-"
 " quickrunで開く窓を水平分割にする
 let g:quickrun_config={'*': {'split': ''}}
 " quickrun横分割時は下へ，縦分割時は右に新しいウィンドウが開く
