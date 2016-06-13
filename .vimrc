@@ -172,7 +172,7 @@ syntax on "文字に色をつける"
 set number "行番号の表示"
 set cursorline "カーソル行の背景色を変える"
 set list "不可視文字の可視化 現在無効化"
-"set showmatch " () {} の対応を報告"
+"set showmatch " () {} の対応を報告 nvimだと重い
 set textwidth=0 " 入力中のテキスト最大幅．幅を越えると空白の後で改行される．値を0にすると無効化
 
 
