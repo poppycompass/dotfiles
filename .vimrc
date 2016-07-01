@@ -153,7 +153,9 @@ let g:lightline = {
 let g:syntastic_mode_map = { 'mode': 'passive' }
 augroup AutoSyntastic
   autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+  " 構文チェックのファイルタイプはここで指定．現在半無効化
+  "autocmd BufWritePost *.c,*.cpp call s:syntastic()
+  autocmd BufWritePost *.rb call s:syntastic()
 augroup END
 function! s:syntastic()
   SyntasticCheck
@@ -184,10 +186,10 @@ set smartcase " 検索時に大文字を含んでいたら大小を区別する
 
 
 "タブ/インデントの設定"
-set tabstop=4 "画面上でタブ文字が占める幅"
+set tabstop=2 "画面上でタブ文字が占める幅"
 set expandtab "タブ入力を複数の空白入力に置き換える"
-set shiftwidth=4 "自動インデントでずれる幅"
-set softtabstop=4 "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅"
+set shiftwidth=2 "自動インデントでずれる幅"
+set softtabstop=2 "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅"
 set autoindent "改行時に前の行のインデントを継続"
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する"
 set cindent "改造が可能なインデント。詳しくはググれ"
@@ -251,7 +253,7 @@ nmap <silent> ,s :w<CR>:q<CR>
 " ファイルタイプの設定
 nmap ,f :set ft=
 " エンコード設定(utf8, sjis...)
-nmap ,e :e ++enc=
+nmap ,E :e ++enc=
 " バイナリ編集, rで書き換え
 nmap <silent> ,V :Vinarise<CR>
 " tabnew
@@ -306,7 +308,7 @@ nmap <silent> ,h :Hexplore<CR>
 " 縦分割してExplore
 nmap <silent> ,v :Vexplore<CR>
 " Explore
-nmap <silent> ,E :Explore<CR>
+nmap <silent> ,e :Explore<CR>
 " Haskellの型推測
 nmap <silent> \t :w<CR>:GhcModType<CR>
 " 型推測によるハイライトを消す
@@ -331,6 +333,8 @@ nmap <silent> <C-p> :set path?<CR>
 " コピー時に挿入された文頭の空白を消す
 nmap <silent> ,<SPACE> :%s/^ *//g<CR>:noh<CR>
 
+nmap <silent> <C-m> :set nopaste<CR>:set buftype=<CR>
+
 " For Arch Linux
 " xlock
 nmap <C-l> :!xlock<CR>
@@ -354,6 +358,8 @@ augroup END
 
 " vimgrep and open cwindow
 autocmd QuickFixCmdPost *grep* cwindow
+" quickfixでEnterを押すと該当エラーに跳ぶ
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " 実行時に下のパスにある設定ファイルも読み込む "
 set runtimepath+=~/.vim/

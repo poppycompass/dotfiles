@@ -8,6 +8,8 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 export CTF=$HOME/Downloads/ctf
+export LAB=$HOME/work/lab
+export TEX=$HOME/work/template/tex
 export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
 xmodmap .Xmodmap
@@ -225,6 +227,7 @@ alias 'st'='strings'
 alias 'gdb'='gdb -q'
 alias 'ctf'='cd $CTF'
 alias 'lab'='cd $HOME/work/lab/now'
+alias 'proj'='cd $LAB/project/2016'
 alias 'bd'="base64 -d"
 alias 'ct'="cd $HOME/work/test"
 alias 'down'="cd $HOME/Downloads"
