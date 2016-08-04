@@ -260,7 +260,7 @@ nmap <silent> ,V :Vinarise<CR>
 nmap <silent> ,t :tabnew<CR>:Explore<CR>
 " tab移動
 nmap <silent> <C-n> gt
-nmap <silent> <C-N> gT
+nmap <silent> <C-p> gT
 " ウィンドウ移動 <C-w> -> s
 nnoremap <silent> sh <C-w>h
 nnoremap <silent> sj <C-w>j
@@ -329,7 +329,7 @@ nmap <silent> ,/ Go/* E.O.F. */<Esc>ggO/* <C-r>% */<CR>
 nmap <silent> ,- Go-- E.O.F.<Esc>ggO-- <C-r>%<CR>
 nmap <silent> ,# Go# E.O.F.<Esc>ggO#!/bin/sh<CR># <C-r>%<CR>
 " path
-nmap <silent> <C-p> :set path?<CR>
+"nmap <silent> <C-P> :set path?<CR>
 " コピー時に挿入された文頭の空白を消す
 nmap <silent> ,<SPACE> :%s/^ *//g<CR>:noh<CR>
 

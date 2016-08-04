@@ -17,7 +17,7 @@ xmodmap .Xmodmap
 
 # cd && ls
 function cd() {
-    builtin cd $@ && ls --color=auto;
+    builtin cd $@ && ls --color=auto -h;
 }
 # ファイルにはless, ディレクトリにはlsを実行する
 function l() {
@@ -25,7 +25,7 @@ function l() {
    if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
       ${PAGER:-less} "$@"
    else
-      ls -alF --color=auto "$@"
+      ls -alFh --color=auto "$@"
    fi
 }
 
@@ -195,7 +195,7 @@ export ZLS_COLORS=$LS_COLORS
 export CLICOLOR=true
 
 # ls color
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -h'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
@@ -204,9 +204,9 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias lr='ls -R'
+alias ll='ls -alFh'
+alias la='ls -Ah'
+alias lr='ls -Rh'
 
 alias 'vim'='nvim'
 alias 'vi'='nvim'
