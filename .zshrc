@@ -12,7 +12,7 @@ export LAB=$HOME/work/lab
 export TEX=$HOME/work/template/tex
 export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
-xmodmap .Xmodmap
+xmodmap $HOME/.Xmodmap
 #setxkbmap -option ctrl:nocaps
 
 # cd && ls
@@ -231,8 +231,10 @@ alias 'proj'='cd $LAB/project/2016'
 alias 'bd'="base64 -d"
 alias 'ct'="cd $HOME/work/test"
 alias 'down'="cd $HOME/Downloads"
-alias 'dg'="cd $HOME/Downloads/git"
+alias 'cg'="cd $HOME/Downloads/git"
 alias 'r32'="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
+alias 'r2'="r2 -c 'aaa;s main;VV'"
+alias 'py'="python"
 
 # for arch
 alias 'pac'='pacman'

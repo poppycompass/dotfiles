@@ -1,4 +1,5 @@
 " .vimrc
+"
 set title
 set nocompatible "vi との互換性を優先しない"
 filetype plugin indent on
@@ -102,6 +103,8 @@ else " vim
         " Vim 内でGoshを起動できる
         "NeoBundleLazy 'aharisu/vim_goshrepl',         {"autoload" : { "filetypes" : ["lisp"] }}
         "NeoBundleLazy 'aharisu/vim-gdev',             {"autoload" : { "filetypes" : ["lisp"] }}
+        " ruby用
+        NeoBundle "tpope/vim-rails",                  {"autoload" : { "filetypes" : ["ruby"] }}
         " neomru.vim
         NeoBundleLazy 'Shougo/neomru.vim'
 
@@ -117,6 +120,8 @@ else " vim
         NeoBundle 'Shougo/unite.vim'
         " colorfull statusbar
         NeoBundle 'itchyny/lightline.vim'
+        " 囲むやつ
+        NeoBundle 'tpope/vim-surround.vim'
 
         " プラグインここまで "
         call neobundle#end()
@@ -155,7 +160,7 @@ augroup AutoSyntastic
   autocmd!
   " 構文チェックのファイルタイプはここで指定．現在半無効化
   "autocmd BufWritePost *.c,*.cpp call s:syntastic()
-  autocmd BufWritePost *.rb call s:syntastic()
+  autocmd BufWritePost *.none call s:syntastic()
 augroup END
 function! s:syntastic()
   SyntasticCheck
@@ -357,9 +362,9 @@ augroup fileTypeIndent
 augroup END
 
 " vimgrep and open cwindow
-autocmd QuickFixCmdPost *grep* cwindow
+autocmd QuickFixCmdPost *grep* cwindow|nnoremap <buffer> <CR> <CR>
 " quickfixでEnterを押すと該当エラーに跳ぶ
-autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+autocmd BufReadPost quickfix cwindow|nnoremap <buffer> <CR> <CR>
 
 " 実行時に下のパスにある設定ファイルも読み込む "
 set runtimepath+=~/.vim/

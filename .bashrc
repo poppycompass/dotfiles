@@ -2,6 +2,20 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+export PATH=$PATH:$HOME/.cabal/bin
+export SDL_VIDEO_X11_DGAMOUSE=0
+export VIDEO_FORMAT="NISC"
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+export CTF=$HOME/Downloads/ctf
+export LAB=$HOME/work/lab
+export TEX=$HOME/work/template/tex
+export TC=$HOME/work/templates/ctf
+export XDG_CONFIG_HOME=$HOME/dotfiles
+xmodmap $HOME/.Xmodmap
+setxkbmap -option ctrl:nocaps
+
 # If not running interactively, don't do anything
 # export PATH=$PATH:$HOME/.cabal/bin
 alias nautilus='nautilus --no-desktop --browser'
@@ -48,6 +62,30 @@ if [[ -n "$PS1" ]]; then
    PROMPT_COMMAND='history -a'
 fi
 
+# plt一覧表示
+function plt() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | grep "@plt>:"
+    else
+        echo "Usage: plt ./bin"
+    fi
+}
+# gotアドレスの表示
+function got() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | grep "@plt>:" -A1
+    else
+        echo "Usage: got ./bin"
+    fi
+}
+# objdump -M intel -d ./bin | less
+function ob() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | less
+    else
+        echo "Usage: ob ./bin"
+    fi
+}
 # C-;で直前のディレクトリに戻る やっていることはcd - と同じ
 #if [[ -n "$PS1" ]]; then
 #   bind '"\C-;":"\ercd -\n"'
@@ -138,19 +176,35 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
+alias ll='ls -alFh'
+alias la='ls -Ah'
+alias lr='ls -Rh'
 #alias l='ls -CF'
 
 alias 'vi'='vim'
 alias 'v'='vim'
 alias gh='ghci'
 
+alias hd='hexdump -C'
 alias d='cd'
+alias f='file'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -ir'
 alias mkdir='mkdir -p'
+alias st='strings'
+alias gdb='gdb -q'
+alias ctf='cd $CTF'
+alias lab='cd $HOME/work/lab/now'
+alias proj='cd $LAB/project/2016'
+alias bd="base64 -d"
+alias ct="cd $HOME/work/test"
+alias down="cd $HOME/Downloads"
+alias cg="cd $HOME/Downloads/git"
+alias r32="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
+alias r2="r2 -c 'aaa;s main;VV'"
+alias py="python"
+alias nautilus='nautilus --no-desktop --browser'
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

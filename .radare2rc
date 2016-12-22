@@ -22,3 +22,6 @@ np=.(peda64)
 ns='do;db main;dc;db- main;np'
 nr='do;dc;np'
 nc='dc;np'
+
+e bin.demangle = true
+e asm.demangle = true

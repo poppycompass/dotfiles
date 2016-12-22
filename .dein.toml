@@ -1,4 +1,5 @@
 [[plugins]]
+
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
@@ -51,3 +52,10 @@ on_ft = 'haskell'
 [[plugins]]
 repo = 'dag/vim2hs'
 on_ft = 'haskell'
+
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = 'ruby'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
