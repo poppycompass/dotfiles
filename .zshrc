@@ -235,6 +235,7 @@ alias 'cg'="cd $HOME/Downloads/git"
 alias 'r32'="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
 alias 'r2'="r2 -c 'aaa;s main;VV'"
 alias 'py'="python"
+alias 'gits'="git status"
 
 # for arch
 alias 'pac'='pacman'
@@ -245,6 +246,9 @@ alias nautilus='nautilus --no-desktop --browser'
 case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
+
+# who am i
+alias pc="echo poppycompass"
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
