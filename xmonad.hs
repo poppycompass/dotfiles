@@ -6,13 +6,17 @@ import XMonad.Util.Run
 
 main :: IO ()
 main = do
-      myStatusBar <- spawnPipe "xmobar"
+      xmproc <- spawnPipe "xmobar"
       xmonad defaultConfig {
             modMask              = myModMask
             , layoutHook         = myLayoutHook
             , manageHook         = manageDocks <+> myManageHook
                                     <+> manageHook defaultConfig
-            , logHook            = myLogHook myStatusBar
+            , logHook            = dynamicLogWithPP xmobarPP -- 今選択しているパネルの情報を出力
+                                       { ppOutput = hPutStrLn xmproc
+                                       , ppTitle xmobarColor "green" "" . shorten 50
+                                       }
+            , myEventHook        = handleEventHook defaultConfig <+> docksEventHook -- 最初のワークスペースでxmobarが後ろに隠れてしまう問題を解決
             , borderWidth        = 3                     -- 周りの枠線の太さ
             , normalBorderColor  = "#e6e6e6"             -- 枠の色
             , focusedBorderColor = "#ff0000"             -- 選択枠の色
