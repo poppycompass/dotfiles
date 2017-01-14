@@ -54,7 +54,7 @@ fi
 if [ ! -d ~/Downloads/git/peda ]; then
   echo "install gdb peda..."
   mkdir ~/Downloads/git
-  git clone https://github.com/longld/peda.git ~/Downloads/git/
+  git clone https://github.com/longld/peda.git ~/Downloads/git/peda
   #echo "source ~/peda/peda.py" >> ~/.gdbinit
 fi
 
