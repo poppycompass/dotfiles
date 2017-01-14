@@ -4,4 +4,4 @@
 $ cd ~  
 $ git clone https://github.com/poppycompass/dotfiles  
 $ cd dotfiles  
-$ yes | ./start.sh  
+$ ./start.sh  

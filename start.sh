@@ -51,7 +51,7 @@ if [ ! -d ~/.xmonad ]; then
     echo "done"
 fi
 
-if [ ! -d ~/.xmonad ]; then
+if [ ! -d ~/Downloads/git/peda ]; then
   echo "install gdb peda..."
   mkdir ~/Downloads/git
   git clone https://github.com/longld/peda.git ~/Downloads/git/
