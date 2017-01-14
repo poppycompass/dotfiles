@@ -1,25 +1,14 @@
 #!/bin/sh
 
-echo -en "\e[36m
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-! p ppp    oooo   p ppp   p ppp   y    y                  !
-! pp   p  o    o  pp   p  pp   p  y    y                  !
-! p    p  o    o  p    p  p    p  y    y                  !
-! pp   p  o    o  pp   p  pp   p  y   yy                  !
-! p ppp   o    o  p ppp   p ppp    yyy y                  !
-! p        oooo   p       p            y                  !
-! p               p       p       y    y                  !
-! p               p       p        yyyy                   !
-!  cccc    oooo   m m mm   p ppp    aaaa    ssss    ssss  !
-! c    c  o    o  mm m  m  pp   p       a  s    s  s    s !
-! c       o    o  m  m  m  p    p   aaaaa   ss      ss    !
-! c       o    o  m  m  m  pp   p  a    a     ss      ss  !
-! c    c  o    o  m  m  m  p ppp   a   aa  s    s  s    s !
-!  cccc    oooo   m  m  m  p        aaa a   ssss    ssss  !
-!                          p                              !
-!                          p                              !
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-\e[m"
+# http://patorjk.com/software/taag/#p=display&f=Blocks&t=poppycompass, font: Blocks, Doh, Doom, Ogre, Slant, Larry 3D is good, now is Slant, 
+echo -en "\e[36;1;7m
+______                                                                                   ______
+\ \ \ \     ____  ____  ____  ____  __  ___________  ____ ___  ____  ____ ___________   / / / /
+ \ \ \ \   / __ \/ __ \/ __ \/ __ \/ / / / ___/ __ \/ __ \`__ \/ __ \/ __ \`/ ___/ ___/  / / / / 
+ / / / /  / /_/ / /_/ / /_/ / /_/ / /_/ / /__/ /_/ / / / / / / /_/ / /_/ (__  |__  )   \ \ \ \ 
+/_/_/_/  / .___/\____/ .___/ .___/\__, /\___/\____/_/ /_/ /_/ .___/\__,_/____/____/     \_\_\_\\
+        /_/         /_/   /_/    /____/                    /_/                                 
+\e[m\n\n"
 cd $(dirname $0)
 
 # for Ubuntu
