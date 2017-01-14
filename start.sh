@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # http://patorjk.com/software/taag/#p=display&f=Blocks&t=poppycompass, font: Blocks, Doh, Doom, Ogre, Slant, Larry 3D is good, now is Slant, 
-echo -en "\e[36;1;7m
+echo "\e[36;1;7m
 ______                                                                                   ______
 \ \ \ \     ____  ____  ____  ____  __  ___________  ____ ___  ____  ____ ___________   / / / /
  \ \ \ \   / __ \/ __ \/ __ \/ __ \/ / / / ___/ __ \/ __ \`__ \/ __ \/ __ \`/ ___/ ___/  / / / / 
@@ -12,7 +12,7 @@ ______                                                                          
 cd $(dirname $0)
 
 # for Ubuntu
-if [ `uname -a | grep ubuntu` ] && [ ! -d /bin/zsh ]; then
+if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
   sudo apt-get install software-properties-common # for neovim
   sudo apt-get install python-dev python-pip python3-dev python3-pip # for neovim
   sudo add-apt-repository ppa:neovim-ppa/unstable
@@ -25,7 +25,7 @@ if [ `uname -a | grep ubuntu` ] && [ ! -d /bin/zsh ]; then
 fi
 
 # for Arch linux
-if [ `uname -a | grep arch` ] && [ ! -d /bin/zsh ]; then
+if uname -a | grep ARCH >/dev/null && [ ! -d /bin/zsh ]; then
   sudo pacman -Sy
   sudo pacman -S git neovim zsh radare2 gdb
   if [ $1 == "x" ]; then
