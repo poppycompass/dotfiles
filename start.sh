@@ -19,7 +19,7 @@ if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
   sudo apt update
   sudo apt install neovim vim gcc gdb
   sudo apt install zsh git
-  if [ $1 == "x" ]; then
+  if [ "$1" = "x" ]; then
     sudo apt install xmobar xmonad
   fi
 fi
@@ -28,27 +28,34 @@ fi
 if uname -a | grep ARCH >/dev/null && [ ! -d /bin/zsh ]; then
   sudo pacman -Sy
   sudo pacman -S git neovim zsh radare2 gdb
-  if [ $1 == "x" ]; then
+  if [ "$1" = "x" ]; then
     sudo pacman -S xmonad xmobar
   fi
 fi
 
-if [ ! -d ~/.vim/bundle/neobundle.vim ];then
+if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
     echo "You don't have Neobundle. Install now..."
     mkdir -p ~/.vim/bundle
     git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
     echo "Install Neobundle done."
 fi
-if [ ! -d ~/.vim/dein ];then
+if [ ! -d ~/.vim/dein ]; then
     echo "You don't have Dein. Install now..."
     git clone https://github.com/Shougo/dein.vim ~/.vim/dein/repos/github.com/Shougo/dein.vim
     echo "Install Dein done."
 fi
 
-if [ ! -d ~/.xmonad ];then
+if [ ! -d ~/.xmonad ]; then
     echo "preparing xmonad..."
     mkdir ~/.xmonad
     echo "done"
+fi
+
+if [ ! -d ~/.xmonad ]; then
+  echo "install gdb peda..."
+  mkdir ~/Downloads/git
+  git clone https://github.com/longld/peda.git ~/Downloads/git/
+  #echo "source ~/peda/peda.py" >> ~/.gdbinit
 fi
 
 for file in .?*
