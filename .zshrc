@@ -17,75 +17,115 @@ xmodmap $HOME/.Xmodmap
 
 # cd && ls
 function cd() {
-    builtin cd $@ && ls --color=auto -h;
+  builtin cd $@ && ls --color=auto -h;
+}
+# mkdir && cd
+function mc() {
+  if [[ $# -gt 0 ]]; then
+    mkdir $1 && cd $1
+  else
+    echo "mc <dir_name>"
+  fi
 }
 # ファイルにはless, ディレクトリにはlsを実行する
 function l() {
-   # if the argument is a single file or stdin is pipe
-   if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
-      ${PAGER:-less} "$@"
-   else
-      ls -alFh --color=auto "$@"
-   fi
+  # if the argument is a single file or stdin is pipe
+  if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
+    ${PAGER:-less} "$@"
+  else
+    ls -alFh --color=auto "$@"
+  fi
 }
 
 # プロセスリストをgrep する ex: p apache2
 function p() {
-   if [[ $# -gt 0 ]]; then
-      ps aux | grep "$@"
-   else
-      ps aux
-   fi
+  if [[ $# -gt 0 ]]; then
+    ps aux | grep "$@"
+  else
+    ps aux
+  fi
 }
 
 # コマンドヒストリをgrepする．
 function h() {
-   if [[ $# -gt 0 ]]; then
-#      history | tac | sort -k2 -u | sort | grep "$@"
-      history | grep "$@"
-   else
-      history
-   fi
+  if [[ $# -gt 0 ]]; then
+    #      history | tac | sort -k2 -u | sort | grep "$@"
+    history | grep "$@"
+  else
+    history
+  fi
+}
+
+# findで見つけたファイルを表示し，lessする
+function fl() {
+  if [[ $# -gt 0 ]]; then
+    list=`find -type f -name $1 2>/dev/null`
+    if [[ $list = "" ]]; then
+      line="0"
+    else
+      line=`echo $list | wc -l`
+    fi
+    case "$line" in
+      "0") echo "No file" ;;
+      "1") less $list ;;
+      *)   echo -en $list | nl
+           arr=(`echo $list | tr -s '\n', ' '`)
+           echo -en "file: "
+           read num
+           less $arr[$num] 2>/dev/null ;;
+    esac
+  else
+    echo "fn \"<file_name>\""
+  fi
+}
+
+# cut | uniq | sortを簡略化
+function cus() {
+  if [[ $# -eq 2 ]]; then
+    cut -d"$1" -f$2 | uniq | sort
+  else
+    cut -d":" -f1 | uniq | sort
+  fi
 }
 
 # grep のようにfindする ex: f auth /var. 第一引数にキーワード，第二引数にディレクトリを指定　第二引数を省略した場合はカレントディレクトリが対象，第一引数も省略した場合は除外条件を除く，すべてのファイルが表示
 # 除外条件：ディレクトリそのもの，隠しディレクトリ以下
 # ex: ls -l $(f sh /bin)
 if [[ -n "$PS1" ]]; then
-   f() {
-      find "${2:-.}" \! -type d \! -path "*/.*" -path "*$1*" |& grep -v -F ": Permission denied" | sort
-   }
+  f() {
+    find "${2:-.}" \! -type d \! -path "*/.*" -path "*$1*" |& grep -v -F ": Permission denied" | sort
+  }
 fi
 
 # ctf
 # plt一覧表示
 function plt() {
-    if [ $# -eq 1 ]; then
-        objdump -M intel -d $@ | grep "@plt>:"
-    else
-        echo "Usage: plt ./bin"
-    fi
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | grep "@plt>:"
+  else
+    echo "Usage: plt ./bin"
+  fi
 }
 # gotアドレスの表示
 function got() {
-    if [ $# -eq 1 ]; then
-        objdump -M intel -d $@ | grep "@plt>:" -A1
-    else
-        echo "Usage: got ./bin"
-    fi
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | grep "@plt>:" -A1
+  else
+    echo "Usage: got ./bin"
+  fi
 }
 # objdump -M intel -d ./bin | less
 function ob() {
-    if [ $# -eq 1 ]; then
-        objdump -M intel -d $@ | less
-    else
-        echo "Usage: ob ./bin"
-    fi
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | less
+  else
+    echo "Usage: ob ./bin"
+  fi
 }
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+  xterm-color) color_prompt=yes;;
 esac
 
 # 言語設定
@@ -227,7 +267,7 @@ alias 'st'='strings'
 alias 'gdb'='gdb -q'
 alias 'ctf'='cd $CTF'
 alias 'lab'='cd $HOME/work/lab/now'
-alias 'proj'='cd $LAB/project/2016'
+alias 'proj'='cd $LAB/project/2017'
 alias 'bd'="base64 -d"
 alias 'ct'="cd $HOME/work/test"
 alias 'down'="cd $HOME/Downloads"
@@ -235,7 +275,16 @@ alias 'cg'="cd $HOME/Downloads/git"
 alias 'r32'="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
 alias 'r2'="r2 -c 'aaa;s main;VV'"
 alias 'py'="python"
+alias 'c'="cat"
 alias 'gits'="git status"
+alias 'gitc'="git commit"
+alias 'gita'="git add -A"
+alias 'gitac'="git add -A; git commit"
+alias 'gitb'="git branch"
+alias 'gitl'="git log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order"
+alias 'gitp'="git push"
+alias 'gr'="grep -R"
+alias 'mm'="less ~/work/doc/memo.txt"
 
 # for arch
 alias 'pac'='pacman'
@@ -244,7 +293,7 @@ alias 'pac'='pacman'
 alias nautilus='nautilus --no-desktop --browser'
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+  xterm-color) color_prompt=yes;;
 esac
 
 # who am i
@@ -256,29 +305,29 @@ alias pc="echo poppycompass"
 #force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+  xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
+  *)
     ;;
 esac
 
@@ -304,18 +353,18 @@ zstyle ':vcs_info:bzr:*' use-simple true
 
 autoload -Uz is-at-least
 if is-at-least 4.3.10; then
-   zstyle ':vcs_info:git:*' check-for-changes true
-   zstyle ':vcs_info:git:*' stagedstr "+"
-   zstyle ':vcs_info:git:*' unstagedstr "-"
-   zstyle ':vcs_info:git:*' formats '[%s: %b] %c%u'
-   zstyle ':vcs_info:git:*' actionformats '[%s: %b|%a] %c%u'
+  zstyle ':vcs_info:git:*' check-for-changes true
+  zstyle ':vcs_info:git:*' stagedstr "+"
+  zstyle ':vcs_info:git:*' unstagedstr "-"
+  zstyle ':vcs_info:git:*' formats '[%s: %b] %c%u'
+  zstyle ':vcs_info:git:*' actionformats '[%s: %b|%a] %c%u'
 fi
 
 function _update_vcs_info_msg() {
-psvar=()
-LANG=en_US.UTF-8 vcs_info
-[[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-                  }
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
 add-zsh-hook precmd _update_vcs_info_msg
 
 # コマンドを実行するときに右プロンプトを消す

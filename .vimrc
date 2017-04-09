@@ -174,6 +174,7 @@ let g:quickrun_config={'*': {'split': ''}}
 set splitbelow
 set splitright
 syntax on "文字に色をつける"
+set synmaxcol=400 "長い文字列のコピペで重くなるのは，色付けをデフォルト3000文字まで頑張っちゃおうとするのが原因．制限すれば軽くなる"
 
 "画面表示の設定"
 set number "行番号の表示"
@@ -340,6 +341,22 @@ nmap <silent> ,<SPACE> :%s/^ *//g<CR>:noh<CR>
 
 nmap <silent> <C-m> :set nopaste<CR>:set buftype=<CR>
 
+" neovim ターミナル起動
+nmap <silent> .t :tabnew<CR>:terminal<CR>
+
+" global
+"map <C-g> :Gtags
+" 今開いているコードの関数一覧がQuickfix Listに表示
+nmap <C-\><C-l> :Gtags -f %<CR>
+" 定義先へ飛ぶ
+nmap <C-s> :GtagsCursor<CR>
+" カーソル以下の使用箇所を探す
+nmap <C-\><C-k> :Gtags -r <C-r><C-w><CR>
+" Quickfixでの移動
+nmap <C-n> :cn<CR>
+" Quickfixでの移動
+nmap <C-p> :cp<CR>
+
 " For Arch Linux
 " xlock
 nmap <C-l> :!xlock<CR>
@@ -359,6 +376,12 @@ augroup fileTypeIndent
     " Schemeの場合に()の色を付ける
     "let lisp_rainbow = 1
     "autocmd BufNewFile,BufRead *.scm set ft=lisp
+augroup END
+
+" ファイルの自動更新
+augroup vimrc-vimrc-checktime
+  autocmd!
+  autocmd WinEnter * checktime
 augroup END
 
 " vimgrep and open cwindow
