@@ -328,8 +328,7 @@ nnoremap <Tab> >>
 " Virsual modeで選択した部分を * で検索できる
 vnoremap * "zy:let @/ = @z<CR>n
 " バッファ移動
-nmap <silent> <C-o> :bp<CR>
-nmap <silent> <C-O> :bn<CR>
+"nmap <silent> <C-o> :bp<CR>
 " ファイルテンプレートの挿入
 nmap <silent> ,/ Go/* E.O.F. */<Esc>ggO/* <C-r>% */<CR>
 nmap <silent> ,- Go-- E.O.F.<Esc>ggO-- <C-r>%<CR>
@@ -353,9 +352,10 @@ nmap <C-s> :GtagsCursor<CR>
 " カーソル以下の使用箇所を探す
 nmap <C-\><C-k> :Gtags -r <C-r><C-w><CR>
 " Quickfixでの移動
-nmap <C-n> :cn<CR>
-" Quickfixでの移動
-nmap <C-p> :cp<CR>
+nmap [q :cn<CR>
+nmap ]q :cp<CR>
+nmap [Q :<C-u>cfirst<CR>
+nmap ]Q :<C-u>clast<CR>
 
 " For Arch Linux
 " xlock

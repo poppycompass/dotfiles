@@ -7,21 +7,21 @@
 (outputStack64,"",pxq 64@rsp)
 (outputStack32,"",pxw 64@esp)
 
-nnw=.(stepIn32)
-niw=.(stepOut32)
-nw=.(outputStack32)
-npw=.(peda32)
-nsw='do;db main;dc;db- main;npw'
-nrw='do;dc;npw'
-ncw='dc;npw'
+$nnw=$(stepIn32)
+$niw=$(stepOut32)
+$nw=$(outputStack32)
+$npw=$(peda32)
+$nsw='do;db main;dc;db- main;npw'
+$nrw='do;dc;npw'
+$ncw='dc;npw'
 
-nn=.(stepIn64)
-ni=.(stepOut64)
-nq=.(outputStack64)
-np=.(peda64)
-ns='do;db main;dc;db- main;np'
-nr='do;dc;np'
-nc='dc;np'
+$nn=$(stepIn64)
+$ni=$(stepOut64)
+$nq=$(outputStack64)
+$np=$(peda64)
+$ns='do;db main;dc;db- main;np'
+$nr='do;dc;np'
+$nc='dc;np'
 
 e bin.demangle = true
 e asm.demangle = true
