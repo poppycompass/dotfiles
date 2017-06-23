@@ -285,6 +285,7 @@ alias 'gitl'="git log --graph -10 --branches --remotes --tags  --format=format:'
 alias 'gitp'="git push"
 alias 'gr'="grep -R"
 alias 'mm'="less ~/work/doc/memo.txt"
+alias 'wifi'='nmcli dev wifi'
 
 # for arch
 alias 'pac'='pacman'

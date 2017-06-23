@@ -121,7 +121,7 @@ else " vim
         " colorfull statusbar
         NeoBundle 'itchyny/lightline.vim'
         " 囲むやつ
-        NeoBundle 'tpope/vim-surround.vim'
+        "NeoBundle 'tpope/vim-surround.vim'
 
         " プラグインここまで "
         call neobundle#end()
