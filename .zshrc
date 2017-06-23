@@ -286,6 +286,7 @@ alias 'gitp'="git push"
 alias 'gr'="grep -R"
 alias 'mm'="less ~/work/doc/memo.txt"
 alias 'wifi'='nmcli dev wifi'
+alias 'mu'='alsamixer'
 
 # for arch
 alias 'pac'='pacman'
