@@ -13,14 +13,14 @@ cd $(dirname $0)
 
 # for Ubuntu
 if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
-  sudo apt-get install software-properties-common # for neovim
-  sudo apt-get install python-dev python-pip python3-dev python3-pip # for neovim
+  sudo apt-get -y install software-properties-common # for neovim
+  sudo apt-get -y install python-dev python-pip python3-dev python3-pip # for neovim
   sudo add-apt-repository ppa:neovim-ppa/unstable
-  sudo apt update
-  sudo apt install neovim vim gcc gdb
-  sudo apt install zsh git
+  sudo apt-get -y update
+  sudo apt-get -y install neovim vim gcc gdb
+  sudo apt-get -y install zsh git
   if [ "$1" = "x" ]; then
-    sudo apt install xmobar xmonad
+    sudo apt-get -y install xmobar xmonad
   fi
 fi
 
