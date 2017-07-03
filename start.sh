@@ -15,7 +15,7 @@ cd $(dirname $0)
 if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
   sudo apt-get -y install software-properties-common # for neovim
   sudo apt-get -y install python-dev python-pip python3-dev python3-pip # for neovim
-  sudo add-apt-repository ppa:neovim-ppa/unstable
+  sudo add-apt-repository -y ppa:neovim-ppa/unstable
   sudo apt-get -y update
   sudo apt-get -y install neovim vim gcc gdb
   sudo apt-get -y install zsh git
