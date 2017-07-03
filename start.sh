@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # http://patorjk.com/software/taag/#p=display&f=Blocks&t=poppycompass, font: Blocks, Doh, Doom, Ogre, Slant, Larry 3D is good, now is Slant, 
-echo "\e[36;1;7m
+echo -e "\e[36;1;7m
 ______                                                                                   ______
 \ \ \ \     ____  ____  ____  ____  __  ___________  ____ ___  ____  ____ ___________   / / / /
  \ \ \ \   / __ \/ __ \/ __ \/ __ \/ / / / ___/ __ \/ __ \`__ \/ __ \/ __ \`/ ___/ ___/  / / / / 
