@@ -20,7 +20,7 @@ if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
   sudo apt-get -y install neovim vim gcc gdb
   sudo apt-get -y install zsh git
   if [ "$1" = "x" ]; then
-    sudo apt-get -y install xmobar xmonad
+    sudo apt-get -y install xmobar xmonad rxvt-unicode-256color
   fi
 fi
 
@@ -29,7 +29,7 @@ if uname -a | grep ARCH >/dev/null && [ ! -d /bin/zsh ]; then
   sudo pacman -Sy
   sudo pacman -S git neovim zsh radare2 gdb
   if [ "$1" = "x" ]; then
-    sudo pacman -S xmonad xmobar
+    sudo pacman -S xmonad xmobar rxvt-unicode
   fi
 fi
 
