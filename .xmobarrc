@@ -9,7 +9,6 @@ Config { font = "xft:MonoSpace:pixelsize=13:antialias=true"
        , hideOnStart = False
        , commands = [ Run Network "enp0s25" ["-L","0","-H","32","--normal","green","--high","red"] 10
                     , Run Network "wlp3s0" ["-L","0","-H","32","--normal","green","--high","red"] 10
-                    , Run Network "enp0s29u1u2c2" ["-L","0","-H","32","--normal","green","--high","red"] 10
                     , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: <usedratio>%", "-L", "30", "-H", "70", "--normal", "green", "--high", "red"] 10
                     , Run Swap [] 10
