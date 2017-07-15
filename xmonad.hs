@@ -23,14 +23,13 @@ main = do
             , terminal           = "urxvt"               -- 起動端末
           }
 
-myModMask = mod3Mask -- ~/.Xmodmapでmod3を無変換キーに束縛．それをModキーに適応
+myModMask = mod1Mask -- ~/.Xmodmapで無変換キーをAltにする． keycode 102 = Alt_L Alt_L Alt_L Alt_L Alt_L, 数値(102)はxevで確認
 
 myLayoutHook = avoidStruts $ layoutHook defaultConfig
 myManageHook = composeAll
     [ className =? "Gimp"      --> doFloat
     , className =? "Vncviewer" --> doFloat
     ]
-
 
 myLogHook h  = dynamicLogWithPP xmobarPP {
                    ppOutput = hPutStrLn h
