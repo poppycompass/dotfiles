@@ -20,6 +20,10 @@ if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
   sudo apt-get -y install neovim vim gcc gdb
   sudo apt-get -y install zsh git
   if [ "$1" = "x" ]; then
+    sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    sudo apt-get update
+    sudo apt-get install google-chrome-stable
     sudo apt-get -y install xmobar xmonad rxvt-unicode-256color
   fi
 fi
@@ -29,7 +33,8 @@ if uname -a | grep ARCH >/dev/null && [ ! -d /bin/zsh ]; then
   sudo pacman -Sy
   sudo pacman -S git neovim zsh radare2 gdb
   if [ "$1" = "x" ]; then
-    sudo pacman -S xmonad xmobar rxvt-unicode
+    sudo pacman -S xmonad xmobar rxvt-unicode thunderbird firefox
+    yaourt -S google-chrome
   fi
 fi
 
