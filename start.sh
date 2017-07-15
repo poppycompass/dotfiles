@@ -24,7 +24,7 @@ if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
     sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
     sudo apt-get update
     sudo apt-get install google-chrome-stable
-    sudo apt-get -y install xmobar xmonad rxvt-unicode-256color
+    sudo apt-get -y install xmobar xmonad rxvt-unicode-256color gmrun suckless-tools
   fi
 fi
 
@@ -33,7 +33,7 @@ if uname -a | grep ARCH >/dev/null && [ ! -d /bin/zsh ]; then
   sudo pacman -Sy
   sudo pacman -S git neovim zsh radare2 gdb
   if [ "$1" = "x" ]; then
-    sudo pacman -S xmonad xmobar rxvt-unicode thunderbird firefox
+    sudo pacman -S xmonad xmobar rxvt-unicode gmrun dmenu thunderbird firefox
     yaourt -S google-chrome
   fi
 fi
