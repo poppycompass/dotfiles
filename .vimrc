@@ -169,8 +169,19 @@ endfunction
 
 " ----- vim/nvim共通設定 -----
 " quickrunで開く窓を水平分割にする
-let g:quickrun_config={'*': {'split': ''}}
 " quickrun横分割時は下へ，縦分割時は右に新しいウィンドウが開く
+" 'c/gcc'などで設定した内容は :QuickRun c/gccで実行
+" '_'は全部に対する設定
+let g:quickrun_config={
+            \ '_': {
+            \    'split': '',
+            \    'outputter/buffer/close_on_empty' : 1,
+            \    'outputter' : 'quickfix',
+            \    'runner' : 'vimproc',
+            \    'runner/vimproc/updatetime' : 60,
+            \},
+            \}
+
 set splitbelow
 set splitright
 syntax on "文字に色をつける"
@@ -192,10 +203,10 @@ set smartcase " 検索時に大文字を含んでいたら大小を区別する
 
 
 "タブ/インデントの設定"
-set tabstop=2 "画面上でタブ文字が占める幅"
+set tabstop=4 "画面上でタブ文字が占める幅"
 set expandtab "タブ入力を複数の空白入力に置き換える"
-set shiftwidth=2 "自動インデントでずれる幅"
-set softtabstop=2 "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅"
+set shiftwidth=4 "自動インデントでずれる幅"
+set softtabstop=4 "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅"
 set autoindent "改行時に前の行のインデントを継続"
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する"
 set cindent "改造が可能なインデント。詳しくはググれ"
