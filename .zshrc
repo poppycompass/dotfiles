@@ -346,7 +346,7 @@ setopt interactive_comments
 setopt prompt_subst
 
 # プロンプトの表示
-PROMPT="%F{green}%U%n%f%u[%F{blue}%B%~%f%b]$ % "
+PROMPT="%F{yellow}%U%n%f%u[%F{blue}%B%~%f%b]$ % "
 
 # プロンプト指定(コマンドの続き)
 PROMPT2='[%F{yellow}%n%f]> '
