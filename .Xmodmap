@@ -1,1 +1,5 @@
 keycode 102 = Alt_L Alt_L Alt_L Alt_L Alt_L 
+
+clear Lock
+keycode 66 = Control_L Control_L Control_L Control_L 
+add Control = Control_L
