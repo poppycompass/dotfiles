@@ -29,6 +29,7 @@ myLayoutHook = avoidStruts $ layoutHook defaultConfig
 myManageHook = composeAll
     [ className =? "Gimp"      --> doFloat
     , className =? "Vncviewer" --> doFloat
+    , className =? "VirtualBox" --> doFloat
     ]
 
 myLogHook h  = dynamicLogWithPP xmobarPP {
