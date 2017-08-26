@@ -176,7 +176,6 @@ let g:quickrun_config={
             \ '_': {
             \    'split': '',
             \    'outputter/buffer/close_on_empty' : 1,
-            \    'outputter' : 'quickfix',
             \    'runner' : 'vimproc',
             \    'runner/vimproc/updatetime' : 60,
             \},
@@ -384,15 +383,25 @@ augroup fileTypeIndent
     autocmd!
     " LaTex用のタブ幅
     autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.py setlocal tabstop=2 softtabstop=2 shiftwidth=2
     " Schemeの場合に()の色を付ける
     "let lisp_rainbow = 1
     "autocmd BufNewFile,BufRead *.scm set ft=lisp
 augroup END
 
 " ファイルの自動更新
-augroup vimrc-vimrc-checktime
+augroup vimrc-checktime
   autocmd!
-  autocmd WinEnter * checktime
+  autocmd InsertEnter,WinEnter * checktime
+augroup END
+
+" ファイルの buftype 問題を解決
+augroup vimrc-buftype
+  autocmd!
+  autocmd WinEnter *.tex setlocal nopaste buftype=
+  autocmd WinEnter *.c setlocal nopaste buftype=
+  autocmd WinEnter *.py setlocal nopaste buftype=
+  autocmd WinEnter *.txt setlocal nopaste buftype=
 augroup END
 
 " vimgrep and open cwindow
