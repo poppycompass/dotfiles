@@ -109,7 +109,8 @@ function plt() {
 # gotアドレスの表示
 function got() {
   if [ $# -eq 1 ]; then
-    objdump -M intel -d $@ | grep "@plt>:" -A1
+    #objdump -M intel -d $@ | grep "@plt>:" -A1
+    objdump -R $@
   else
     echo "Usage: got ./bin"
   fi
@@ -206,8 +207,6 @@ setopt share_history
 # スペースから始まるコマンド行はヒストリに残さない
 setopt hist_ignore_space
 
-
-
 # 色の設定
 # ----------------------------
 # 色の定義
@@ -271,6 +270,7 @@ alias 'proj'='cd $LAB/project/2017'
 alias 'bd'="base64 -d"
 alias 'ct'="cd $HOME/work/test"
 alias 'down'="cd $HOME/Downloads"
+alias 'dev'="cd $HOME/dev"
 alias 'cg'="cd $HOME/Downloads/git"
 alias 'r32'="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
 alias 'r2'="r2 -c 'aaa;s main;VV'"
