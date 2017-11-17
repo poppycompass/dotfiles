@@ -383,6 +383,7 @@ augroup fileTypeIndent
     " LaTex用のタブ幅
     autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead python,ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd BufNewFile,BufRead *.go *.c *.c++ setlocal tabstop=4 softtabstop=4 shiftwidth=4
     " Schemeの場合に()の色を付ける
     "let lisp_rainbow = 1
     "autocmd BufNewFile,BufRead *.scm set ft=lisp
