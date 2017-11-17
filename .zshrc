@@ -14,6 +14,7 @@ export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
 xmodmap $HOME/.Xmodmap
 #setxkbmap -option ctrl:nocaps
+xset r rate 180
 
 # cd && ls
 function cd() {
@@ -283,6 +284,7 @@ alias 'gitac'="git add -A; git commit"
 alias 'gitb'="git branch"
 alias 'gitl'="git log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order"
 alias 'gitam'="git status | sed -e 's/#.*modified://g | xargs git add"
+alias 'gor'="go run"
 alias 'gitp'="git push"
 alias 'gr'="grep -R"
 alias 'mm'="less ~/work/doc/memo.txt"
