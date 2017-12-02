@@ -4,6 +4,7 @@ sudo apt-get -y install python-dev python-pip python3-dev python3-pip # for neov
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt-get -y update
 sudo apt-get -y install neovim vim gcc gdb
+sudo pip install neovim
 sudo apt-get -y install zsh git
 if [ "$1" = "x" ]; then
   sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
