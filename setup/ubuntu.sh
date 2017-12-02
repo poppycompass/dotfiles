@@ -12,3 +12,4 @@ if [ "$1" = "x" ]; then
   sudo apt-get install -y google-chrome-stable
   sudo apt-get -y install xmobar xmonad rxvt-unicode-256color gmrun suckless-tools
 fi
+ln -sf ~/dotfiles/.Xmodmap ~/.Xmodmap

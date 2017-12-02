@@ -1,0 +1,191 @@
+# 基本設定
+# ----------------------------
+export PATH=$PATH:$HOME/.cabal/bin
+export SDL_VIDEO_X11_DGAMOUSE=0
+export VIDEO_FORMAT="NISC"
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+export CTF=$HOME/Downloads/ctf
+export LAB=$HOME/work/lab
+export TEX=$HOME/work/template/tex
+export TC=$HOME/work/templates/ctf
+export XDG_CONFIG_HOME=$HOME/dotfiles
+
+xmodmap $HOME/.Xmodmap
+#setxkbmap -option ctrl:nocaps
+xset r rate 180
+
+# cd && ls
+function cd() {
+  builtin cd $@ && ls --color=auto -h;
+}
+# mkdir && cd
+function mc() {
+  if [[ $# -gt 0 ]]; then
+    mkdir $1 && cd $1
+  else
+    echo "mc <dir_name>"
+  fi
+}
+# ファイルにはless, ディレクトリにはlsを実行する
+function l() {
+  # if the argument is a single file or stdin is pipe
+  if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
+    ${PAGER:-less} "$@"
+  else
+    ls -alFh --color=auto "$@"
+  fi
+}
+
+# プロセスリストをgrep する ex: p apache2
+function p() {
+  if [[ $# -gt 0 ]]; then
+    ps aux | grep "$@"
+  else
+    ps aux
+  fi
+}
+
+# コマンドヒストリをgrepする．
+function h() {
+  if [[ $# -gt 0 ]]; then
+    #      history | tac | sort -k2 -u | sort | grep "$@"
+    history | grep "$@"
+  else
+    history
+  fi
+}
+
+# findで見つけたファイルを表示し，lessする
+function fl() {
+  if [[ $# -gt 0 ]]; then
+    list=`find -type f -name $1 2>/dev/null`
+    if [[ $list = "" ]]; then
+      line="0"
+    else
+      line=`echo $list | wc -l`
+    fi
+    case "$line" in
+      "0") echo "No file" ;;
+      "1") less $list ;;
+      *)   echo -en $list | nl
+           arr=(`echo $list | tr -s '\n', ' '`)
+           echo -en "file: "
+           read num
+           less $arr[$num] 2>/dev/null ;;
+    esac
+  else
+    echo "fl \"<file_name>\""
+  fi
+}
+
+# cut | uniq | sortを簡略化
+function cus() {
+  if [[ $# -eq 2 ]]; then
+    cut -d"$1" -f$2 | uniq | sort
+  else
+    cut -d":" -f1 | uniq | sort
+  fi
+}
+
+# grep のようにfindする ex: f auth /var. 第一引数にキーワード，第二引数にディレクトリを指定　第二引数を省略した場合はカレントディレクトリが対象，第一引数も省略した場合は除外条件を除く，すべてのファイルが表示
+# 除外条件：ディレクトリそのもの，隠しディレクトリ以下
+# ex: ls -l $(f sh /bin)
+if [[ -n "$PS1" ]]; then
+  f() {
+    find "${2:-.}" \! -type d \! -path "*/.*" -path "*$1*" |& grep -v -F ": Permission denied" | sort
+  }
+fi
+
+# ctf
+# plt一覧表示
+function plt() {
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | grep "@plt>:"
+  else
+    echo "Usage: plt ./bin"
+  fi
+}
+# gotアドレスの表示
+function got() {
+  if [ $# -eq 1 ]; then
+    #objdump -M intel -d $@ | grep "@plt>:" -A1
+    objdump -R $@
+  else
+    echo "Usage: got ./bin"
+  fi
+}
+# objdump -M intel -d ./bin | less
+function ob() {
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | less
+  else
+    echo "Usage: ob ./bin"
+  fi
+}
+
+# ls color
+alias ls='ls --color=auto -h'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# some more ls aliases
+alias ll='ls -alFh'
+alias la='ls -Ah'
+alias lr='ls -Rh'
+
+alias 'vim'='nvim'
+alias 'vi'='nvim'
+alias 'v'='nvim'
+alias 'emacs'='nvim'
+alias 'gh'='ghci'
+
+alias 'hd'='hexdump -C'
+alias 'd'='cd'
+alias 'f'='file'
+alias 'rm'='rm -i'
+alias 'mv'='mv -i'
+alias 'cp'='cp -ir'
+alias 'mkdir'='mkdir -p'
+alias '| l'='| less'
+alias '../'='cd ../'
+alias 'st'='strings'
+alias 'gdb'='gdb -q'
+alias 'ctf'='cd $CTF'
+alias 'lab'='cd $HOME/work/lab/now'
+alias 'proj'='cd $LAB/project/2017'
+alias 'bd'="base64 -d"
+alias 'ct'="cd $HOME/work/test"
+alias 'down'="cd $HOME/Downloads"
+alias 'dev'="cd $HOME/work/dev"
+alias 'cg'="cd $HOME/Downloads/git"
+alias 'r32'="r2 -i $HOME/dotfiles/.radare2rc_32 -d"
+alias 'r2'="r2 -c 'aaa;s main;VV'"
+alias 'py'="python"
+alias 'c'="cat"
+alias 'gits'="git status"
+alias 'gitc'="git commit"
+alias 'gitd'="git diff"
+alias 'gita'="git add -A"
+alias 'gitac'="git add -A; git commit"
+alias 'gitb'="git branch"
+alias 'gitl'="git log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order"
+alias 'gitam'="git status | sed -e 's/#.*modified://g | xargs git add"
+alias 'gor'="go run"
+alias 'gitp'="git push"
+alias 'gr'="grep -R"
+alias 'mm'="less ~/work/doc/memo.txt"
+alias 'wifi'='nmcli dev wifi'
+alias 'mu'='alsamixer'
+alias 'fn'="find . -name"
+
+# for arch
+alias 'pac'='pacman'
+
+# Xmonad for GNOME
+alias nautilus='nautilus --no-desktop --browser'
