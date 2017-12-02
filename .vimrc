@@ -222,7 +222,7 @@ endif
 " 実行時に下のパスにある設定ファイルも読み込む
 set runtimepath+=~/.vim/userautoload
 
-" vimバージョン依存
+" vimバージョン依存, TODO: vim8.0ではdeinが上手く動かない?
 if v:version >= 704
   runtime! userautoload/basic/*.vim
   runtime! userautoload/dein/*.vim

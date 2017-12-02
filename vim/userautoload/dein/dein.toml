@@ -7,12 +7,22 @@ hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-denite.vim
 '''
 
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['roxma/nvim-yarp', 'roxma/vim-hug-neovim-rpc']
+hook_add = '''
+  let g:deoplete#enable_at_statup = 1
+'''
+
 # ファイルエクスプローラー
 [[plugins]]
-repo = 'scrooloose/nerdtree'
-hook_add = '''
-  nnoremap <Space>f :<C-u>NERDTreeToggle<CR>
-  let NERDTreeIgnore = ['\.pyc$']
+repo = 'scrooloose/nerdtree' hook_add = ''' nnoremap <Space>f :<C-u>NERDTreeToggle<CR> let NERDTreeIgnore = ['\.pyc$']
 '''
 
 [[plugins]]
@@ -32,17 +42,19 @@ hook_add = '''
   nnoremap <silent> <Leader>gb :Gblame<CR>
 '''
 
-# nerdtreeにGitの状態を表示
-[[plugins]]
-repo = 'Xuyuanp/nerdtree-git-plugin'
-depends = ['vim-fugitive', 'nerdtree']
-
-# gitで管理しているファイル編集時に差分を表示
+# gitで管理しているファイル編集時に差分を表示, 重い(更新タイミングを少なくして軽量化中)
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 # http://wonderwall.hatenablog.com/entry/2016/03/26/211710
 hook_add = '''
+  let g:gitgutter_realtime = 0
+  let g:gitgutter_eager = 0
 '''
+
+# nerdtreeにGitの状態を表示, 重い
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+depends = ['vim-fugitive', 'nerdtree']
 
 [[plugins]]
 repo = 'vim-scripts/Align'
