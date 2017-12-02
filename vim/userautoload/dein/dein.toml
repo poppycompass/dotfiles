@@ -1,0 +1,57 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-denite.vim
+'''
+
+# ファイルエクスプローラー
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+  nnoremap <Space>f :<C-u>NERDTreeToggle<CR>
+  let NERDTreeIgnore = ['\.pyc$']
+'''
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-lightline.vim
+'''
+
+# vimからGit
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+  nnoremap <silent> <Leader>gs :Gstatus<CR>
+  nnoremap <silent> <Leader>gw :Gwrite<CR>
+  nnoremap <silent> <Leader>gc :Gcommit<CR>
+  nnoremap <silent> <Leader>gd :Gdiff<CR>
+  nnoremap <silent> <Leader>gb :Gblame<CR>
+'''
+
+# nerdtreeにGitの状態を表示
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+depends = ['vim-fugitive', 'nerdtree']
+
+# gitで管理しているファイル編集時に差分を表示
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+# http://wonderwall.hatenablog.com/entry/2016/03/26/211710
+hook_add = '''
+'''
+
+[[plugins]]
+repo = 'vim-scripts/Align'
+
+[[plugins]]
+repo = 'Shougo/vinarise'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'tpope/vim-surround'

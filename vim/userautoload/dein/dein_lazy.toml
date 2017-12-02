@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
+depends = ['vimproc.vim']
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-quickrun.vim
+'''
+
+[[plugins]]
+repo = 'jsfaint/gen_tags.vim'
+on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-gen_tags.vim
+'''

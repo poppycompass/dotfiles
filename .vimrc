@@ -1,189 +1,17 @@
 " .vimrc
-"
+
+" 全体的な設定
+set all& " init all settings
 set title
 set nocompatible "vi との互換性を優先しない"
-filetype plugin indent on
-filetype indent on
-
-" nvim/vim固有の設定
-if has('nvim') " nvim
-    set clipboard=unnamed,unnamedplus
-    set mouse=
-    " builtin termialでの<Esc>
-    tnoremap <C-k> <C-\><C-n>
-    nnoremap <silent> .v :Hexplore<CR>:terminal<CR>
-
-    " ----- dein settings -----
-    " プラグインが実際にインストールされるディレクトリ
-    let s:dein_dir = expand('~/.vim/dein')
-    " dein.vim 本体
-    let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-    execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-
-    " 設定開始
-    if dein#load_state(s:dein_dir)
-        call dein#begin(s:dein_dir)
-
-        " プラグインリストを収めた TOML ファイル
-        " 予め TOML ファイル（後述）を用意しておく
-        let g:rc_dir    = expand('~')
-        let s:toml      = g:rc_dir . '/.dein.toml'
-        let s:lazy_toml = g:rc_dir . '/.dein_lazy.toml'
-
-        " TOML を読み込み、キャッシュしておく
-        call dein#load_toml(s:toml,      {'lazy': 0})
-        call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-        " 設定終了
-        call dein#end()
-        call dein#save_state()
-    endif
-    " プラグインを追加・削除やtomlファイルを編集した後は
-    " 適宜 call dein#update, call dein#clear_stateを呼ぶ
-    if dein#check_install()
-        call dein#install()
-    endif
-else " vim
-    " nvimデフォルト有効/バックアップ(history)
-    set ttyfast
-    set history=10000
-    " VimShell
-    nnoremap <silent> .v :Hexplore<CR>:VimShell<CR>
-
-    " ----- Neobundle Settings -----"
-    let s:noplugin = 0
-    let s:bundle_root = expand('~/.vim/bundle')
-    let s:neobundle_root = s:bundle_root . '/neobundle.vim'
-    if !isdirectory(s:neobundle_root) || v:version < 702
-        " NeoBundleがない場合またはvimのバージョンが古い場合はNeoBundleを読み込まない "
-        let s:noplugin = 1
-    else
-        " プラグイン管理のNeoBundle起動+bundle関係のディレクトリ指定"
-        if has('vim_starting')
-            set runtimepath+=~/.vim/bundle/neobundle.vim
-            "execute "set runtimepath+=" . s:neobundle_root
-        endif
-        call neobundle#begin(expand('~/.vim/bundle/'))
-        NeoBundleFetch 'Shougo/neobundle.vim'
-
-        " vimで非同期操作を可能にする。NeoBundleと連携可能 "
-        NeoBundle 'Shougo/vimproc', {
-                    \ 'build': {
-                    \     'windows': 'make -f make_mingw32.mak',
-                    \      'cygwin' : 'make -f make_cygwin.mak',
-                    \      'mac'    : 'make -f make_mac.mak',
-                    \      'unix'   : 'make -fmake_unix.mak',
-                    \ }}
-
-        " 補完 "
-        if has('lua') && ( (v:version >= 703 && has('patch885')) || v:version >= 704)
-            " 鬱陶しいほどの自動補完
-            "NeoBundle 'Shougo/neocomplete'
-            "let g:neocomplete#enable_at_startup = 1
-        else
-            "NeoBundle 'Shougo/neocomplcache'
-            "let g:neocomplcache_enable_at_startup = 1
-        endif
-
-        " 以下各種プラグイン "
-
-        " haskell"
-        " ghc-mod
-        NeoBundleLazy "eagletmt/ghcmod-vim",         {"autoload" : { "filetypes" : ["haskell"] }}
-        " Haskell補完
-        NeoBundleLazy "ujihisa/neco-ghc",            {"autoload" : { "filetypes" : ["haskell"] }}
-        " Unite でモジュールを挿入
-        NeoBundleLazy "ujihisa/unite-haskellimport", {"autoload" : { "filetypes" : ["haskell"] }}
-        " Vimのシンタックスハイライト設定　長い配列を取り扱ったりすると動作が極めて遅くなる原因
-        NeoBundleLazy "dag/vim2hs",                  {"autoload" : { "filetypes" : ["haskell"] }}
-        " 本来はHoogleドキュメントを閲覧するためのものらしいが，使い方が分からないため放置
-        "    NeoBundleLazy "eagletmt/unite-haddock",      {"autoload" : { "filetypes" : ["haskell"] }}
-
-        " Scheme(Gauche)なんだが，lisp_rainbowを使うためにLisp扱い
-        " Vim 内でGoshを起動できる
-        "NeoBundleLazy 'aharisu/vim_goshrepl',         {"autoload" : { "filetypes" : ["lisp"] }}
-        "NeoBundleLazy 'aharisu/vim-gdev',             {"autoload" : { "filetypes" : ["lisp"] }}
-        " ruby用
-        NeoBundle "tpope/vim-rails",                  {"autoload" : { "filetypes" : ["ruby"] }}
-        " neomru.vim
-        NeoBundleLazy 'Shougo/neomru.vim'
-
-        " quickrun "
-        NeoBundle 'thinca/vim-quickrun'
-        " Align "
-        NeoBundle 'Align'
-        " バイナリ編集 "
-        NeoBundle 'Shougo/vinarise'
-        " VimShell
-        NeoBundle 'Shougo/vimshell'
-        " Unite depends neomru
-        NeoBundle 'Shougo/unite.vim'
-        " colorfull statusbar
-        NeoBundle 'itchyny/lightline.vim'
-        " 囲むやつ
-        "NeoBundle 'tpope/vim-surround.vim'
-
-        " プラグインここまで "
-        call neobundle#end()
-
-        "filetype plugin indent on  "ファイル形式ごとのインデントを設定する。(あった場合のみ) NeoBundle起動に必要 "
-        "filetype indent on
-        " vim起動時に未インストールのNeoBundleがあればプロンプトを出す "
-        NeoBundleCheck
-    endif
-    " ----- Neobundle Settings end -----"
-endif
-
-" lightline設定, 自動構文チェック(c/cpp)
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'separator': { 'left': "〉", 'right': "〈" },
-      \ 'subseparator': { 'left': "〈", 'right': "〈" },
-      \ 'component': {
-      \   'readonly': '%{&readonly?"!RO!":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}'
-      \ },
-      \ 'active': {
-      \   'right': [ [ 'syntastic', 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
-      \ }
-      \ }
-let g:syntastic_mode_map = { 'mode': 'passive' }
-augroup AutoSyntastic
-  autocmd!
-  " 構文チェックのファイルタイプはここで指定．現在半無効化
-  "autocmd BufWritePost *.c,*.cpp call s:syntastic()
-  autocmd BufWritePost *.none call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-
-" ----- vim/nvim共通設定 -----
-" quickrunで開く窓を水平分割にする
-" quickrun横分割時は下へ，縦分割時は右に新しいウィンドウが開く
-" 'c/gcc'などで設定した内容は :QuickRun c/gccで実行
-" '_'は全部に対する設定
-let g:quickrun_config={
-            \ '_': {
-            \    'split': '',
-            \    'outputter/buffer/close_on_empty' : 0,
-            \    'runner/vimproc/updatetime' : 60,
-            \},
-            \}
-
+set ttyfast
+set history=10000
 set splitbelow
 set splitright
-syntax on "文字に色をつける"
+syntax on "文字に色付け
 set synmaxcol=400 "長い文字列のコピペで重くなるのは，色付けをデフォルト3000文字まで頑張っちゃおうとするのが原因．制限すれば軽くなる"
+filetype on
+filetype detect
 
 "画面表示の設定"
 set number "行番号の表示"
@@ -255,8 +83,6 @@ vnoremap <C-k> <Esc>
 nmap <silent> ,, :nohlsearch<CR>
 " only
 nmap <silent> ,o :only<CR>
-" Quickrun
-nmap <silent> ,r :w<CR>:QuickRun<CR>
 " quit
 nmap <silent> ,c :q<CR>
 " quit all
@@ -269,8 +95,6 @@ nmap <silent> ,s :w<CR>:q<CR>
 nmap ,f :set ft=
 " エンコード設定(utf8, sjis...)
 nmap ,E :e ++enc=
-" バイナリ編集, rで書き換え
-nmap <silent> ,V :Vinarise<CR>
 " tabnew
 nmap <silent> ,t :tabnew<CR>:Explore<CR>
 " tab移動
@@ -301,6 +125,16 @@ nnoremap <silent> s+ <C-w>+
 nnoremap <silent> s- <C-w>-
 " ウィンドウ分割
 nnoremap <silent> sv <C-w>v
+nnoremap <silent> sm :sp<CR>
+" 分割してファイル選択
+nmap <silent> ,h :Hexplore<CR>
+nmap <silent> ,v :Vexplore<CR>
+nmap <silent> ,e :Explore<CR>
+
+" Quickrun
+nmap <silent> ,r :w<CR>:QuickRun<CR>
+" バイナリ編集, rで書き換え
+nmap <silent> ,V :Vinarise<CR>
 
 " ノーマルモードで';'と':'を入れ替え
 nnoremap ; :
@@ -318,26 +152,11 @@ nmap ,U bgUwA
 nmap ,z zfj
 " C等の関数向け畳み込み
 nmap ,{ zfa{
-" 水平分割して下のウィンドウでブラウジング開始 -> Netrwの利用コマンド
-nmap <silent> ,h :Hexplore<CR>
-" 縦分割してExplore
-nmap <silent> ,v :Vexplore<CR>
-" Explore
-nmap <silent> ,e :Explore<CR>
-" Haskellの型推測
-nmap <silent> \t :w<CR>:GhcModType<CR>
-" 型推測によるハイライトを消す
-nmap <silent> \n :GhcModTypeClear<CR>
-" 現在のバッファで開いているHaskellのコードに対してコンパイルエラー・警告をquickfixウィンドウに表示
-nmap <silent> \c :w<CR>:GhcModCheck<CR>
-" hlintからのメッセージをquickfixウィンドウに表示する
-nmap <silent> \h :w<CR>:GhcModLint<CR>
 " <Tab>で現在行をインデント
-nnoremap <Tab> >>
+nnoremap <silent>> >>
+nnoremap <silent>< <<
 " Virsual modeで選択した部分を * で検索できる
 vnoremap * "zy:let @/ = @z<CR>n
-" バッファ移動
-"nmap <silent> <C-o> :bp<CR>
 " ファイルテンプレートの挿入
 nmap <silent> ,/ Go/* E.O.F. */<Esc>ggO/* <C-r>% */<CR>
 nmap <silent> ,- Go-- E.O.F.<Esc>ggO-- <C-r>%<CR>
@@ -349,58 +168,40 @@ nmap <silent> ,<SPACE> :%s/^ *//g<CR>:noh<CR>
 
 nmap <silent> <C-m> :set nopaste<CR>:set buftype=<CR>
 
-" neovim ターミナル起動
+" ターミナル起動
 nmap <silent> .t :tabnew<CR>:terminal<CR>
-
-" global
-"map <C-g> :Gtags
-" 今開いているコードの関数一覧がQuickfix Listに表示
-nmap <C-\><C-l> :Gtags -f %<CR>
-" 定義先へ飛ぶ
-nmap <C-s> :GtagsCursor<CR>
-" カーソル以下の使用箇所を探す
-nmap <C-\><C-k> :Gtags -r <C-r><C-w><CR>
-" Quickfixでの移動
-nmap [q :cn<CR>
-nmap ]q :cp<CR>
-nmap [Q :<C-u>cfirst<CR>
-nmap ]Q :<C-u>clast<CR>
 
 " For Arch Linux
 " xlock
 nmap <C-l> :!xlock<CR>
 
+" <Leader>をspaceに
+let mapleader = "\<Space>"
+
 if &term == "rxvt-unicode-256color" || &term == "nvim"
-   " ~/.vim/colors/urxvt.vim
    colorscheme urxvt
 else
    highlight CursorLine term=none cterm=none ctermfg=none ctermbg=black "カーソルがある行のハイライト表示.ctermbgはバックグラウンドの色を決定.端末の背景色が黒に近いため、設定の黒が結果的には白に見える.これを実現するには、デスクトップの背景画像が少し透けるくらいの暗さにしておく。設定は端末の編集で行う."
 endif
 
-" ファイルタイプごとの設定．追加するときはaugroup内に追記していく
 augroup fileTypeIndent
-    autocmd!
-    " LaTex用のタブ幅
-    autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
-    autocmd BufNewFile,BufRead python,ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
-    autocmd BufNewFile,BufRead go c c++ setlocal tabstop=4 softtabstop=4 shiftwidth=4
-    " Schemeの場合に()の色を付ける
-    "let lisp_rainbow = 1
-    "autocmd BufNewFile,BufRead *.scm set ft=lisp
+  autocmd!
+  autocmd BufNewFile,BufRead *.txt setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+  autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+  autocmd BufNewFile,BufRead *.py  setlocal tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd BufNewFile,BufRead *.rb  setlocal tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd BufNewFile,BufRead *.go  setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd BufNewFile,BufRead *.c   setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd BufNewFile,BufRead *.h   setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd BufNewFile,BufRead *.cpp setlocal tabstop=4 softtabstop=4 shiftwidth=4
+  autocmd BufNewFile,BufRead *.hpp setlocal tabstop=4 softtabstop=4 shiftwidth=4
 augroup END
 
-" ファイルの自動更新
-augroup vimrc-checktime
+" ファイルの自動更新, buftype 問題を解決
+augroup vimrc-refresh
   autocmd!
   autocmd InsertEnter,WinEnter * checktime
-augroup END
-
-" ファイルの buftype 問題を解決
-augroup vimrc-buftype
-  autocmd!
-  autocmd WinEnter *.tex setlocal nopaste buftype=
-  autocmd WinEnter *.txt setlocal nopaste buftype=
-  autocmd WinEnter c,c++,python,ruby,go setlocal nopaste buftype=
+  autocmd InsertEnter,WinEnter * set nopaste buftype=
 augroup END
 
 " vimgrep and open cwindow
@@ -408,8 +209,29 @@ autocmd QuickFixCmdPost *grep* cwindow|nnoremap <buffer> <CR> <CR>
 " quickfixでEnterを押すと該当エラーに跳ぶ
 autocmd BufReadPost quickfix cwindow|nnoremap <buffer> <CR> <CR>
 
-" 実行時に下のパスにある設定ファイルも読み込む "
-set runtimepath+=~/.vim/
-runtime! userautoload/*.vim
+" nvim
+if has('nvim')
+  set clipboard=unnamed,unnamedplus
+  set mouse=
+  " builtin termialでの<Esc>
+  tnoremap <C-k> <C-\><C-n>
+  nnoremap <silent> .v :Hexplore<CR>:terminal<CR>
+endif
 
+" 実行時に下のパスにある設定ファイルも読み込む
+set runtimepath+=~/.vim/userautoload
+
+" vimバージョン依存
+if v:version >= 704
+  runtime! userautoload/basic/*.vim
+  runtime! userautoload/dein/*.vim
+  "runtime! userautoload/util/*.vim
+elseif (v:version > 702) && (v:version < 704) " deinが使えないくらいの古さ
+  runtime! userautoload/basic/*.vim
+  runtime! userautoload/neobundle/*.vim
+  runtime! userautoload/plugins/*.vim
+  "runtime! userautoload/util/*.vim
+else " 化石
+  runtime! userautoload/basic/*.vim
+endif
 " E.O.F. "

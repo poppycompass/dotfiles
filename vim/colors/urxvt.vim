@@ -54,4 +54,8 @@ highlight PmenuSel term=reverse cterm=reverse ctermfg=219 ctermbg=16
 highlight Label term=bold cterm=bold ctermfg=33 ctermbg=none
 " none, 91とかの設定数値の色
 highlight PreProc term=none cterm=none ctermfg=183 ctermbg=none
-
+" Gdiffのときが明るすぎた, :help diffとかすると，どの色を使っているかを出してくれるようだ
+highlight DiffAdd term=none cterm=none ctermfg=203 ctermbg=none
+highlight DiffChange term=none cterm=none ctermfg=203 ctermbg=none
+highlight DiffDelete term=none cterm=none ctermfg=12 ctermbg=none
+highlight DiffText term=none cterm=none ctermfg=203 ctermbg=none

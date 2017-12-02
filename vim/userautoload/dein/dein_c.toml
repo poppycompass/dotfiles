@@ -1,0 +1,6 @@
+[[plugins]]
+repo = 'scrooloose/syntastic'
+on_ft = ['c', 'cpp']
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-syntastic.vim
+'''

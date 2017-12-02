@@ -9,52 +9,24 @@ ______                                                                          
 /_/_/_/  / .___/\____/ .___/ .___/\__, /\___/\____/_/ /_/ /_/ .___/\__,_/____/____/     \_\_\_\\
         /_/         /_/   /_/    /____/                    /_/                                 
 \e[m\n\n"
-cd $(dirname $0)
 
-# for Ubuntu
-if uname -a | grep Ubuntu >/dev/null && [ ! -d /bin/zsh ]; then
-  sudo apt-get -y install software-properties-common # for neovim
-  sudo apt-get -y install python-dev python-pip python3-dev python3-pip # for neovim
-  sudo add-apt-repository -y ppa:neovim-ppa/unstable
-  sudo apt-get -y update
-  sudo apt-get -y install neovim vim gcc gdb
-  sudo apt-get -y install zsh git
-  if [ "$1" = "x" ]; then
-    sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    sudo apt-get update
-    sudo apt-get install -y google-chrome-stable
-    sudo apt-get -y install xmobar xmonad rxvt-unicode-256color gmrun suckless-tools
-  fi
-fi
+SETUP_DIR="setup"
+OS=`uname -s | perl -pe 's/\n//g'`
+# os type
+case ${OS} in
+  "Linux" ) DIST=`cat /etc/os-release | grep "ID=" | cut -d'=' -f2 | perl -pe 's/\n//g'` ;;
+  "Darwin") DIST=${OS} ;;
+  * ) echo "[-] Unknown OS type"; exit ;;
+esac
 
-# for Arch linux
-if uname -a | grep ARCH >/dev/null && [ ! -d /bin/zsh ]; then
-  sudo pacman -Sy
-  sudo pacman -S git neovim zsh radare2 gdb
-  if [ "$1" = "x" ]; then
-    sudo pacman -S xmonad xmobar rxvt-unicode gmrun dmenu thunderbird firefox
-    yaourt -S google-chrome
-  fi
-fi
-
-# for Mac
-if uname -a | grep "Darwin Kernel" >/dev/null && [ ! -d /bin/zsh ]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew install neovim/neovim/neovim
-  brew install zsh git binutils gdb
-fi
-
-if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
-    echo "You don't have Neobundle. Install now..."
-    mkdir -p ~/.vim/bundle
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-    echo "Install Neobundle done."
-fi
-if [ ! -d ~/.vim/dein ]; then
-    echo "You don't have Dein. Install now..."
-    git clone https://github.com/Shougo/dein.vim ~/.vim/dein/repos/github.com/Shougo/dein.vim
-    echo "Install Dein done."
+# run setup script for the distribution
+echo "[+] Your distribution is '${OS}/${DIST}'"
+if [ ! -d /bin/zsh ]; then
+  ${SETUP_DIR}/${DIST}.sh $1
+  case `echo $?` in
+    0 ) echo "[+] setup of '${DIST}' completed." ;;
+    * ) echo "[-] setup script for '${DIST}' not found." ;;
+  esac
 fi
 
 if [ ! -d ~/.xmonad ]; then
@@ -77,6 +49,7 @@ do
     fi
 done
 
+mkdir -p ~/.vim/bundle
 ln -sf ~/dotfiles/colors ~/.vim/
 ln -sf ~/dotfiles/userautoload ~/.vim/
 ln -sf ~/.vim ~/dotfiles/nvim

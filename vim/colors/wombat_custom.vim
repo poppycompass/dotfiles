@@ -1,8 +1,9 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/wombat.vim
-" Author: itchyny
+" Filename: autoload/lightline/colorscheme/wombat_custom.vim
+" Author: itchyny -> poppycopmass
 " License: MIT License
 " Last Change: 2015/11/30 08:37:43.
+" wombatの色をカスタムした, Filename部分を書き換えないと，上手く動かない
 " =============================================================================
 let s:base03 = [ '#242424', 235 ]
 let s:base023 = [ '#353535 ', 236 ]

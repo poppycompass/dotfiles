@@ -1,0 +1,33 @@
+[[plugins]]
+repo = 'eagletmt/ghcmod-vim'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'ujihisa/neco-ghc'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'dag/vim2hs'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'eagletmt/ghcmod-vim'
+on_ft = 'haskell'
+hook_add = '''
+  " Haskellの型推測
+  nmap <silent> \t :w<CR>:GhcModType<CR>
+  " 型推測によるハイライトを消す
+  nmap <silent> \n :GhcModTypeClear<CR>
+  " 現在のバッファで開いているHaskellのコードに対してコンパイルエラー・警告をquickfixウィンドウに表示
+  nmap <silent> \c :w<CR>:GhcModCheck<CR>
+  " hlintからのメッセージをquickfixウィンドウに表示する
+  nmap <silent> \h :w<CR>:GhcModLint<CR>
+'''
+
+[[plugins]]
+repo = 'ujihisa/neco-ghc'
+on_ft = 'haskell'
+
+[[plugins]]
+repo = 'dag/vim2hs'
+on_ft = 'haskell'
