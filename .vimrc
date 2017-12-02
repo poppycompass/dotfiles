@@ -201,7 +201,8 @@ augroup END
 augroup vimrc-refresh
   autocmd!
   autocmd InsertEnter,WinEnter * checktime
-  autocmd InsertEnter,WinEnter * set nopaste buftype=
+  autocmd InsertEnter,WinEnter *.* set nopaste buftype=
+  autocmd InsertEnter,WinEnter .* set nopaste buftype=
 augroup END
 
 " vimgrep and open cwindow
