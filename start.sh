@@ -14,7 +14,7 @@ SETUP_DIR="setup"
 OS=`uname -s | perl -pe 's/\n//g'`
 # os type
 case ${OS} in
-  "Linux" ) DIST=`cat /etc/os-release | grep "ID=" | cut -d'=' -f2 | perl -pe 's/\n//g'` ;;
+  "Linux" ) DIST=`cat /etc/os-release | grep "^ID=" | cut -d'=' -f2 | perl -pe 's/\n//g'` ;;
   "Darwin") DIST=${OS} ;;
   * ) echo "[-] Unknown OS type"; exit ;;
 esac
