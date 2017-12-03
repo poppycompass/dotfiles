@@ -8,6 +8,16 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'nixprime/cpsm'
+build = 'env PY3=ON ./install.sh'
+hook_add = '''
+  let g:python3_host_prog = expand('/usr/bin/python3')
+'''
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
 repo = 'roxma/nvim-yarp'
 
 [[plugins]]
@@ -65,7 +75,7 @@ repo = 'vim-scripts/Align'
 repo = 'Shougo/vinarise'
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
+repo = 'Shougo/unite.vim' 
 
 [[plugins]]
 repo = 'tpope/vim-surround'
@@ -83,4 +93,15 @@ hook_add = '''
     \  'sink':    'tabe',
     \  'options': '-m -x +s',
     \  'down':    '40%'})
+'''
+
+[[plugins]]
+repo = 'glidenote/memolist.vim'
+# detail: http://blog.glidenote.com/blog/2012/03/26/memolist.vim/
+hook_add = '''
+  let g:memolist_path = "$HOME/memo"
+  let g:memolist_gfixgrep             = 1
+  let g:memolist_filename_prefix_none = 1
+  nnoremap mn  :MemoNew<CR>
+  nnoremap mg  :MemoGrep<CR>
 '''
