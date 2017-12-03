@@ -75,10 +75,10 @@ noremap k gk
 " 改行
 nmap <C-j> o<Esc>
 " 押しやすいEsc
-nnoremap <C-k> <Esc>
-inoremap <C-k> <Esc>
-cnoremap <C-k> <Esc>
-vnoremap <C-k> <Esc>
+nnoremap <silent> <C-k> <Esc>:set nopaste buftype=<CR>
+inoremap <silent> <C-k> <Esc>:set nopaste buftype=<CR>
+cnoremap <silent> <C-k> <Esc>:set nopaste buftype=<CR>
+vnoremap <silent> <C-k> <Esc>:set nopaste buftype=<CR>
 " nohlsearch
 nmap <silent> ,, :nohlsearch<CR>
 " only
@@ -153,6 +153,7 @@ nmap ,z zfj
 " C等の関数向け畳み込み
 nmap ,{ zfa{
 " <Tab>で現在行をインデント
+nnoremap <Tab> >>
 nnoremap <silent>> >>
 nnoremap <silent>< <<
 " Virsual modeで選択した部分を * で検索できる

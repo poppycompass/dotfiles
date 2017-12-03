@@ -35,6 +35,12 @@ if [ ! -d ~/.xmonad ]; then
     echo "done"
 fi
 
+if [ ! -d ~/.fzf ]; then
+  echo "install fzf..."
+  git clone https://github.com/junegunn/fzf ~/.fzf
+  echo "y\ny\nn\n" | ~/.fzf/install --all
+fi
+
 if [ ! -d ~/Downloads/git/peda ]; then
   echo "install gdb peda..."
   mkdir ~/Downloads/git

@@ -37,4 +37,5 @@ call denite#custom#source(
 " 検索対象外のファイル指定
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
     \ [ '.git/', '.ropeproject/', '__pycache__/',
-    \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
+    \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/',
+    \   'deps/'])

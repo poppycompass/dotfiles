@@ -88,3 +88,87 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# fzf
+if [ -f ~/.fzf.bash ]; then
+  source ~/.fzf.bash
+  export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+  export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+  # fbr - checkout git branch
+  fbr() {
+    local branches branch
+    branches=$(git branch -vv) &&
+    branch=$(echo "$branches" | fzf +m) &&
+    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+  }
+  #fbrm - checkout git branch (including remote branches)
+  fbrm() {
+    local branches branch
+    branches=$(git branch --all | grep -v HEAD) &&
+    branch=$(echo "$branches" |
+             fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+    git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+  }
+  # fshow - git commit browser
+  fshow() {
+    git log --graph --color=always \
+        --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+    fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+        --bind "ctrl-m:execute:
+                  (grep -o '[a-f0-9]\{7\}' | head -1 |
+                  xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                  {}
+  FZF-EOF"
+  }
+  # fcd - cd to selected directory
+  fcd() {
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune \
+                    -o -type d -print 2> /dev/null | fzf +m) &&
+    cd "$dir"
+  }
+  # worktree移動
+  function cdworktree() {
+      # カレントディレクトリがGitリポジトリ上かどうか
+      git rev-parse &>/dev/null
+      if [ $? -ne 0 ]; then
+          echo fatal: Not a git repository.
+          return
+      fi
+  
+      local selectedWorkTreeDir=`git worktree list | fzf | awk '{print $1}'`
+  
+      if [ "$selectedWorkTreeDir" = "" ]; then
+          # Ctrl-C.
+          return
+      fi
+  
+      cd ${selectedWorkTreeDir}
+  }
+  fadd() {
+    local out q n addfiles
+    while out=$(
+        git status --short |
+        awk '{if (substr($0,2,1) !~ / /) print $2}' |
+        fzf-tmux --multi --exit-0 --expect=ctrl-d); do
+      q=$(head -1 <<< "$out")
+      n=$[$(wc -l <<< "$out") - 1]
+      addfiles=(`echo $(tail "-$n" <<< "$out")`)
+      [[ -z "$addfiles" ]] && continue
+      if [ "$q" = ctrl-d ]; then
+        git diff --color=always $addfiles | less -R
+      else
+        git add $addfiles
+      fi
+    done
+  }
+  # fkill - kill process
+  fkill() {
+    local pid
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+    if [ "x$pid" != "x" ]; then
+      echo $pid | xargs kill -${1:-9}
+    fi
+  }
+fi
