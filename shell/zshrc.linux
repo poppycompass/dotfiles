@@ -158,6 +158,7 @@ alias 'st'='strings'
 alias 'gdb'='gdb -q'
 alias 'ctf'='cd $CTF'
 alias 'lab'='cd $HOME/work/lab/now'
+alias 'aul'='cd $HOME/.vim/userautoload'
 alias 'proj'='cd $LAB/project/2017'
 alias 'bd'="base64 -d"
 alias 'ct'="cd $HOME/work/test"

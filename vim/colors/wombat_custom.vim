@@ -3,7 +3,7 @@
 " Author: itchyny -> poppycopmass
 " License: MIT License
 " Last Change: 2015/11/30 08:37:43.
-" wombatの色をカスタムした, Filename部分を書き換えないと，上手く動かない
+" wombatの色をカスタムした
 " =============================================================================
 let s:base03 = [ '#242424', 235 ]
 let s:base023 = [ '#353535 ', 236 ]
@@ -34,16 +34,12 @@ let s:p.normal.left = [ [ s:base02, s:blue ], [ s:base3, s:base01 ] ]
 "let s:p.normal.right = [ [ s:base02, s:base2 ], [ s:base1, s:base0 ] ]
 let s:p.normal.right = [ [ s:black, s:base3 ], [ s:black, s:base3 ], [ s:black, s:base3 ]]
 " inactiveは選択していないときの色
-"let s:p.inactive.right = [ [ s:base023, s:base01 ], [ s:base00, s:base02 ] ]
-"let s:p.inactive.left =  [ [ s:base1, s:base02 ], [ s:base00, s:base023 ] ]
 let s:p.inactive.right = [ [ s:white, s:base01 ], [ s:white, s:base01 ] ]
 let s:p.inactive.left =  [ [ s:white, s:base01 ], [ s:white, s:base01 ] ]
 let s:p.insert.left = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
 let s:p.replace.left = [ [ s:base023, s:red ], [ s:base3, s:base01 ] ]
 let s:p.visual.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
 " middle はそのまんま真ん中
-"let s:p.normal.middle = [ [ s:base2, s:base02 ] ]
-"let s:p.inactive.middle = [ [ s:base1, s:base023 ] ]
 let s:p.normal.middle = [ [ s:base2, s:base3 ] ]
 let s:p.inactive.middle = [ [ s:base1, s:base01 ] ]
 " tabsel: 現在選択タブ
@@ -51,10 +47,6 @@ let s:p.tabline.left = [ [ s:black, s:base3 ] ]
 let s:p.tabline.tabsel = [ [ s:green, s:black ] ]
 let s:p.tabline.middle = [ [ s:base2, s:base3 ] ]
 let s:p.tabline.right = [ [ s:base2, s:base00 ] ]
-"let s:p.tabline.left = [ [ s:base3, s:base00 ] ]
-"let s:p.tabline.tabsel = [ [ s:base3, s:base03 ] ]
-"let s:p.tabline.middle = [ [ s:base2, s:base02 ] ]
-"let s:p.tabline.right = [ [ s:base2, s:base00 ] ]
 let s:p.normal.error = [ [ s:base03, s:red ] ]
 let s:p.normal.warning = [ [ s:base023, s:yellow ] ]
 
