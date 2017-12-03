@@ -35,11 +35,13 @@ hook_add = '''
 [[plugins]]
 repo = 'tpope/vim-fugitive'
 hook_add = '''
-  nnoremap <silent> <Leader>gs :Gstatus<CR>
-  nnoremap <silent> <Leader>gw :Gwrite<CR>
-  nnoremap <silent> <Leader>gc :Gcommit<CR>
-  nnoremap <silent> <Leader>gd :Gdiff<CR>
-  nnoremap <silent> <Leader>gb :Gblame<CR>
+  map [fugitive] <Nop>
+  map <Leader>g [fugitive]
+  nnoremap <silent> [fugitive]s :Gstatus<CR>
+  nnoremap <silent> [fugitive]w :Gwrite<CR>
+  nnoremap <silent> [fugitive]c :Gcommit<CR>
+  nnoremap <silent> [fugitive]d :Gdiff<CR>
+  nnoremap <silent> [fugitive]b :Gblame<CR>
 '''
 
 # gitで管理しているファイル編集時に差分を表示, 重い(更新タイミングを少なくして軽量化中)

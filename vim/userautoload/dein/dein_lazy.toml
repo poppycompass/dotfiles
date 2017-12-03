@@ -1,3 +1,4 @@
+# 条件付きの読み込みは遅延読み込み扱い
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
