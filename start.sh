@@ -41,6 +41,23 @@ if [ ! -d ~/.fzf ]; then
   echo "y\ny\nn\n" | ~/.fzf/install --all
 fi
 
+# install global
+if [ ! -d /usr/local/global ]; then
+  global = "global-6.5.7"
+  ext = ".tar.gz"
+  cd /usr/local/src
+  sudo wget http://tamacom.com/global/${global}${ext}
+  sudo tar xvf ${global}${ext}
+  cd ${global}
+  sudo ./configure --prefix=/usr/local/global
+  sudo make
+  sudo make install
+  sudo ln -s /usr/local/global/bin/gtags /usr/bin/gtags
+  sudo ln -s /usr/local/global/bin/global /usr/bin/global
+  sudo ln -s /usr/local/global/bin/htags /usr/bin/htags
+  sudo ln -s /usr/local/global/bin/htags-server /usr/bin/htags-server
+fi
+
 if [ ! -d ~/Downloads/git/peda ]; then
   echo "install gdb peda..."
   mkdir ~/Downloads/git
