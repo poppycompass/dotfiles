@@ -43,8 +43,8 @@ fi
 
 # install global
 if [ ! -d /usr/local/global ]; then
-  global = "global-6.5.7"
-  ext = ".tar.gz"
+  global="global-6.5.7"
+  ext=".tar.gz"
   cd /usr/local/src
   sudo wget http://tamacom.com/global/${global}${ext}
   sudo tar xvf ${global}${ext}
