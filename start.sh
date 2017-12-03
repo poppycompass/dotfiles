@@ -56,8 +56,8 @@ do
 done
 
 mkdir -p ~/.vim/bundle
-ln -sf ~/dotfiles/colors ~/.vim/
-ln -sf ~/dotfiles/userautoload ~/.vim/
+ln -sf ~/dotfiles/vim/colors ~/.vim/
+ln -sf ~/dotfiles/vim/userautoload ~/.vim/
 ln -sf ~/.vim ~/dotfiles/nvim
 ln -sf ~/dotfiles/.vimrc ~/dotfiles/nvim/init.vim
 ln -sf ~/dotfiles/xmonad.hs ~/.xmonad/xmonad.hs
