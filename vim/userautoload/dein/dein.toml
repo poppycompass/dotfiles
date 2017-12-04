@@ -34,7 +34,7 @@ repo = 'Shougo/neomru.vim'
 [[plugins]]
 repo = 'scrooloose/nerdtree' 
 hook_add = ''' 
-  nnoremap <Leader>f :<C-u>NERDTreeToggle<CR> let NERDTreeIgnore = ['\.pyc$']
+  nnoremap <silent> <Leader>f :<C-u>NERDTreeToggle<CR> let NERDTreeIgnore = ['\.pyc$']
 '''
 
 [[plugins]]
