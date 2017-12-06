@@ -15,6 +15,7 @@ export XDG_CONFIG_HOME=$HOME/dotfiles
 xmodmap $HOME/.Xmodmap
 #setxkbmap -option ctrl:nocaps
 xset r rate 180
+xset -b
 
 # cd && ls
 function cd() {
