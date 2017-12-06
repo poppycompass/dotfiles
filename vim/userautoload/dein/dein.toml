@@ -18,6 +18,9 @@ hook_add = '''
 repo = 'Shougo/neomru.vim'
 
 #[[plugins]]
+#repo = 'Shougo/neoyank.vim'
+
+#[[plugins]]
 #repo = 'roxma/nvim-yarp'
 #
 #[[plugins]]
