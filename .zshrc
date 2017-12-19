@@ -1,3 +1,4 @@
+alias 'seccon'='cd $HOME/Downloads/ctf/seccon2017'
 OS=`uname -s | perl -pe 's/\n//g'`
 # OS依存なもの
 case ${OS} in

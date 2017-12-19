@@ -176,6 +176,8 @@ nmap <silent> .t :tabnew<CR>:terminal<CR>
 " xlock
 nmap <C-l> :!xlock<CR>
 
+" 検索用
+nmap m/ /\*\*\* 
 " <Leader>をspaceに
 let mapleader = "\<Space>"
 
