@@ -33,7 +33,7 @@ function mc() {
 function l() {
   # if the argument is a single file or stdin is pipe
   if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
-    ${PAGER:-less} "$@"
+    ${PAGER:-less} -N "$@"
   else
     ls -alFh --color=auto "$@"
   fi
