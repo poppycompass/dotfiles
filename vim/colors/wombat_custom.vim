@@ -1,5 +1,5 @@
 " =============================================================================
-" Filename: autoload/lightline/colorscheme/wombat_custom.vim
+" Filename: autoload/lightline/colorscheme/wombat.vim
 " Author: itchyny -> poppycopmass
 " License: MIT License
 " Last Change: 2015/11/30 08:37:43.
