@@ -3,7 +3,7 @@ sudo apt-get -y install software-properties-common # for neovim
 sudo apt-get -y install python-dev python-pip python3-dev python3-pip # for neovim
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt-get -y update
-sudo apt-get -y install neovim vim gcc gdb ctags
+sudo apt-get -y install neovim vim gcc gdb ctags libncurses5-dev
 sudo pip3 install neovim
 sudo apt-get -y install zsh git
 if [ "$1" = "x" ]; then
@@ -11,7 +11,7 @@ if [ "$1" = "x" ]; then
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
   sudo apt-get update
   sudo apt-get install -y google-chrome-stable
-  sudo apt-get -y install xmobar xmonad rxvt-unicode-256color gmrun suckless-tools libncurses5-dev
+  sudo apt-get -y install xmobar xmonad rxvt-unicode-256color gmrun suckless-tools
 fi
 # install global
 if [ ! -d /usr/local/global ]; then
