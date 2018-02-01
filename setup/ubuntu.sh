@@ -3,7 +3,7 @@ sudo apt-get -y install software-properties-common # for neovim
 sudo apt-get -y install python-dev python-pip python3-dev python3-pip # for neovim
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt-get -y update
-sudo apt-get -y install neovim vim gcc gdb ctags libncurses5-dev
+sudo apt-get -y install neovim vim gcc gdb ctags libncurses5-dev libboost-all-dev cmake
 sudo pip3 install neovim
 sudo apt-get -y install zsh git
 if [ "$1" = "x" ]; then
