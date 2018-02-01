@@ -30,47 +30,32 @@ if [ ! -d /bin/zsh ]; then
 fi
 
 if [ ! -d ~/.xmonad ]; then
-    echo "preparing xmonad..."
+    echo "[+] preparing xmonad..."
     mkdir ~/.xmonad
-    echo "done"
-fi
-
-if [ ! -d ~/.fzf ]; then
-  echo "install fzf..."
-  git clone https://github.com/junegunn/fzf ~/.fzf
-  echo "y\ny\nn\n" | ~/.fzf/install --all
-fi
-
-# install global
-if [ ! -d /usr/local/global ]; then
-  global="global-6.5.7"
-  ext=".tar.gz"
-  cd /usr/local/src
-  sudo wget http://tamacom.com/global/${global}${ext}
-  sudo tar xvf ${global}${ext}
-  cd ${global}
-  sudo ./configure --prefix=/usr/local/global
-  sudo make
-  sudo make install
-  sudo ln -s /usr/local/global/bin/gtags /usr/bin/gtags
-  sudo ln -s /usr/local/global/bin/global /usr/bin/global
-  sudo ln -s /usr/local/global/bin/htags /usr/bin/htags
-  sudo ln -s /usr/local/global/bin/htags-server /usr/bin/htags-server
+    echo "[+] done"
 fi
 
 if [ ! -d ~/Downloads/git/peda ]; then
-  echo "install gdb peda..."
+  echo "[+] install gdb peda..."
   mkdir ~/Downloads/git
   git clone https://github.com/longld/peda.git ~/Downloads/git/peda
   #echo "source ~/peda/peda.py" >> ~/.gdbinit
 fi
 
+cd ~/dotfiles
 for file in .?*
 do
     if [ $file != '..' ] && [ $file != '.Xmodmap' ] && [ $file != '.git' ]; then
+        echo "[+] create link to $HOME/$file"
         ln -sf $HOME/dotfiles/$file $HOME
     fi
 done
+
+if [ ! -d ~/.fzf ]; then
+  echo "[+] install fzf..."
+  git clone https://github.com/junegunn/fzf ~/.fzf
+  echo "y\ny\nn\n" | ~/.fzf/install --all
+fi
 
 mkdir -p ~/.vim/bundle
 ln -sf ~/dotfiles/vim/colors ~/.vim/
@@ -80,4 +65,4 @@ ln -sf ~/dotfiles/.vimrc ~/dotfiles/nvim/init.vim
 ln -sf ~/dotfiles/xmonad.hs ~/.xmonad/xmonad.hs
 chsh -s /bin/zsh
 
-echo "mount /dev/brain! Here we go!"
+echo "[+] mount /dev/brain! Here we go!"

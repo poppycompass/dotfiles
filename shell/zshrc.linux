@@ -140,6 +140,7 @@ alias ll='ls -alFh'
 alias la='ls -Ah'
 alias lr='ls -Rh'
 
+alias 'less'='less -N'
 alias 'vim'='nvim'
 alias 'vi'='nvim'
 alias 'v'='nvim'
