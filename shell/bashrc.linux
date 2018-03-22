@@ -21,7 +21,7 @@ esac
 
 # cd && ls
 function cd() {
-    builtin cd $@ && ls --color=auto;
+    builtin cd $@ && ls --color=auto -F;
 }
 # ファイルにはless, ディレクトリにはlsを実行する
 function l() {
@@ -88,7 +88,7 @@ function ob() {
 
 # grep のようにfindする ex: f auth /var. 第一引数にキーワード，第二引数にディレクトリを指定　第二引数を省略した場合はカレントディレクトリが対象，第一引数も省略した場合は除外条件を除く，すべてのファイルが表示
 # 除外条件：ディレクトリそのもの，隠しディレクトリ以下
-# ex: ls -l $(f sh /bin)
+# ex: ls -Fl $(f sh /bin)
 if [[ -n "$PS1" ]]; then
    f() {
       find "${2:-.}" \! -type d \! -path "*/.*" -path "*$1*" |& grep -v -F ": Permission denied" | sort
@@ -98,7 +98,7 @@ fi
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls='ls --color=auto -F'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -109,8 +109,8 @@ fi
 
 # some more ls aliases
 alias ll='ls -alFh'
-alias la='ls -Ah'
-alias lr='ls -Rh'
+alias la='ls -AFh'
+alias lr='ls -RFh'
 #alias l='ls -CF'
 
 alias 'vi'='vim'

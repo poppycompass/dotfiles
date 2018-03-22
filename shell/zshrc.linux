@@ -19,7 +19,7 @@ xset -b
 
 # cd && ls
 function cd() {
-  builtin cd $@ && ls --color=auto -h;
+  builtin cd $@ && ls --color=auto -Fh;
 }
 # mkdir && cd
 function mc() {
@@ -127,7 +127,7 @@ function ob() {
 }
 
 # ls color
-alias ls='ls --color=auto -h'
+alias ls='ls --color=auto -hF'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
 
@@ -137,8 +137,8 @@ alias egrep='egrep --color=auto'
 
 # some more ls aliases
 alias ll='ls -alFh'
-alias la='ls -Ah'
-alias lr='ls -Rh'
+alias la='ls -AFh'
+alias lr='ls -RFh'
 
 alias 'less'='less -N'
 alias 'vim'='nvim'
@@ -156,6 +156,7 @@ alias 'cp'='cp -ir'
 alias 'mkdir'='mkdir -p'
 alias '| l'='| less'
 alias '../'='cd ../'
+alias '..'='cd ../'
 alias 'st'='strings'
 alias 'gdb'='gdb -q'
 alias 'ctf'='cd $CTF'
@@ -173,10 +174,11 @@ alias 'py'="python"
 alias 'c'="cat"
 alias 'gits'="git status"
 alias 'gitc'="git commit"
+alias 'gitcl'="git clone"
 alias 'gitch'="git checkout"
 alias 'gitd'="git diff"
 alias 'gitm'="git merge"
-alias 'gita'="git add -A"
+alias 'gita'="git add -p"
 alias 'gitac'="git add -A; git commit"
 alias 'gitb'="git branch"
 alias 'gitl'="git log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order"
