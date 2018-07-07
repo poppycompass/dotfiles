@@ -1,17 +1,36 @@
 # setup script for ubuntu/debian
-sudo apt-get -y install software-properties-common # for neovim
-sudo apt-get -y install python-dev python-pip python3-dev python3-pip # for neovim
-sudo add-apt-repository -y ppa:neovim-ppa/unstable
-sudo apt-get -y update
-sudo apt-get -y install neovim vim gcc gdb ctags libncurses5-dev libboost-all-dev cmake
-sudo pip3 install neovim
-sudo apt-get -y install zsh git
+
+VER=`lsb_release -a | grep Release | cut -d: -f2 | sed -e's/\t//g'`
+APPS="zsh git vim gcc gdb ctags libncurses5-dev libboost-all-dev cmake"
+NEOVIM="neovim python-dev python-pip python3-dev python3-pip software-properties-common"
+XMONAD="xmobar xmonad rxvt-unicode-256color gmrun suckless-tools"
+
+echo "[+] OS version is ${VER}"
+case ${VER} in
+  "12.04") sudo apt-get update && \
+           sudo apt-get install ${NEOVIM} ${APPS} ;;
+  "14.04") sudo add-apt-repository -y ppa:neovim-ppa/unstable ;;
+  "16.04") sudo apt install ${NEOVIM} ${APPS} ;;
+  "18.04") sudo apt update && \
+           sudo apt install ${NEOVIM} ${APPS} && \
+           sudo pip3 install neovim ;;
+  * ) echo "[-] WTF?! OS version not found." ;;
+esac
+
 if [ "$1" = "x" ]; then
   sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  sudo apt-get update
-  sudo apt-get install -y google-chrome-stable
-  sudo apt-get -y install xmobar xmonad rxvt-unicode-256color gmrun suckless-tools
+  case ${VER} in
+    "12.04") sudo apt-add-repository ppa:neovim-ppa/stable && \
+             sudo apt-get update && \
+             sudo apt-get install ${XMONAD} "google-chrome-stable" ;;
+    "14.04") sudo apt update && \
+             sudo apt install ${XMONAD} "google-chrome-stable" ;;
+    "16.04") sudo apt update && \
+             sudo apt install ${XMONAD} "google-chrome-stable" ;;
+    "18.04") sudo apt install ${XMONAD} "chromium-browser" ;;
+    * ) echo "[-] WTF?! OS version not found." ;;
+  esac
 fi
 # install global
 if [ ! -d /usr/local/global ]; then
