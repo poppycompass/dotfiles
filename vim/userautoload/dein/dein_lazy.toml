@@ -7,6 +7,20 @@ hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-quickrun.vim
 '''
 
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+hook_source = '''
+  imap <C-a> <Plug>(neosnippet_expand_or_jump)
+  smap <C-a> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-a> <Plug>(neosnippet_expand_target)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+on_i = 1
+of_ft = ['snippet']
+depends = ['neosnippet-snippets']
+
 #[[plugins]]
 #repo = 'jsfaint/gen_tags.vim'
 #on_ft = ['python', 'ruby', 'go', 'c', 'cpp']

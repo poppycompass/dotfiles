@@ -17,30 +17,6 @@ hook_add = '''
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 
-#[[plugins]]
-#repo = 'Shougo/neoyank.vim'
-
-#[[plugins]]
-#repo = 'roxma/nvim-yarp'
-#
-#[[plugins]]
-#repo = 'roxma/vim-hug-neovim-rpc'
-#
-#[[plugins]]
-#repo = 'Shougo/deoplete.nvim'
-#depends = ['roxma/nvim-yarp', 'roxma/vim-hug-neovim-rpc']
-#hook_add = '''
-#  let g:deoplete#enable_at_startup = 1
-#  let g:deoplete#auto_complete_delay = 0
-#  let g:deoplete#auto_complete_start_length = 1
-#  let g:deoplete#enable_camel_case = 0
-#  let g:deoplete#enable_ignore_case = 0
-#  let g:deoplete#enable_refresh_always = 0
-#  let g:deoplete#enable_smart_case = 1
-#  let g:deoplete#file#enable_buffer_path = 1
-#  let g:deoplete#max_list = 10000
-#'''
-
 # ファイルエクスプローラー(https://kamiya555.github.io/2015/10/14/nerdtree-command/)
 [[plugins]]
 repo = 'scrooloose/nerdtree' 
@@ -118,4 +94,35 @@ hook_add = '''
   let g:memolist_filename_prefix_none = 1
   nnoremap mn  :MemoNew<CR>
   nnoremap mg  :MemoGrep<CR>
+'''
+
+# neosnippet
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+# deoplete
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_event = 'InsertCharPre'
+depends = ['roxma/nvim-yarp', 'roxma/vim-hug-neovim-rpc']
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 0
+  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#enable_camel_case = 0
+  let g:deoplete#enable_ignore_case = 0
+  let g:deoplete#enable_refresh_always = 0
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#file#enable_buffer_path = 1
+  let g:deoplete#max_list = 10000
+  " Tab補完
+  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 '''
