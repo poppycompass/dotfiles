@@ -3,14 +3,17 @@
 VER=`lsb_release -a | grep Release | cut -d: -f2 | sed -e's/\t//g'`
 BASIC="zsh git vim gcc gdb ctags libncurses5-dev libboost-all-dev cmake"
 NEOVIM="neovim python-dev python-pip python3-dev python3-pip software-properties-common"
-XMONAD="xmobar xmonad rxvt-unicode-256color gmrun suckless-tools"
+XMONAD="xmobar xmonad rxvt-unicode-256color gmrun suckless-tools chromium-browser"
 
 echo "[+] OS version is ${VER}"
 case ${VER} in
   "12.04") sudo apt-get update && \
            sudo apt-get install ${NEOVIM} ${BASIC} ;;
-  "14.04") sudo add-apt-repository -y ppa:neovim-ppa/unstable ;;
-  "16.04") sudo apt install ${NEOVIM} ${BASIC} ;;
+  "14.04" | \
+  "16.04") sudo add-apt-repository -y ppa:neovim-ppa/unstable && \
+           sudo apt update && \
+           sudo apt install ${NEOVIM} ${BASIC} && \
+           sudo pip3 install neovim ;;
   "18.04") sudo apt update && \
            sudo apt install ${NEOVIM} ${BASIC} && \
            sudo pip3 install neovim ;;
@@ -18,19 +21,7 @@ case ${VER} in
 esac
 
 if [ "$1" = "x" ]; then
-  sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  case ${VER} in
-    "12.04") sudo apt-add-repository ppa:neovim-ppa/stable && \
-             sudo apt-get update && \
-             sudo apt-get install ${XMONAD} "google-chrome-stable" ;;
-    "14.04") sudo apt update && \
-             sudo apt install ${XMONAD} "google-chrome-stable" ;;
-    "16.04") sudo apt update && \
-             sudo apt install ${XMONAD} "google-chrome-stable" ;;
-    "18.04") sudo apt install ${XMONAD} "chromium-browser" ;;
-    * ) echo "[-] WTF?! OS version not found." ;;
-  esac
+  sudo apt install ${XMONAD} ;;
 fi
 # install global
 if [ ! -d /usr/local/global ]; then
