@@ -1,18 +1,18 @@
 # setup script for ubuntu/debian
 
 VER=`lsb_release -a | grep Release | cut -d: -f2 | sed -e's/\t//g'`
-APPS="zsh git vim gcc gdb ctags libncurses5-dev libboost-all-dev cmake"
+BASIC="zsh git vim gcc gdb ctags libncurses5-dev libboost-all-dev cmake"
 NEOVIM="neovim python-dev python-pip python3-dev python3-pip software-properties-common"
 XMONAD="xmobar xmonad rxvt-unicode-256color gmrun suckless-tools"
 
 echo "[+] OS version is ${VER}"
 case ${VER} in
   "12.04") sudo apt-get update && \
-           sudo apt-get install ${NEOVIM} ${APPS} ;;
+           sudo apt-get install ${NEOVIM} ${BASIC} ;;
   "14.04") sudo add-apt-repository -y ppa:neovim-ppa/unstable ;;
-  "16.04") sudo apt install ${NEOVIM} ${APPS} ;;
+  "16.04") sudo apt install ${NEOVIM} ${BASIC} ;;
   "18.04") sudo apt update && \
-           sudo apt install ${NEOVIM} ${APPS} && \
+           sudo apt install ${NEOVIM} ${BASIC} && \
            sudo pip3 install neovim ;;
   * ) echo "[-] WTF?! OS version not found." ;;
 esac
