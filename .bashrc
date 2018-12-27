@@ -1,4 +1,8 @@
 OS=`uname -s | perl -pe 's/\n//g'`
+# scalaenv
+export PATH="${PATH}:${HOME}/.scalaenv/bin"
+eval "$(scalaenv init -)"
+
 # OS依存なもの
 case ${OS} in
   "Linux" )
