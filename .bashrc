@@ -1,17 +1,9 @@
-OS=`uname -s | perl -pe 's/\n//g'`
-# scalaenv
-export PATH="${PATH}:${HOME}/.scalaenv/bin"
-eval "$(scalaenv init -)"
+# common settings
+source ~/dotfiles/.shrc
 
-# OS依存なもの
-case ${OS} in
-  "Linux" )
-    source ~/dotfiles/shell/bashrc.linux
-    ;;
-  "Darwin" )
-    source ~/dotfiles/shell/bashrc.osx
-    ;;
-  * ) echo "[-] Unknown OS type"; exit ;;
+case $- in
+    *i*) ;;
+      *) return;;
 esac
 
 # If not running interactively, don't do anything
@@ -41,11 +33,6 @@ shopt -s checkwinsize
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
@@ -92,6 +79,17 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# OS依存なもの, exportの後に実行すること(共通設定に上書き)
+case ${OS} in
+  "Linux" )
+    source ~/dotfiles/shell/bashrc.linux
+    ;;
+  "Darwin" )
+    source ~/dotfiles/shell/bashrc.osx
+    ;;
+  * ) echo "[-] Unknown OS type"; exit ;;
+esac
 
 # fzf
 if [ -f ~/.fzf.bash ]; then
@@ -176,3 +174,86 @@ if [ -f ~/.fzf.bash ]; then
     fi
   }
 fi
+
+# cd && ls
+function cd() {
+    builtin cd $@ && ls --color=auto -F;
+}
+# ファイルにはless, ディレクトリにはlsを実行する
+function l() {
+   # if the argument is a single file or stdin is pipe
+   if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
+      ${PAGER:-less} "$@"
+   else
+      ls -alF --color=auto "$@"
+   fi
+}
+
+# プロセスリストをgrep する ex: p apache2
+function p() {
+   if [[ $# -gt 0 ]]; then
+      ps aux | grep "$@"
+   else
+      ps aux
+   fi
+}
+# コマンドヒストリをgrepする．
+function h() {
+   if [[ $# -gt 0 ]]; then
+#      history | tac | sort -k2 -u | sort | grep "$@"
+      history | grep "$@"
+   else
+      history
+   fi
+}
+# 通常シェルが終了する時に更新される.bash_historyをコマンド実行後とに更新する 複数シェルを起動している状態で，他のシェルのヒストリを手元に反映させたいときはhisotry -n
+if [[ -n "$PS1" ]]; then
+   shopt -s histappend
+   PROMPT_COMMAND='history -a'
+fi
+
+# plt一覧表示
+function plt() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | grep "@plt>:"
+    else
+        echo "Usage: plt ./bin"
+    fi
+}
+# gotアドレスの表示
+function got() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | grep "@plt>:" -A1
+    else
+        echo "Usage: got ./bin"
+    fi
+}
+# objdump -M intel -d ./bin | less
+function ob() {
+    if [ $# -eq 1 ]; then
+        objdump -M intel -d $@ | less
+    else
+        echo "Usage: ob ./bin"
+    fi
+}
+# grep のようにfindする ex: f auth /var. 第一引数にキーワード，第二引数にディレクトリを指定　第二引数を省略した場合はカレントディレクトリが対象，第一引数も省略した場合は除外条件を除く，すべてのファイルが表示
+# 除外条件：ディレクトリそのもの，隠しディレクトリ以下
+# ex: ls -Fl $(f sh /bin)
+if [[ -n "$PS1" ]]; then
+   f() {
+      find "${2:-.}" \! -type d \! -path "*/.*" -path "*$1*" |& grep -v -F ": Permission denied" | sort
+   }
+fi
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
