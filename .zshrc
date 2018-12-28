@@ -1,25 +1,5 @@
-alias 'seccon'='cd $HOME/Downloads/ctf/seccon2017'
-OS=`uname -s | perl -pe 's/\n//g'`
-
-# scalaenv
-export PATH="${PATH}:${HOME}/.scalaenv/bin"
-eval "$(scalaenv init -)"
-
-# OS依存なもの
-case ${OS} in
-  "Linux" )
-    source ~/dotfiles/shell/zshrc.linux
-    ;;
-  "Darwin" )
-    source ~/dotfiles/shell/zshrc.osx
-    ;;
-  * ) echo "[-] Unknown OS type"; exit ;;
-esac
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color) color_prompt=yes;;
-esac
+# common settings
+source ~/dotfiles/.shrc
 
 # 言語設定
 export LANG=en_US.UTF-8
@@ -126,11 +106,6 @@ export ZLS_COLORS=$LS_COLORS
 # lsコマンド時、自動で色がつく
 export CLICOLOR=true
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-  xterm-color) color_prompt=yes;;
-esac
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -186,8 +161,19 @@ SPROMPT="%{$fg[green]%}%{$suggest%}possible : %B%r%b %{$fg[green]%}? [y,n,a,e]:$
 
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
-# who am i
-alias pc="echo poppycompass"
+alias '| l'='| less -N'
+alias '../'='cd ../'
+
+# OS依存なもの, exportの後に実行すること(共通設定に上書き)
+case ${OS} in
+  "Linux" )
+    source ~/dotfiles/shell/zshrc.linux
+    ;;
+  "Darwin" )
+    source ~/dotfiles/shell/zshrc.osx
+    ;;
+  * ) echo "[-] Unknown OS type"; exit ;;
+esac
 
 # fzf
 if [ -f ~/.fzf.zsh ]; then
@@ -272,3 +258,114 @@ if [ -f ~/.fzf.zsh ]; then
     fi
   }
 fi
+
+# cd && ls
+function cd() {
+  builtin cd $@ && ls --color=auto -F;
+}
+
+# mkdir && cd
+function mc() {
+  if [[ $# -gt 0 ]]; then
+    mkdir $1 && cd $1
+  else
+    echo "mc <dir_name>"
+  fi
+}
+
+# ファイルにはless, ディレクトリにはlsを実行する
+function l() {
+  # if the argument is a single file or stdin is pipe
+  if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
+    ${PAGER:-less} -N "$@"
+  else
+    ls -alFh --color=auto "$@"
+  fi
+}
+
+# プロセスリストをgrep する ex: p apache2
+function p() {
+  if [[ $# -gt 0 ]]; then
+    ps aux | grep "$@"
+  else
+    ps aux
+  fi
+}
+
+# コマンドヒストリをgrepする．
+function h() {
+  if [[ $# -gt 0 ]]; then
+    #      history | tac | sort -k2 -u | sort | grep "$@"
+    history | grep "$@"
+  else
+    history
+  fi
+}
+
+# findで見つけたファイルを表示し，lessする
+function fl() {
+  if [[ $# -gt 0 ]]; then
+    list=`find -type f -name $1 2>/dev/null`
+    if [[ $list = "" ]]; then
+      line="0"
+    else
+      line=`echo $list | wc -l`
+    fi
+    case "$line" in
+      "0") echo "No file" ;;
+      "1") less $list ;;
+      *)   echo -en $list | nl
+           arr=(`echo $list | tr -s '\n', ' '`)
+           echo -en "file: "
+           read num
+           less $arr[$num] 2>/dev/null ;;
+    esac
+  else
+    echo "fl \"<file_name>\""
+  fi
+}
+
+# cut | uniq | sortを簡略化
+function cus() {
+  if [[ $# -eq 2 ]]; then
+    cut -d"$1" -f$2 | uniq | sort
+  else
+    cut -d":" -f1 | uniq | sort
+  fi
+}
+
+# grep のようにfindする ex: f auth /var. 第一引数にキーワード，第二引数にディレクトリを指定　第二引数を省略した場合はカレントディレクトリが対象，第一引数も省略した場合は除外条件を除く，すべてのファイルが表示
+# 除外条件：ディレクトリそのもの，隠しディレクトリ以下
+# ex: ls -l $(f sh /bin)
+#if [[ -n "$PS1" ]]; then
+#  f() {
+#    find "${2:-.}" \! -type d \! -path "*/.*" -path "*$1*" |& grep -v -F ": Permission denied" | sort
+#  }
+#fi
+
+# ctf
+# plt一覧表示
+function plt() {
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | grep "@plt>:"
+  else
+    echo "Usage: plt ./bin"
+  fi
+}
+# gotアドレスの表示
+function got() {
+  if [ $# -eq 1 ]; then
+    #objdump -M intel -d $@ | grep "@plt>:" -A1
+    objdump -R $@
+  else
+    echo "Usage: got ./bin"
+  fi
+}
+# objdump -M intel -d ./bin | less
+function ob() {
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | less
+  else
+    echo "Usage: ob ./bin"
+  fi
+}
