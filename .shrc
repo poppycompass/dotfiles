@@ -15,7 +15,7 @@ export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
 
 # scalaenv
-export PATH="${PATH}:${HOME}/.scalaenv/bin"
+#export PATH="${PATH}:${HOME}/.scalaenv/bin"
 eval "$(scalaenv init -)"
 
 # set a fancy prompt (non-color, unless we know we "want" color)
