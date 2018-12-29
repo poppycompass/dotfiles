@@ -42,7 +42,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 alias 'less'='less -N'
-if [ -f /usr/nvim ]; then
+if [ -f /usr/bin/nvim ]; then
   alias 'vim'='nvim'
   alias 'vi'='nvim'
   alias 'v'='nvim'
