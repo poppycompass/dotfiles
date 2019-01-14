@@ -2,13 +2,11 @@ clear Lock
 keycode  66 = Control_L NoSymbol Control_L NoSymbol Control_L
 keycode 105 = End NoSymbol End NoSymbol End
 keycode 100 = Caps_Lock NoSymbol Caps_Lock NoSymbol NoSymbol Caps_Lock
-keycode 110 = Menu NoSymbol Menu NoSymbol Menu
-keycode 112 = XF86Back NoSymbol XF86Back NoSymbol XF86Back
-keycode 115 = Control_R NoSymbol Control_R NoSymbol Control_R
-keycode 117 = XF86Forward NoSymbol XF86Forward NoSymbol XF86Forward
-keycode 135 = Home NoSymbol Home NoSymbol Home
-keycode 166 = Prior NoSymbol Prior NoSymbol Prior
-keycode 167 = Next NoSymbol Next NoSymbol Next
+keycode 107 = Home NoSymbol Home NoSymbol Home
+keycode 110 = XF86Back NoSymbol XF86Back NoSymbol XF86Back
+keycode 112 = Prior NoSymbol Prior NoSymbol Prior
+keycode 115 = XF86Forward NoSymbol XF86Forward NoSymbol XF86Forward
+keycode 117 = Next NoSymbol Next NoSymbol Next
 add Control = Control_L
 
 keycode 102 = Alt_L Alt_L Alt_L Alt_L Alt_L 
