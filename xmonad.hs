@@ -2,6 +2,7 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Actions.UpdatePointer
 import XMonad.Util.Run
 
 main :: IO ()
@@ -16,8 +17,10 @@ main = do
                                        { ppOutput = hPutStrLn xmproc
                                        , ppTitle  = xmobarColor "green" "" . shorten 50
                                        }
+                                   myLogHook wsbar
+                                     >> updatePointer (0.5, 0.5) (0, 0)
             , handleEventHook    = handleEventHook def <+> docksEventHook -- 最初のワークスペースでxmobarが後ろに隠れてしまう問題を解決
-            , borderWidth        = 3                     -- 周りの枠線の太さ
+            , borderWidth        = 5                     -- 周りの枠線の太さ
             , normalBorderColor  = "#e6e6e6"             -- 枠の色
             , focusedBorderColor = "#ff0000"             -- 選択枠の色
             , terminal           = "urxvt"               -- 起動端末
@@ -35,3 +38,4 @@ myManageHook = composeAll
 myLogHook h  = dynamicLogWithPP xmobarPP {
                    ppOutput = hPutStrLn h
                  }
+--               >> updatePointer (0.8, 0.2) (0.5, 0.5)
