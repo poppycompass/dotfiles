@@ -21,9 +21,38 @@ on_i = 1
 of_ft = ['snippet']
 depends = ['neosnippet-snippets']
 
-#[[plugins]]
-#repo = 'jsfaint/gen_tags.vim'
-#on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
-#hook_add = '''
-#  source ~/.vim/userautoload/plugins/plugins-gen_tags.vim
-#'''
+[[plugins]]
+repo = 'jsfaint/gen_tags.vim'
+on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-gen_tags.vim
+'''
+
+[[plugins]]
+repo = 'lighttiger2505/gtags.vim'
+on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
+hook_add = '''
+  " Option
+  let g:Gtags_Auto_Map = 0
+  let g:Gtags_OpenQuickfixWindow = 1
+  nmap [gtags] <Nop>
+  map <C-\> [gtags]
+  " if you want grep among source
+  " <C-g> and -g <func><CR>
+  nmap <silent> [gtags]<C-g> :Gtags<SPACE>
+  " 今開いているコードの関数一覧がQuickfix Listに表示
+  nmap <silent> [gtags]<C-\> :Gtags -f %<CR>
+  " 定義先へ飛ぶ
+  nmap <silent> <C-]> :GtagsCursor<CR>
+  " カーソル以下の使用箇所を探す
+  nmap <silent> [gtags]<C-k> :Gtags -r <C-r><C-w><CR>
+  " open preview window and output word under the cursor
+  nmap <silent> [gtags]<C-d> :execute 'psearch ' . expand('<cword>')<CR>
+  " ???
+  nmap <silent> [gtags]<C-z> :Gozilla<CR>
+  " Quickfixでの移動
+  nnoremap <F11> :cn<CR>
+  nnoremap <F12> :cp<CR>
+  nmap <silent> [gtags]<C-c> :<C-u>cfirst<CR>
+  nmap <silent> [gtags]<C-d> :<C-u>clast<CR>
+'''
