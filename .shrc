@@ -18,6 +18,7 @@ export XDG_CONFIG_HOME=$HOME/dotfiles
 
 # go
 export GOPATH=$HOME/go
+export GOBIN="$GOPATH/tools" # binary file for development
 
 # scalaenv
 #export PATH="${PATH}:${HOME}/.scalaenv/bin"
