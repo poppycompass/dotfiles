@@ -1,13 +1,6 @@
 # common settings
 source ~/dotfiles/.shrc
 
-# 言語設定
-export LANG=en_US.UTF-8
-
-# エディタはvim
-#export EDITOR=vim
-export EDITOR=nvim
-
 # PCRE 互換の正規表現を使う
 setopt re_match_pcre
 

@@ -2,6 +2,8 @@
 OS=`uname -s | perl -pe 's/\n//g'`
 
 # export
+export LANG=en_US.UTF-8
+export EDITOR=nvim # or vim
 export PATH=$PATH:$HOME/.cabal/bin
 export SDL_VIDEO_X11_DGAMOUSE=0
 export VIDEO_FORMAT="NISC"
@@ -13,6 +15,9 @@ export LAB=$HOME/work/lab
 export TEX=$HOME/work/template/tex
 export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
+
+# go
+export GOPATH=$HOME/go
 
 # scalaenv
 #export PATH="${PATH}:${HOME}/.scalaenv/bin"
