@@ -4,7 +4,7 @@ OS=`uname -s | perl -pe 's/\n//g'`
 # export
 export LANG=en_US.UTF-8
 export EDITOR=nvim # or vim
-export PATH=$PATH:$HOME/.cabal/bin
+export PATH=$PATH:$HOME/.cabal/bin:$HOME/go/tools
 export SDL_VIDEO_X11_DGAMOUSE=0
 export VIDEO_FORMAT="NISC"
 export GTK_IM_MODULE=ibus
