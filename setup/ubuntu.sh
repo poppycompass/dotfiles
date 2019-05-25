@@ -13,10 +13,10 @@ case ${VER} in
   "16.04") sudo add-apt-repository -y ppa:neovim-ppa/unstable && \
            sudo apt update && \
            sudo apt install ${NEOVIM} ${BASIC} && \
-           sudo pip3 install neovim ;;
+           sudo pip3 install neovim neovim-remote ;;
   "18.04") sudo apt update && \
            sudo apt install ${NEOVIM} ${BASIC} && \
-           sudo pip3 install neovim ;;
+           sudo pip3 install neovim neovim-remote ;;
   * ) echo "[-] WTF?! OS version not found." ;;
 esac
 

@@ -8,6 +8,16 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'Shougo/unite.vim'
+[[plugins]]
+repo = 'Shougo/vimfiler.vim'
+depends = ['unite']
+hook_add = '''
+  let g:vimfilter_as_default_explorer = 1
+  let g:vimfiler_safe_mode_by_default = 0
+'''
+
+[[plugins]]
 repo = 'nixprime/cpsm'
 build = 'env PY3=ON ./install.sh'
 hook_add = '''
