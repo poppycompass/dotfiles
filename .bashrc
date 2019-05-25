@@ -175,67 +175,12 @@ if [ -f ~/.fzf.bash ]; then
   }
 fi
 
-# cd && ls
-function cd() {
-    builtin cd $@ && ls --color=auto -F;
-}
-# ファイルにはless, ディレクトリにはlsを実行する
-function l() {
-   # if the argument is a single file or stdin is pipe
-   if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
-      ${PAGER:-less} "$@"
-   else
-      ls -alF --color=auto "$@"
-   fi
-}
-
-# プロセスリストをgrep する ex: p apache2
-function p() {
-   if [[ $# -gt 0 ]]; then
-      ps aux | grep "$@"
-   else
-      ps aux
-   fi
-}
-# コマンドヒストリをgrepする．
-function h() {
-   if [[ $# -gt 0 ]]; then
-#      history | tac | sort -k2 -u | sort | grep "$@"
-      history | grep "$@"
-   else
-      history
-   fi
-}
 # 通常シェルが終了する時に更新される.bash_historyをコマンド実行後とに更新する 複数シェルを起動している状態で，他のシェルのヒストリを手元に反映させたいときはhisotry -n
 if [[ -n "$PS1" ]]; then
    shopt -s histappend
    PROMPT_COMMAND='history -a'
 fi
 
-# plt一覧表示
-function plt() {
-    if [ $# -eq 1 ]; then
-        objdump -M intel -d $@ | grep "@plt>:"
-    else
-        echo "Usage: plt ./bin"
-    fi
-}
-# gotアドレスの表示
-function got() {
-    if [ $# -eq 1 ]; then
-        objdump -M intel -d $@ | grep "@plt>:" -A1
-    else
-        echo "Usage: got ./bin"
-    fi
-}
-# objdump -M intel -d ./bin | less
-function ob() {
-    if [ $# -eq 1 ]; then
-        objdump -M intel -d $@ | less
-    else
-        echo "Usage: ob ./bin"
-    fi
-}
 # grep のようにfindする ex: f auth /var. 第一引数にキーワード，第二引数にディレクトリを指定　第二引数を省略した場合はカレントディレクトリが対象，第一引数も省略した場合は除外条件を除く，すべてのファイルが表示
 # 除外条件：ディレクトリそのもの，隠しディレクトリ以下
 # ex: ls -Fl $(f sh /bin)
@@ -256,4 +201,3 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-

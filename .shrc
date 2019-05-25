@@ -35,6 +35,107 @@ xmodmap $HOME/.Xmodmap
 xset r rate 180
 xset -b
 
+# cd && ls
+function cd() {
+  builtin cd $@ && ls --color=auto -F;
+}
+
+# mkdir && cd
+function mc() {
+  if [[ $# -gt 0 ]]; then
+    mkdir $1 && cd $1
+  else
+    echo "mc <dir_name>"
+  fi
+}
+
+# ファイルにはless, ディレクトリにはlsを実行する
+function l() {
+  # if the argument is a single file or stdin is pipe
+  if [[ ($# -eq 1 && -f "$1") || (-p /dev/stdin) ]]; then
+    ${PAGER:-less} -N "$@"
+  else
+    ls -alFh --color=auto "$@"
+  fi
+}
+# プロセスリストをgrep する ex: p apache2
+function p() {
+  if [[ $# -gt 0 ]]; then
+    ps aux | grep "$@"
+  else
+    ps aux
+  fi
+}
+# コマンドヒストリをgrepする．
+function h() {
+  if [[ $# -gt 0 ]]; then
+    #      history | tac | sort -k2 -u | sort | grep "$@"
+    history | grep "$@"
+  else
+    history
+  fi
+}
+# findで見つけたファイルを表示し，lessする
+function fl() {
+  if [[ $# -gt 0 ]]; then
+    list=`find -type f -name $1 2>/dev/null`
+    if [[ $list = "" ]]; then
+      line="0"
+    else
+      line=`echo $list | wc -l`
+    fi
+    case "$line" in
+      "0") echo "No file" ;;
+      "1") less $list ;;
+      *)   echo -en $list | nl
+           arr=(`echo $list | tr -s '\n', ' '`)
+           echo -en "file: "
+           read num
+           less $arr[$num] 2>/dev/null ;;
+    esac
+  else
+    echo "fl \"<file_name>\""
+  fi
+}
+# cut | uniq | sortを簡略化
+function cus() {
+  if [[ $# -eq 2 ]]; then
+    cut -d"$1" -f$2 | uniq | sort
+  else
+    cut -d":" -f1 | uniq | sort
+  fi
+}
+# ctf
+# plt一覧表示
+function plt() {
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | grep "@plt>:"
+  else
+    echo "Usage: plt ./bin"
+  fi
+}
+# gotアドレスの表示
+function got() {
+  if [ $# -eq 1 ]; then
+    #objdump -M intel -d $@ | grep "@plt>:" -A1
+    objdump -R $@
+  else
+    echo "Usage: got ./bin"
+  fi
+}
+# objdump -M intel -d ./bin | less
+function ob() {
+  if [ $# -eq 1 ]; then
+    objdump -M intel -d $@ | less
+  else
+    echo "Usage: ob ./bin"
+  fi
+}
+# nvim端末内のカレントディレクトリ移動
+function nd () {
+  nvr -c "cd "`pwd`
+}
+
 # alias
 alias pc="echo poppycompass" # who am i
 alias ls='ls --color=auto -hF'
