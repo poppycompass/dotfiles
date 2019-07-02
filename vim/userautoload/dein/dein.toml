@@ -5,6 +5,7 @@ repo = 'Shougo/dein.vim'
 repo = 'Shougo/denite.nvim'
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-denite.vim
+  nnoremap <silent> <Leader>f :VimFiler<CR>
 '''
 
 [[plugins]]
@@ -28,11 +29,11 @@ hook_add = '''
 repo = 'Shougo/neomru.vim'
 
 # ファイルエクスプローラー(https://kamiya555.github.io/2015/10/14/nerdtree-command/)
-[[plugins]]
-repo = 'scrooloose/nerdtree' 
-hook_add = ''' 
-  nnoremap <silent> <Leader>f :<C-u>NERDTreeToggle<CR> let NERDTreeIgnore = ['\.pyc$']
-'''
+#[[plugins]]
+#repo = 'scrooloose/nerdtree' 
+#hook_add = ''' 
+#  nnoremap <silent> <Leader>f :<C-u>NERDTreeToggle<CR> let NERDTreeIgnore = ['\.pyc$']
+#'''
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'

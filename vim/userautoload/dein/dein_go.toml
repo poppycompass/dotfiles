@@ -2,10 +2,19 @@
 repo = 'fatih/vim-go'
 on_ft = ['go']
 hook_add = '''
+let mapleader = "\<Space>"
 "" go runのキーマッピング  
-au FileType go nmap gr (go-run)  
+au FileType go nmap <silent> <Leader>r <Plug>(go-run)
 """ go testのキーマッピング  
-au FileType go nmap gt (go-test)  
+au FileType go nmap <silent> <Leader>t <Plug>(go-test)
+au FileType go nmap <silent> <Leader>s <Plug>(go-def-split)
+au FileType go nmap <silent> <Leader>v <Plug>(go-def-vertical)
+au FileType go nmap <silent> <leader>at :GoAddTags<CR>
+au FileType go nmap <silent> <leader>fs :GoFillStruct<CR>
+au FileType go nmap <silent> <leader>ei :GoIfErr<CR>
+au FileType go nmap <silent> <leader>ki :GoKeyify<CR>
+au FileType go nmap <silent> <leader>dd :GoDeclsDir<CR>
+au FileType go nmap <silent> <leader>ip :GoImpl<CR>
 "" highlight  
 let g:go_hightlight_functions = 1  
 let g:go_hightlight_methods = 1  
@@ -15,6 +24,9 @@ let g:go_hightlight_operators = 1
 let g:go_hightlight_build_constraints = 1  
 "" GoFmt時にインポートするパッケージを整理(GoFmtはファイル書き込み時に自動的に実行される)  
 let g:go_fmt_command = "goimports"  
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet'] " パワーがないマシンのときは構文チェックだけにする
+let g:go_term_mode = 'split' " GoRun/GoTest画面分割方法
 '''
 
 [[plugins]]
@@ -30,4 +42,36 @@ hook_add = '''
 let g:syntastic_mode_map = { 'mode': 'passive',
     \ 'active_filetypes': ['go'] }
     let g:syntastic_go_checkers = ['go', 'golint']
+'''
+
+[[plugins]]
+repo = ''
+hook_add = '''
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 '''
