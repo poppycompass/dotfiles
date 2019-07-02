@@ -1,5 +1,6 @@
 # common settings for all shell
 OS=`uname -s | perl -pe 's/\n//g'`
+THINKPAD=true # Do you love Thinkpad :) ?
 
 # export
 export LANG=en_US.UTF-8
@@ -19,7 +20,6 @@ export TEX=$HOME/work/template/tex
 export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
 
-
 # scalaenv
 #export PATH="${PATH}:${HOME}/.scalaenv/bin"
 #eval "$(scalaenv init -)"
@@ -34,6 +34,11 @@ xmodmap $HOME/.Xmodmap
 #setxkbmap -option ctrl:nocaps
 xset r rate 180
 xset -b
+
+# thinkpad
+if "${THINKPAD}"; then
+  $HOME/dotfiles/setup/thinkpad.sh
+fi
 
 # cd && ls
 function cd() {
@@ -202,3 +207,4 @@ alias 'fn'="find . -name"
 alias 'nautilus'='nautilus --no-desktop --browser' # GNOME in xmonad
 alias 'pac'='pacman' # for arch
 alias 'nr'='nvr'
+
