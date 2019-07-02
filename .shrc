@@ -4,7 +4,10 @@ OS=`uname -s | perl -pe 's/\n//g'`
 # export
 export LANG=en_US.UTF-8
 export EDITOR=nvim # or vim
-export PATH=$PATH:$HOME/.cabal/bin:$HOME/go/tools
+# go
+export GOPATH=$HOME/go
+export GOBIN="$GOPATH/tools" # binary file for development
+export PATH=$PATH:$HOME/.cabal/bin:$GOBIN
 export SDL_VIDEO_X11_DGAMOUSE=0
 export VIDEO_FORMAT="NISC"
 export GTK_IM_MODULE=ibus
@@ -16,9 +19,6 @@ export TEX=$HOME/work/template/tex
 export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
 
-# go
-export GOPATH=$HOME/go
-export GOBIN="$GOPATH/tools" # binary file for development
 
 # scalaenv
 #export PATH="${PATH}:${HOME}/.scalaenv/bin"
@@ -201,3 +201,4 @@ alias 'mu'='alsamixer'
 alias 'fn'="find . -name"
 alias 'nautilus'='nautilus --no-desktop --browser' # GNOME in xmonad
 alias 'pac'='pacman' # for arch
+alias 'nr'='nvr'
