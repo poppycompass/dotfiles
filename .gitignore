@@ -2,6 +2,7 @@ conkyrc_sample
 nvim
 shortcut_global.vim
 pulse/
+ibus/
 gtk-2.0/
 configstore/
 brasero/
