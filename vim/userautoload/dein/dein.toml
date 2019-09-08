@@ -1,6 +1,7 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 hook_add = '''
@@ -136,4 +137,14 @@ hook_source = '''
   inoremap <expr><tab> pumvisible() ? "\<C-n>" :
     \ neosnippet#expandable_or_jumpable() ?
     \ "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+
+[[plugins]]
+repo = 'yuratomo/w3m.vim'
+hook_add = '''
+  let g:w3m#command = '/usr/bin/w3m'
+  let g:w3m#external_browser = 'google-chrome-stable'
+  let g:w3m#homepage = "http://www.google.co.jp/"
+  let g:w3m#hit_a_hint_key = 'f'
+  let g:w3m#lang = 'en_US'
 '''
