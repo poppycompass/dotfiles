@@ -5,6 +5,7 @@ THINKPAD=true # Do you love Thinkpad :) ?
 # export
 export LANG=en_US.UTF-8
 export EDITOR=nvim # or vim
+export D=$HOME/Downloads
 # go
 export GOPATH=$HOME/go
 export GOBIN="$GOPATH/tools" # binary file for development
