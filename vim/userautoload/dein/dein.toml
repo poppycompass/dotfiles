@@ -148,3 +148,21 @@ hook_add = '''
   let g:w3m#hit_a_hint_key = 'f'
   let g:w3m#lang = 'en_US'
 '''
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+depends = ['async.vim']
+hook_add = '''
+  let g:lsp_log_verbose = 1
+  let g:lsp_log_file = expand('~/vim-lsp.log')
+  call lsp#register_server({
+      \ 'name': 'clangd',
+      \ 'cmd': {server_info->['clangd']},
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+      \ })
+  " オムニ補完設定
+  autocmd FileType typescript setlocal omnifunc=lsp#complete
+'''
