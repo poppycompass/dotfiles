@@ -3,14 +3,6 @@ repo = 'mattn/emmet-vim'
 on_ft = ['html', 'css', 'javascript']
 
 [[plugins]]
-repo = 'taichouchou2/surround.vim'
-on_ft = ['html', 'css', 'javascript']
-
-[[plugins]]
-repo = 'open-browser.vim'
-on_ft = ['html', 'css', 'javascript']
-
-[[plugins]]
 repo = 'mattn/webapi-vim'
 on_ft = ['html', 'css', 'javascript']
 
@@ -19,13 +11,9 @@ repo = 'hail2u/vim-css3-syntax'
 on_ft = ['html', 'css', 'javascript']
 
 [[plugins]]
-repo = 'taichouchou2/html5.vim'
-on_ft = ['html', 'css', 'javascript']
-
-[[plugins]]
-repo = 'taichouchou2/vim-javascript'
-on_ft = ['html', 'css', 'javascript']
-
-[[plugins]]
 repo = 'kchmck/vim-coffee-script'
+on_ft = ['html', 'css', 'javascript']
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
 on_ft = ['html', 'css', 'javascript']
