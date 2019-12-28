@@ -1,22 +1,17 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-denite.vim
-  nnoremap <silent> <Leader>f :VimFiler<CR>
 '''
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
-[[plugins]]
-repo = 'Shougo/vimfiler.vim'
-depends = ['unite']
+repo = 'Shougo/defx.nvim'
 hook_add = '''
-  let g:vimfilter_as_default_explorer = 1
-  let g:vimfiler_safe_mode_by_default = 0
+  source ~/.vim/userautoload/plugins/plugins-defx.vim
+  nnoremap <silent><Space>f :Defx -split=vertical -winwidth=30 -direction=topleft<CR>
 '''
 
 [[plugins]]
@@ -63,10 +58,6 @@ hook_add = '''
 #  let g:gitgutter_realtime = 0
 #  let g:gitgutter_eager = 0
 #'''
-
-# 非常に重い
-#[[plugins]]
-#repo = 'Shougo/unite.vim' 
 
 # nerdtreeにGitの状態を表示, 重い
 [[plugins]]

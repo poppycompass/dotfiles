@@ -3,9 +3,9 @@ nmap [denite] <Nop>
 map <C-D> [denite]
 
 " プロジェクト内のファイル検索
-nmap <silent> [denite]<C-F> :Denite file_rec<CR>
+nmap <silent> [denite]<C-F> :Denite -auto-action=preview file/rec<CR>
 " 検索結果のプレピュー付き
-nmap <silent> [denite]<C-P> :Denite -auto_preview grep<CR>
+nmap <silent> [denite]<C-P> :Denite grep<CR>
 " 前回の結果を再表示
 nmap <silent> [denite]<C-R> :Denite -resume<CR>
 " バッファに展開中のファイル 
@@ -14,8 +14,8 @@ nmap <silent> [denite]<C-B> :Denite buffer<CR>
 nmap <silent> [denite]<C-O> :Denite outline<CR>
 " neoyank
 nmap <silent> [denite]<C-Y> :Denite neoyank<CR>
-" dotfiles配下をカレントにし _rec起動
-nmap <silent> [denite]<C-V> :call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+" dotfiles配下をカレントにし /rec起動
+nmap <silent> [denite]<C-V> :call denite#start([{'name': 'file/rec', 'args': ['~/dotfiles']}])<CR>
 " カーソル以下の単語をgrep
 nmap <silent> [denite]<C-G> :DeniteCursorWord grep -buffer-name=search line<CR><C-R><C-W><CR>
 
