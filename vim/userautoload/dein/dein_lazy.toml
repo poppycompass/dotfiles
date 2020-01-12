@@ -56,3 +56,19 @@ hook_add = '''
   nmap <silent> [gtags]<C-c> :<C-u>cfirst<CR>
   nmap <silent> [gtags]<C-d> :<C-u>clast<CR>
 '''
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
+hook_add = '''
+  " 関数位置の更新に必要な時間
+  set updatetime=500
+  let g:tagbar_width = 30
+  let g:tagbar_autoshowtag = 1
+  " ステータスラインの参考 %{tagbar#currenttag('[%s]','')} がタグを表示している部分
+  set statusline=%F%m%r%h%w\%=%{tagbar#currenttag('[%s]','')}\[Pos=%v,%l]\[Len=%L]
+  filetype on
+  nnoremap <Space>t :TagbarToggle<CR>
+'''
+
+
