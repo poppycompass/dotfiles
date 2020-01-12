@@ -9,4 +9,4 @@ TrackPointAS=`xinput --list-props ${TrackPointID} | perl -ne 'if ($_=~/Accel Spe
 xinput --set-prop ${TrackPointID} ${TrackPointAS} ${SPEED} # 0~1.0, make mouse pointer fast
 
 TouchPadID=`xinput --list --short | perl -ne 'if ($_=~/TouchPad/) {s/.*id=(\d+).*/$1/; print $_}'`
-xinput --disable ${TouchPadID} # disable touchpad
+#xinput --disable ${TouchPadID} # disable touchpad
