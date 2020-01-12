@@ -99,10 +99,6 @@ hook_add = '''
   nnoremap mg  :MemoGrep<CR>
 '''
 
-# neosnippet
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
 # deoplete
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
@@ -157,3 +153,12 @@ hook_add = '''
   " オムニ補完設定
   autocmd FileType typescript setlocal omnifunc=lsp#complete
 '''
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-ale.vim
+'''
+
+[[plugins]]
+repo = 'tpope/vim-commentary'
