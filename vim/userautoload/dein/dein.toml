@@ -26,8 +26,8 @@ repo = 'Shougo/neomru.vim'
 
 # ファイルエクスプローラー(https://kamiya555.github.io/2015/10/14/nerdtree-command/)
 #[[plugins]]
-#repo = 'scrooloose/nerdtree' 
-#hook_add = ''' 
+#repo = 'scrooloose/nerdtree'
+#hook_add = '''
 #  nnoremap <silent> <Leader>f :<C-u>NERDTreeToggle<CR> let NERDTreeIgnore = ['\.pyc$']
 #'''
 
@@ -159,6 +159,22 @@ repo = 'dense-analysis/ale'
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-ale.vim
 '''
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+depends = ['lightline.vim', 'ale']
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+hook_source = '''
+  inoremap <C-s> <Plug>(neosnippet_expand_or_jump)
+  snoremap <C-s> <Plug>(neosnippet_expand_or_jump)
+  xnoremap <C-s> <Plug>(neosnippet_expand_target)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+on_i = 1
+depends = ['neosnippet-snippets']

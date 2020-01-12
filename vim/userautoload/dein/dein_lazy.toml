@@ -8,20 +8,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-hook_source = '''
-  imap <C-l> <Plug>(neosnippet_expand_or_jump)
-  smap <C-l> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-l> <Plug>(neosnippet_expand_target)
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
-'''
-on_i = 1
-of_ft = ['snippet']
-depends = ['neosnippet-snippets']
-
-[[plugins]]
 repo = 'jsfaint/gen_tags.vim'
 on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
 hook_add = '''
@@ -70,5 +56,5 @@ hook_add = '''
   filetype on
   nnoremap <Space>t :TagbarToggle<CR>
 '''
-
-
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
