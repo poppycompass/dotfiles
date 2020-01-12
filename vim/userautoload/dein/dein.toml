@@ -167,14 +167,4 @@ depends = ['lightline.vim', 'ale']
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-hook_source = '''
-  inoremap <C-s> <Plug>(neosnippet_expand_or_jump)
-  snoremap <C-s> <Plug>(neosnippet_expand_or_jump)
-  xnoremap <C-s> <Plug>(neosnippet_expand_target)
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
-'''
-on_i = 1
-depends = ['neosnippet-snippets']
+repo = 'Shougo/neosnippet-snippets'

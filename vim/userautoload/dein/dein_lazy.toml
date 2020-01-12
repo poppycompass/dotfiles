@@ -1,4 +1,17 @@
-# 条件付きの読み込みは遅延読み込み扱い
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+hook_source = '''
+  imap <C-s> <Plug>(neosnippet_expand_or_jump)
+  smap <C-s> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-s> <Plug>(neosnippet_expand_target)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+on_i = 1
+on_ft = ['snippet']
+depends = ['neosnippet-snippets']
+
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
@@ -56,5 +69,3 @@ hook_add = '''
   filetype on
   nnoremap <Space>t :TagbarToggle<CR>
 '''
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'

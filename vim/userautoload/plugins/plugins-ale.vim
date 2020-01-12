@@ -8,12 +8,12 @@ let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 let g:ale_statusline_format = ['x %d', '! %d', 'o ok']
 " ファイル保存時にチェック
-let g:ale_lint_on_save = 0
+let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 " ファイルオープン時にチェックしない
 let g:ale_lint_on_enter = 0
 let g:ale_set_loclist = 0
-"let g:ale_set_quickfix = 1
+let g:ale_set_quickfix = 0
 let g:ale_open_list = 1
 nmap <silent> ,k <Plug>(ale_previous_wrap)
 nmap <silent> ,j <Plug>(ale_next_wrap)
