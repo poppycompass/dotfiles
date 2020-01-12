@@ -11,6 +11,9 @@ call defx#custom#column('mark', {
       \ 'readonly_icon': '☓',
       \ 'selected_icon': '✓',
       \ })
+call defx#custom#option('_', {
+     \ 'show_ignored_files': 1,
+     \ })
 call defx#is_opened_tree()
 
 autocmd FileType defx call s:defx_my_settings()
@@ -26,9 +29,9 @@ autocmd FileType defx call s:defx_my_settings()
      \ defx#do_action('move')
       nnoremap <silent><buffer><expr> p
      \ defx#do_action('paste')
-      nnoremap <silent><buffer><expr> l
+      nnoremap <silent><buffer><expr> o
      \ defx#do_action('open')
-      nnoremap <silent><buffer><expr> E
+      nnoremap <silent><buffer><expr> v
      \ defx#do_action('open', 'vsplit')
       nnoremap <silent><buffer><expr> P
      \ defx#do_action('open', 'pedit')
