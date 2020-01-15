@@ -20,6 +20,7 @@ nmap <silent> ,j <Plug>(ale_next_wrap)
 " Formatter設定
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'javascript':['eslint'],
   \   'python': ['black'],
   \ }
 let g:ale_fix_on_save = 1

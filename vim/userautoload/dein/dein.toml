@@ -168,3 +168,28 @@ repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'vim-scripts/taglist.vim'
+hook_add = '''
+  let Tlist_Show_One_File = 1
+  let Tlist_Use_Right_Window = 1
+  let Tlist_Exit_OnlyWindow = 1
+  nmap <silent> <leader>t :TlistToggle<CR>
+'''
+[[plugins]]
+repo = 'wesleyche/SrcExpl'
+hook_add = '''
+  let g:SrcExpl_RefreshTime = 1
+  let g:SrcExpl_WinHeight = 9
+  let g:SrcExpl_UpdateTags = 1
+  let g:SrcExpl_RefreshMapKey = "<Space>"
+  let g:SrcExpl_GoBackMapKey  = "<C-b>"
+  nmap <F8> :SrcExplToggle<CR>
+'''
+
+#[[plugins]]
+#repo = 'neoclide/coc.nvim'
+#hook_add = '''
+#  source ~/.vim/userautoload/plugins/plugins-coc.vim
+#"'''
