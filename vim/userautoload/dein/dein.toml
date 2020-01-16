@@ -24,13 +24,6 @@ hook_add = '''
 [[plugins]]
 repo = 'Shougo/neomru.vim'
 
-# ファイルエクスプローラー(https://kamiya555.github.io/2015/10/14/nerdtree-command/)
-#[[plugins]]
-#repo = 'scrooloose/nerdtree'
-#hook_add = '''
-#  nnoremap <silent> <Leader>f :<C-u>NERDTreeToggle<CR> let NERDTreeIgnore = ['\.pyc$']
-#'''
-
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
@@ -58,11 +51,6 @@ hook_add = '''
 #  let g:gitgutter_realtime = 0
 #  let g:gitgutter_eager = 0
 #'''
-
-# nerdtreeにGitの状態を表示, 重い
-[[plugins]]
-repo = 'Xuyuanp/nerdtree-git-plugin'
-depends = ['nerdtree']
 
 [[plugins]]
 repo = 'vim-scripts/Align'
@@ -136,57 +124,20 @@ hook_add = '''
   let g:w3m#lang = 'en_US'
 '''
 
-[[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-depends = ['async.vim']
-hook_add = '''
-  let g:lsp_log_verbose = 1
-  let g:lsp_log_file = expand('~/vim-lsp.log')
-  call lsp#register_server({
-      \ 'name': 'clangd',
-      \ 'cmd': {server_info->['clangd']},
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-      \ })
-  " オムニ補完設定
-  autocmd FileType typescript setlocal omnifunc=lsp#complete
-'''
-
-[[plugins]]
-repo = 'dense-analysis/ale'
-hook_add = '''
-  source ~/.vim/userautoload/plugins/plugins-ale.vim
-'''
-[[plugins]]
-repo = 'maximbaz/lightline-ale'
-depends = ['lightline.vim', 'ale']
+#[[plugins]]
+#repo = 'dense-analysis/ale'
+#hook_add = '''
+#  source ~/.vim/userautoload/plugins/plugins-ale.vim
+#'''
+#[[plugins]]
+#repo = 'maximbaz/lightline-ale'
+#depends = ['lightline.vim', 'ale']
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
-repo = 'vim-scripts/taglist.vim'
-hook_add = '''
-  let Tlist_Show_One_File = 1
-  let Tlist_Use_Right_Window = 1
-  let Tlist_Exit_OnlyWindow = 1
-  nmap <silent> <leader>t :TlistToggle<CR>
-'''
-[[plugins]]
-repo = 'wesleyche/SrcExpl'
-hook_add = '''
-  let g:SrcExpl_RefreshTime = 1
-  let g:SrcExpl_WinHeight = 9
-  let g:SrcExpl_UpdateTags = 1
-  let g:SrcExpl_RefreshMapKey = "<Space>"
-  let g:SrcExpl_GoBackMapKey  = "<C-b>"
-  nmap <F8> :SrcExplToggle<CR>
-'''
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
