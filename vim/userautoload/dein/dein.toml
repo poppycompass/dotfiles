@@ -124,14 +124,14 @@ hook_add = '''
   let g:w3m#lang = 'en_US'
 '''
 
-#[[plugins]]
-#repo = 'dense-analysis/ale'
-#hook_add = '''
-#  source ~/.vim/userautoload/plugins/plugins-ale.vim
-#'''
-#[[plugins]]
-#repo = 'maximbaz/lightline-ale'
-#depends = ['lightline.vim', 'ale']
+[[plugins]]
+repo = 'dense-analysis/ale'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-ale.vim
+'''
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+depends = ['lightline.vim', 'ale']
 
 [[plugins]]
 repo = 'tpope/vim-commentary'
@@ -143,4 +143,4 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'neoclide/coc.nvim'
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-coc.vim
-"'''
+'''
