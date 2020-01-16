@@ -58,6 +58,7 @@ if [ ! -d ~/.fzf ]; then
 fi
 
 mkdir -p ~/.vim/bundle
+mkdir -p ~/.config/coc/extensions
 ln -sf ~/dotfiles/vim/after ~/.vim/
 ln -sf ~/dotfiles/vim/colors ~/.vim/
 ln -sf ~/dotfiles/vim/userautoload ~/.vim/

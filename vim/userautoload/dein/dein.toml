@@ -188,8 +188,8 @@ hook_add = '''
   nmap <F8> :SrcExplToggle<CR>
 '''
 
-#[[plugins]]
-#repo = 'neoclide/coc.nvim'
-#hook_add = '''
-#  source ~/.vim/userautoload/plugins/plugins-coc.vim
-#"'''
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-coc.vim
+"'''
