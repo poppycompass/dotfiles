@@ -22,7 +22,7 @@ set textwidth=0 " 入力中のテキスト最大幅．幅を越えると空白�
 
 
 "検索/置換の設定"
-set ruler " 画面右下のカーソル位置表示" 
+set ruler " 画面右下のカーソル位置表示"
 set hlsearch "検索文字列をハイライトする"
 set ignorecase " 検索時に文字の大小を区別しない
 set smartcase " 検索時に大文字を含んでいたら大小を区別する
@@ -64,7 +64,7 @@ set noswapfile "ファイル編集中にスワップファイルを作らない"
 set path+=/usr/local/include
 
 "コマンドラインモードでのTABキーによるファイル名補完を有効にする"
-set wildmenu wildmode=list:full "タブによるファイル名補完.マッチした候補を表示しつつ順番に候補を変えていく" 
+set wildmenu wildmode=list:full "タブによるファイル名補完.マッチした候補を表示しつつ順番に候補を変えていく"
 
 
 " キーバインド
@@ -126,9 +126,9 @@ nnoremap <silent> s- <C-w>-
 nnoremap <silent> sv <C-w>v
 nnoremap <silent> sm :sp<CR>
 " 分割してファイル選択
-"nmap <silent> ,h :Hexplore<CR>
-"nmap <silent> ,v :Vexplore<CR>
-"nmap <silent> ,e :Explore<CR>
+nmap <silent> ,h :Hexplore<CR>
+nmap <silent> ,v :Vexplore<CR>
+nmap <silent> ,e :Explore<CR>
 
 " Quickrun
 nmap <silent> ,r :w<CR>:QuickRun<CR>
@@ -147,7 +147,7 @@ nmap <silent> ,D :w<CR>:copen<CR>:make<CR><CR>:make test<CR><CR>
 nmap ,u bguwA
 " 単語の大文字化
 nmap ,U bgUwA
-" 畳み込み 現在畳み込まれている行で行うと一行追加できる. 
+" 畳み込み 現在畳み込まれている行で行うと一行追加できる.
 nmap ,z zfj
 " C等の関数向け畳み込み
 nmap ,{ zfa{
@@ -176,7 +176,7 @@ nmap <silent> .t :tabnew<CR>:terminal<CR>
 nmap <C-l> :!xlock<CR>
 
 " 検索用
-nmap m/ /\*\*\* 
+nmap m/ /\*\*\*\
 " <Leader>をspaceに
 let mapleader = "\<Space>"
 
@@ -188,8 +188,8 @@ endif
 
 augroup fileTypeIndent
   autocmd!
-  autocmd BufNewFile,BufRead *.txt setlocal tabstop=2 softtabstop=2 shiftwidth=2 
-  autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+  autocmd BufNewFile,BufRead *.txt setlocal tabstop=2 softtabstop=2 shiftwidth=2
+  autocmd BufNewFile,BufRead *.tex setlocal tabstop=2 softtabstop=2 shiftwidth=2
   autocmd BufNewFile,BufRead *.py  setlocal tabstop=2 softtabstop=2 shiftwidth=2
   autocmd BufNewFile,BufRead *.rb  setlocal tabstop=2 softtabstop=2 shiftwidth=2
   autocmd BufNewFile,BufRead *.go  setlocal tabstop=4 softtabstop=4 shiftwidth=4

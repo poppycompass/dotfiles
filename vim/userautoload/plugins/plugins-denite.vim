@@ -5,10 +5,10 @@ map <C-D> [denite]
 " プロジェクト内のファイル検索
 nmap <silent> [denite]<C-F> :Denite -auto-action=preview file/rec<CR>
 " 検索結果のプレピュー付き
-nmap <silent> [denite]<C-P> :Denite grep<CR>
+nmap <silent> [denite]<C-P> :Denite -auto-action=preview grep<CR>
 " 前回の結果を再表示
 nmap <silent> [denite]<C-R> :Denite -resume<CR>
-" バッファに展開中のファイル 
+" バッファに展開中のファイル
 nmap <silent> [denite]<C-B> :Denite buffer<CR>
 " ファイル内の関数/クラス等の
 nmap <silent> [denite]<C-O> :Denite outline<CR>
@@ -18,7 +18,6 @@ nmap <silent> [denite]<C-Y> :Denite neoyank<CR>
 nmap <silent> [denite]<C-V> :call denite#start([{'name': 'file/rec', 'args': ['~/dotfiles']}])<CR>
 " カーソル以下の単語をgrep
 nmap <silent> [denite]<C-G> :DeniteCursorWord grep -buffer-name=search line<CR><C-R><C-W><CR>
-
 
 " プロンプト変更
 call denite#custom#option('default', 'prompt', '$')
@@ -52,3 +51,20 @@ call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
     \ [ '.git/', '.ropeproject/', '__pycache__/',
     \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/',
     \   'deps/'])
+
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction

@@ -143,4 +143,7 @@ repo = 'Shougo/neosnippet-snippets'
 repo = 'neoclide/coc.nvim'
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-coc.vim
+  nnoremap <silent>,h :sp<CR>:Defx<CR>
+  nnoremap <silent>,v :vsplit<CR>:Defx<CR>
+  nnoremap <silent>,e :Defx -split=vertical -winwidth=30 -direction=topleft<CR>
 '''

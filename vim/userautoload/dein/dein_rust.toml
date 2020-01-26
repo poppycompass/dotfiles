@@ -1,0 +1,20 @@
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_source = '''
+    let g:rustfmt_autosave = 1
+    let g:rust_doc#define_map_K = 0
+'''
+[[plugins]]
+repo = 'rust-lang-nursery/rustfmt'
+on_ft = 'rust'
+[[plugins]]
+repo = 'racer-rust/vim-racer'
+on_ft = 'rust'
+hook_source = '''
+  au FileType rust nmap gd <Plug>(rust-def)
+  au FileType rust nmap gs <Plug>(rust-def-split)
+  au FileType rust nmap gx <Plug>(rust-def-vertical)
+  au FileType rust nmap gt <Plug>(rust-def-tab)
+  au FileType rust nmap <leader>gd <Plug>(rust-doc)
+'''

@@ -3,6 +3,7 @@ let g:ale_linters = {
   \   'javascript': ['eslint'],
   \   'python': ['flake8'],
   \   'ruby': ['rubocop'],
+  \   'rust': ['rustfmt'],
   \}
 " 常にシンボルカラムの表示
 let g:ale_sign_column_always = 1
@@ -25,6 +26,7 @@ let g:ale_fixers = {
   \   'javascript':['eslint'],
   \   'python': ['autopep8', 'black', 'isort'],
   \   'ruby': ['rubocop'],
+  \   'rust': ['rustfmt'],
   \ }
 let g:ale_fix_on_save = 1
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'

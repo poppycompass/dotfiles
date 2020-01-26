@@ -15,7 +15,7 @@ depends = ['neosnippet-snippets']
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
+on_ft = ['python', 'ruby', 'go', 'c', 'cpp', 'rust']
 depends = ['vimproc.vim']
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-quickrun.vim
@@ -59,7 +59,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
-on_ft = ['python', 'ruby', 'go', 'c', 'cpp']
+on_ft = ['python', 'ruby', 'go', 'c', 'cpp', 'rust']
 hook_add = '''
   " 関数位置の更新に必要な時間
   set updatetime=500
