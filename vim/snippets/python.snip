@@ -1,0 +1,4 @@
+snippet httplib2
+  import httplib2
+  h = httplib2.Http(".cache")
+  (resp_headers, content) = h.request("https://${1}", "GET")
