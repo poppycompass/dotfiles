@@ -6,7 +6,7 @@ NEOVIM="neovim python-dev python-pip python3-dev python3-pip software-properties
 XMONAD="xmobar xmonad rxvt-unicode-256color gmrun suckless-tools chromium-browser"
 
 echo "[+] OS version is ${VERSION}"
-case "${VERSION}" in
+case ${VERSION} in
   "12.04") sudo apt-get update && \
            sudo apt-get install ${NEOVIM} ${BASIC} ;;
   "14.04" | \
