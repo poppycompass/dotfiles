@@ -1,12 +1,12 @@
 # setup script for ubuntu/debian
 
-VER=`lsb_release -a | grep Release | cut -d: -f2 | sed -e's/\t//g'`
+VERSION=`cat /etc/os-release | grep "^VERSION_ID=" | cut -d'=' -f2 | perl -pe 's/\n//g'`
 BASIC="zsh git vim gcc gdb ctags libncurses5-dev libboost-all-dev cmake"
 NEOVIM="neovim python-dev python-pip python3-dev python3-pip software-properties-common"
 XMONAD="xmobar xmonad rxvt-unicode-256color gmrun suckless-tools chromium-browser"
 
-echo "[+] OS version is ${VER}"
-case ${VER} in
+echo "[+] OS version is ${VERSION}"
+case ${VERSION} in
   "12.04") sudo apt-get update && \
            sudo apt-get install ${NEOVIM} ${BASIC} ;;
   "14.04" | \
@@ -21,8 +21,9 @@ case ${VER} in
 esac
 
 if [ "$1" = "x" ]; then
-  sudo apt install ${XMONAD} ;;
+  sudo apt install ${XMONAD} ;
 fi
+
 # install global
 if [ ! -d /usr/local/global ]; then
   global="global-6.5.7"
