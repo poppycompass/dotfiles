@@ -3,7 +3,6 @@ let g:ale_linters = {
   \   'javascript': ['eslint'],
   \   'python': ['flake8'],
   \   'ruby': ['rubocop'],
-  \   'rust': ['rustfmt'],
   \}
 " 常にシンボルカラムの表示
 let g:ale_sign_column_always = 1
