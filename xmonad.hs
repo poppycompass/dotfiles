@@ -2,6 +2,7 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.SetWMName
 import XMonad.Actions.UpdatePointer
 import XMonad.Util.Run
 
@@ -17,13 +18,13 @@ main = do
                                        { ppOutput = hPutStrLn xmproc
                                        , ppTitle  = xmobarColor "green" "" . shorten 50
                                        }
-                                   myLogHook wsbar
                                      >> updatePointer (0.5, 0.5) (0, 0)
             , handleEventHook    = handleEventHook def <+> docksEventHook -- 最初のワークスペースでxmobarが後ろに隠れてしまう問題を解決
             , borderWidth        = 5                     -- 周りの枠線の太さ
             , normalBorderColor  = "#e6e6e6"             -- 枠の色
             , focusedBorderColor = "#ff0000"             -- 選択枠の色
             , terminal           = "urxvt"               -- 起動端末
+            , startupHook        = setWMName "LG3D"      -- Java GUI
           }
 
 myModMask = mod1Mask -- ~/.Xmodmapで無変換キーをAltにする． keycode 102 = Alt_L Alt_L Alt_L Alt_L Alt_L, 数値(102)はxevで確認
@@ -34,8 +35,3 @@ myManageHook = composeAll
     , className =? "Vncviewer" --> doFloat
     , className =? "VirtualBox" --> doFloat
     ]
-
-myLogHook h  = dynamicLogWithPP xmobarPP {
-                   ppOutput = hPutStrLn h
-                 }
---               >> updatePointer (0.8, 0.2) (0.5, 0.5)
