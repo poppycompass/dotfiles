@@ -97,8 +97,8 @@ nmap ,E :e ++enc=
 " tabnew
 nmap <silent> ,t :tabnew<CR>:Explore<CR>
 " tab移動
-nmap <silent> <C-n> gt
-nmap <silent> <C-p> gT
+nnoremap <silent> <C-n> gt
+nnoremap <silent> <C-p> gT
 " ウィンドウ移動 <C-w> -> s
 nnoremap <silent> sh <C-w>h
 nnoremap <silent> sj <C-w>j
