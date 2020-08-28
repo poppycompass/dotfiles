@@ -1,4 +1,193 @@
-snippet httplib2
-  import httplib2
-  h = httplib2.Http(".cache")
-  (resp_headers, content) = h.request("https://${1}", "GET")
+snippet http
+  import urllib.request
+  response = urllib.request.urlopen("https://example.com")
+  print('url:', response.geturl())
+  print('code:', response.getcode())
+  print('Content-Type:', response.info()['Content-Type'])
+  content = response.read()
+  html = content.decode()
+  print(content)
+  print(html)
+  response.close()
+  # download
+  urllib.request.urlretrieve("http://google.com", "download")
+snippet htmlparser
+  # https://qiita.com/Taillook/items/a0f2c59d8e17381fc835
+  from html.parser import HTMLParser
+  import re
+  import urllib.request
+  target = "https://google.com"
+  savefile = ""
+  headers = { "User-Agent" :  "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)" }
+  class MyHTMLParser(HTMLParser):
+      def __init__(self):
+          HTMLParser.__init__(self)
+          self.title = False
+          self.link = False
+          self.data = []
+          self.url = ""
+      def handle_starttag(self, tag, attrs):
+          attrs = dict(attrs)
+          if tag == "h1":
+              self.data.append({})
+              self.title = True
+          if tag == "a": # is <a> tag?
+              attrs = dict(attrs) # tuple -> dict
+          if 'href' in attrs: # href?
+              self.url = attrs['href']
+              self.data[-1].update({"link": attrs['href']})
+      def handle_endtag(self, tag): # 開始・終了タグに囲まれた中身の処理
+          if self.url and re.match('^http', self.url): # http tag?
+              print(self.url)
+              urllib.request.urlretrieve(self.data['link'], savefile)
+              self.url = ""
+      def handle_data(self, data):
+          if self.title:
+              self.title = False
+              self.data[-1].update({"title": data})
+          #print("data: " , data)
+          return data
+  req = urllib.request.Request(target, None, headers)
+  response = urllib.request.urlopen(req)
+  content = response.read()
+  html = content.decode()
+  parser = MyHTMLParser()
+  parser.feed(html)
+  print(parser.data[0]["title"])
+  for i in parser.data:
+      print("title: " + i["title"])
+snippet crawl_img
+  from html.parser import HTMLParser
+  import re
+  import urllib.request
+  import time
+  import os
+
+  target = "https//${1:url}"
+  savedir_base = "${2:dir}"
+  headers = { "User-Agent" : "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)" }
+
+  def download(url, savedir, num_pages):
+    base_url = "${3:base}" + url.split("/")[-2] + "/"
+    for i in range(1, num_pages):
+      image_url = base_url + str(i) + ".jpg"
+      savefile = savedir + "/" + str(i) + ".jpg"
+      print("[+] save " + str(i) + ".jpg")
+      urllib.request.urlretrieve(image_url, savefile)
+      time.sleep(30)
+
+  class MyHTMLParser(HTMLParser):
+    def __init__(self):
+      HTMLParser.__init__(self)
+      self.title = False
+      self.data = []
+    def handle_starttag(self, tag, attrs):
+      if tag == "h2":
+        self.data.append({})
+        self.title = True
+      if tag == "img":
+        attrs = dict(attrs)
+        if attrs.get("data-src") != None:
+          self.data.append({})
+          self.data[-1].update({"link": attrs["data-src"]})
+    def handle_endtag(self, tag):
+      return
+    def handle_data(self, data):
+      if self.title:
+        self.data[-1].update({"title": data})
+        self.title = False
+      if data.endswith("pages"):
+        self.data.append({})
+        self.data[-1].update({"page": data.strip(" pages")})
+
+  req = urllib.request.Request(target, None, headers)
+  response = urllib.request.urlopen(req)
+  content = response.read()
+  html = content.decode()
+  parser = MyHTMLParser()
+  parser.feed(html)
+
+  num_pages = 0
+  url = ""
+  title = ""
+  valid_link = True
+  valid_page = True
+  valid_title = True
+  for d in parser.data:
+    if d.get("title") and valid_title:
+      valid_title = False
+      title = d['title']
+    elif d.get("link") and d['link'].startswith("${4:word}") and valid_link:
+      valid_link = False
+      url = d['link']
+    elif d.get("page") and valid_page:
+      valid_page = False
+      num_pages = int(d['page'])
+
+  savedir = savedir_base + title
+  os.mkdir(savedir)
+  download(url, savedir, num_pages)
+snippet crawler
+  #https://qiita.com/Chanmoro/items/f4df85eb73b18d902739
+  #https://qiita.com/naka-j/items/4b2136b7b5a4e2432da8
+  #pyquery
+snippet xor
+  def xor(x, y):
+      return [(ord(a) ^ b) for a, b in zip(x, y)]
+snippet ch
+  ch = string.printable
+snippet try
+    try:
+        assert expect == output, 'except: {0}, output: {1}'.format(except, output)
+    except AssertionError as err:
+        print('AssertionError :', err)
+snippet is_odd
+  is_odd = lambda arg: arg % 2 != 0
+snippet itertools
+  # https://docs.python.org/ja/3/library/itertools.html
+  import itertools
+  for s in itertools.permutations("ABC", 2):
+    print(s)
+snippet binary_search
+    def binary_search(nums, target):
+        low = 0
+        high = len(nums)-1
+        while low <= high:
+            middle = (low+high)//2
+            if nums[middle] == target:
+                return middle
+            elif nums[middle] > target:
+                high = middle - 1
+            else:
+                low = middle + 1
+        return -1
+snippet unique_list
+    # 二重配列のリストから重複を削除したいとき
+    seen = []
+    return [x for x in ret if x not in seen and not seen.append(x)]
+snippet list
+  list2 = [[0 for _ in range(3)] for _ in range(2)]
+  [i for i in l if i % 2 != 0]
+snippet quick_sort
+    def quick_sort(self, nums):
+        left = []
+        right = []
+        if len(nums) <= 1:
+            return nums
+        mid = nums[0]
+        count = 0
+        for n in nums:
+            if n < mid:
+                left.append(n)
+            elif n > mid:
+                right.append(n)
+            else:
+                count += 1
+        left = quick_sort(left)
+        right = quick_sort(right)
+        return left + [mid] * count + right
+snippet counter
+  # https://note.nkmk.me/python-collections-counter/
+  import collections
+snippet if_line
+  x = "OK" if n == 10 else "NG"
