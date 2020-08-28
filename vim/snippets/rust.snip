@@ -1,0 +1,173 @@
+snippet args
+  use std::env;
+  let args: Vec<String> = env::args().collect();
+  let argv = args.len();
+
+snippet for
+  for x in 0..10 {
+    println!("{}", x);
+  }
+snippet fread
+  use std::fs::File;
+  use std::io::prelude::*;
+  use std::io::{self, BufRead, BufReader};
+  fn main() -> Result<(), Box<std::error::Error>> {
+      for result in BufReader::new(File::open("path/to/file")?).lines() {
+          let l = result?;
+          println!("{}", l);
+      }
+      Ok(())
+  }
+
+snippet fwrite
+  use std::fs;
+  use std::io::{BufWriter, Write};
+  let b = b"test";
+  let mut f = BufWriter::new(fs::File::create("rs.dump").unwrap());
+  for _ in 0 .. 100_000_000 {
+      f.write(b).unwrap();
+  }
+
+snippet do-while
+  //https://scrapbox.io/nwtgck/Rust%E3%81%A7do-while%E3%82%92%E6%9B%B8%E3%81%8D%E3%81%9F%E3%81%84%E3%81%AA%E3%82%89%E6%9D%A1%E4%BB%B6%E5%BC%8F%E3%82%92%E3%83%96%E3%83%AD%E3%83%83%E3%82%AF%E3%81%AB%E3%81%99%E3%82%8C%E3%81%B0%E8%89%AF%E3%81%8B%E3%81%A3%E3%81%9F
+   while {
+     let x = foo();
+     bar(x);
+     x != 0 // 条件式
+   } {}
+snippet while
+  let mut x = 5; // mut x: i32
+  let mut done = false; // mut done: bool
+  while !done {
+      x += x - 3;
+      println!("{}", x);
+      if x % 5 == 0 {
+          done = true;
+      }
+  }
+snippet split
+   let v: Vec<&str> = "hello,world,goodbye,world".split(',').collect();
+   assert_eq!(v, ["hello", "world", "goodbye", "world"]);
+   let val = match base_name_vstr.last() {
+       Some(val) => val,
+       None => "",
+   };
+snippet env
+  use std::env;
+  let home = match env::var("HOME") {
+    Ok(val) => val,
+    Err(err) => {
+      println!("{}: {}", err, home);
+    },
+  };
+snippet cast
+  let at_sign = 64 as char;
+snippet str2num
+  let a_str: String = String::form("5");
+  let num: i32 = a_str.parse().unwrap();
+snippet num2str
+  let num: i32 = 5;
+  let a_str = num.to_string();
+snippet hashmap
+  // https://doc.rust-jp.rs/book/second-edition/ch08-03-hash-maps.html
+  use std::collections::HashMap;
+  let mut example = HashMap::new(); // e.g. type; std::collections::HashMap<String, i16>
+  example.insert(String::from("Blue"), 10);
+  example.entry(String::from("Yellow")).or_insert(50); // insert if not exists
+  example.get("c"), Some(&1972)); // get()を使うと、キーが存在する場合はSomeを、存在しない場合はNoneを返す
+  example.contains_key("rust"); // contains_key()でキーが存在するかの判定(ture/false)
+  for (key, value) in &example {
+    println!("{}: {}", key, value);
+  }
+snippet trim
+  // https://doc.rust-lang.org/std/primitive.str.html
+  "${1:str}".trim(''); // remove space/tab
+  "${1:str}".trim_end(''); // remove from end
+  "${1:str}".trim_start(''); // remove from end
+  "11abc11".trim_matches('1'); // return 'abc'
+  "11abc11".trim_start_matches('1'); // return 'abc11'
+  "11abc11".trim_end_matches('1'); // return '11abc'
+
+snippet strip
+  "foobar".strip_prefix("foo") // return 'bar'
+  "barfoo".strip_suffix("foo") // return 'bar'
+
+snippet vec
+  use std::vec;
+  let v: Vec<&str> = "a/b"c.split("/").collect();
+  let a: Vec::new();
+  v.contains("a");
+  if v.contains(&String::from("word")) {
+  }
+snippet test
+  // https://doc.rust-jp.rs/the-rust-programming-language-ja/1.6/book/testing.html
+  // $ cargo test
+  #[cfg(test)]
+  mod tests {
+    use super::*;
+    #[test]
+    fn it_works() {
+      assert_eq!(4, 2+2);
+    }
+  }
+snippet debug
+  // http://doc.rust-jp.rs/rust-by-example-ja/hello/print/print_debug.html
+  // https://qiita.com/rejasupotaro/items/e45fe64623ac7462e2a9
+  // Cargo.toml
+  // [+] env_logger = "*"
+  // [+] log = "*"
+  use env_logger;
+  use log::{debug, error, info, warn};
+  use std::env;
+  env::set_var("RUST_LOG", "debug");
+  env_logger::init();
+  debug!("debug");
+  info!("info");
+  warn!("warn");
+  error!("error");
+snippet global
+  thread_local!(static TEST = "abc");
+  TESTS.with(|TESTS| TESTS.contains(&"a"));
+snippet struct
+  // https://qiita.com/MoriokaReimen/items/b32ebcb0ab23bffd7e9b
+snippet enum
+  enum EnumTest {
+      A(i64),
+  }
+  let a = EnumTest::A(32);
+  let num;
+  match a {
+      EnumTest::A(n) => num = n,
+  };
+}
+snippet collect
+  // type annotations needed
+  "do Output.printString(\"THE AVERAGE IS: \");".chars().collect::<Vec<char>>()
+snippet mod
+  // https://keens.github.io/blog/2018/12/08/rustnomoju_runotsukaikata_2018_editionhan/
+snippet filename
+  // https://doc.rust-lang.org/std/path/struct.Path.html#method.file_stem
+  use std::ffi::OsStr;
+  use std::path::Path;
+  let path = Path::new("test.rs");
+  let basename_str = path.file_stem().unwrap();
+  let outfile_str = path.with_extension("xml");
+
+snippet dotenv
+  // https://crates.io/crates/dotenv
+  // add Cargo.toml
+  // [+] dotenv = "*"
+  // [+] dotenv_codegen = "*"
+  #[macro_use]
+  extern crate dotenv_codegen;
+  use dotenv::dotenv;
+  use dotenv_codegen::dotenv;
+  use std::env;
+
+  // read project top dir's .env
+  println!("{}", dotenv!("PROJECT"));
+snippet box
+  https://sioyaki.com/archives/1678
+  let hoge_box = Box::new("hoge".to_string());
+  assert_eq!(&hoge_box, &Box::new("hoge".to_string()));
+  assert_eq!(*hoge_box, "hoge".to_string());

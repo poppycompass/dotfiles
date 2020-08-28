@@ -1,0 +1,35 @@
+snippet if
+  if [ ${1:conditions} ];then
+    echo 'true'
+  else
+    echo 'false'
+  fi
+
+snippet while
+  while read line
+  do
+    echo "$line"
+  done <test.txt
+snippet for
+  for (i = 0; i < length(arr); i++) {
+    printf "%s,", arr[i]
+  }
+snippet swap
+  {
+    for (i=1; i<=NF; i++)  {
+      a[NR,i] = $i
+    }
+  }
+  NF>p
+  {
+    p = NF
+  }
+  END {
+    for(j=1; j<=p; j++) {
+      str=a[1,j];
+      for(i=2; i<=NR; i++){
+        str=str" "a[i,j];
+      }
+      print str
+    }
+  }
