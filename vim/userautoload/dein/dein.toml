@@ -148,8 +148,12 @@ hook_add = '''
   nnoremap <silent>,e :Defx -split=vertical -winwidth=30 -direction=topleft<CR>
 '''
 
+# :help sonictemplate-vim-writetemplate
 [[plugins]]
 repo = 'mattn/vim-sonictemplate'
+hook_add = '''
+  let g:sonictemplate_vim_template_dir = '~/dotfiles/vim/template'
+'''
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
