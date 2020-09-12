@@ -61,6 +61,7 @@ hook_add = '''
 repo = 'majutsushi/tagbar'
 on_ft = ['python', 'ruby', 'go', 'c', 'cpp', 'rust']
 hook_add = '''
+  let g:airline#extensions#tagbar#enabled = 0
   " 関数位置の更新に必要な時間
   set updatetime=500
   let g:tagbar_width = 30
@@ -70,3 +71,4 @@ hook_add = '''
   filetype on
   nnoremap <Space>t :TagbarToggle<CR>
 '''
+
