@@ -147,3 +147,9 @@ hook_add = '''
   nnoremap <silent>,v :vsplit<CR>:Defx<CR>
   nnoremap <silent>,e :Defx -split=vertical -winwidth=30 -direction=topleft<CR>
 '''
+
+[[plugins]]
+repo = 'mattn/vim-sonictemplate'
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
