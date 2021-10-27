@@ -103,6 +103,10 @@ export CLICOLOR=true
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# 出力結果をクリップボードにコピー
+# $ pwd | cl
+alias cl="xclip -in -sel clip"
+
 # 補完候補に色を付ける
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
@@ -214,14 +218,14 @@ if [ -f ~/.fzf.zsh ]; then
         echo fatal: Not a git repository.
         return
     fi
-  
+
     local selectedWorkTreeDir=`git worktree list | fzf | awk '{print $1}'`
-  
+
     if [ "$selectedWorkTreeDir" = "" ]; then
         # Ctrl-C.
         return
     fi
-  
+
     cd ${selectedWorkTreeDir}
   }
   fadd() {
