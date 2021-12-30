@@ -31,7 +31,7 @@ case "$TERM" in
 esac
 
 # run
-xmodmap $HOME/.Xmodmap
+#xmodmap $HOME/.Xmodmap
 #setxkbmap -option ctrl:nocaps
 xset r rate 180
 xset -b
@@ -208,4 +208,4 @@ alias 'fn'="find . -name"
 alias 'nautilus'='nautilus --no-desktop --browser' # GNOME in xmonad
 alias 'pac'='pacman' # for arch
 alias 'nr'='nvr'
-
+alias 'adj'='xrandr --output Virtual1 --mode 1920x1200'
