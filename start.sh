@@ -45,7 +45,7 @@ fi
 cd ~/dotfiles
 for file in .?*
 do
-    if [ $file != '..' ] && [ $file != '.Xmodmap' ] && [ $file != '.git' ]; then
+    if [ $file != '..' ] && [ $file != '.git' ]; then
         echo "[+] create link to $HOME/$file"
         ln -sf $HOME/dotfiles/$file $HOME
     fi

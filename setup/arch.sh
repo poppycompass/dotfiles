@@ -5,5 +5,3 @@ if [ "$1" = "x" ]; then
   sudo pacman -S xmonad xmobar rxvt-unicode gmrun dmenu thunderbird firefox
   yaourt -S google-chrome
 fi
-
-ln -sf ~/dotfiles/.Xmodmap.arch ~/.Xmodmap

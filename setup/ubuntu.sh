@@ -40,5 +40,3 @@ if [ ! -d /usr/local/global ]; then
   sudo ln -s /usr/local/global/bin/htags /usr/bin/htags
   sudo ln -s /usr/local/global/bin/htags-server /usr/bin/htags-server
 fi
-
-ln -sf ~/dotfiles/.Xmodmap ~/.Xmodmap
