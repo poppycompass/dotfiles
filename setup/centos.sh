@@ -4,5 +4,3 @@ curl -o /etc/yum.repos.d/dperson-neovim-epel-7.repo https://copr.fedorainfraclou
 yum -y install neovim vim gcc gdb ctags
 yum -y install zsh git
 sudo pip3 install neovim neovim-remote
-
-ln -sf ~/dotfiles/.Xmodmap ~/.Xmodmap

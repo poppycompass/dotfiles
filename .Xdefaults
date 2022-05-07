@@ -24,7 +24,7 @@ URxvt.lineSpace:            0
 
 ! Fonts
 URxvt.allow_bold:           true
-Rxvt*font: xft:MonoSpace:pixelsize=25:antialias=true
+Rxvt*font: xft:TakaoGothic:pixelsize=35:antialias=true
 urxvt*letterSpace: 0
 
 ! Fix font space

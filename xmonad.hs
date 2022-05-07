@@ -27,7 +27,7 @@ main = do
             , startupHook        = setWMName "LG3D"      -- Java GUI
           }
 
-myModMask = mod1Mask -- ~/.Xmodmapで無変換キーをAltにする． keycode 102 = Alt_L Alt_L Alt_L Alt_L Alt_L, 数値(102)はxevで確認
+myModMask = mod1Mask -- udevで無変換キーをAltにする． /etc/udev/hwdb.d
 
 myLayoutHook = avoidStruts $ layoutHook def
 myManageHook = composeAll

@@ -1,6 +1,6 @@
 # common settings for all shell
 OS=`uname -s | perl -pe 's/\n//g'`
-THINKPAD=true # Do you love Thinkpad :) ?
+THINKPAD=false # Do you love Thinkpad :) ?
 
 # export
 export LANG=en_US.UTF-8
@@ -31,7 +31,6 @@ case "$TERM" in
 esac
 
 # run
-xmodmap $HOME/.Xmodmap
 #setxkbmap -option ctrl:nocaps
 xset r rate 180
 xset -b
