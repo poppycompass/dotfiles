@@ -128,7 +128,7 @@ nnoremap <silent> sm :sp<CR>
 " 分割してファイル選択
 nmap <silent> ,h :Hexplore<CR>
 nmap <silent> ,v :Vexplore<CR>
-nmap <silent> ,e :Explore<CR>
+nmap <silent> \ :Explore<CR>
 
 " Quickrun
 nmap <silent> ,r :w<CR>:QuickRun<CR>

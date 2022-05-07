@@ -1,18 +1,66 @@
+# :checkhealth, :message
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# ddc
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-hook_add = '''
-  source ~/.vim/userautoload/plugins/plugins-denite.vim
-'''
+repo = 'vim-denops/denops.vim'
+[[plugins]]
+repo = 'vim-denops/denops-helloworld.vim'
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+depends = ['vim-denops/denops.vim']
+# Install your UIs
+# popup
+[[plugins]]
+repo = 'Shougo/pum.vim'
+depends = ['Shougo/ddu.vim']
+# Install your sources
+# カーソル周辺の既出単語補完 source
+[[plugins]]
+repo = 'Shougo/ddc-around'
+depends = ['Shougo/ddc.vim']
+# ファイル名補完補完 source
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
+depends = ['Shougo/ddc.vim']
+# Install your filters
+# 入力中の単語を補完の対象にする filter
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+depends = ['Shougo/ddc.vim']
+# 補完候補を適切にソートする filter
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+depends = ['Shougo/ddc.vim']
+# 補完候補の重複を防ぐための filter
+[[plugins]]
+repo = 'Shougo/ddc-converter_remove_overlap'
+depends = ['Shougo/ddc.vim']
+# Install your kinds
+# end ddc
 
+# ddu
 [[plugins]]
-repo = 'Shougo/defx.nvim'
-hook_add = '''
-  source ~/.vim/userautoload/plugins/plugins-defx.vim
-  nnoremap <silent><Space>f :Defx -split=vertical -winwidth=30 -direction=topleft<CR>
-'''
+repo = 'Shougo/ddu.vim'
+depends = ['vim-denops/denops.vim']
+[[plugins]]
+repo = 'Shougo/ddu-ui-ff'
+[[plugins]]
+repo = 'Shougo/ddu-source-file'
+[[plugins]]
+repo = 'Shougo/ddu-source-register'
+[[plugins]]
+repo = 'kuuote/ddu-source-mr'
+[[plugins]]
+repo = 'lambdalisue/mr.vim'
+[[plugins]]
+repo = 'shun/ddu-source-buffer'
+[[plugins]]
+repo = 'Shougo/ddu-filter-matcher_substring'
+[[plugins]]
+repo = 'Shougo/ddu-commands.vim'
+# ddu end
 
 [[plugins]]
 repo = 'nixprime/cpsm'
@@ -21,14 +69,49 @@ hook_add = '''
   let g:python3_host_prog = expand('/usr/bin/python3')
 '''
 
+# Update: UpdateRemotePlugins<CR>, default dir: $XDG_CONFIG_HOME/nvim/
 [[plugins]]
-repo = 'Shougo/neomru.vim'
+repo = 'Shougo/deoppet.nvim'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-deoppet.vim
+'''
+
+# neo tree: Neotree
+# :Neotree source=filesystem reveal=true position=left
+# :Neotree /home
+[[plugins]]
+repo = 'nvim-neo-tree/neo-tree.nvim'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-nvim-neo-tree.vim
+'''
+depends = ['nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim']
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+[[plugins]]
+repo = 'MunifTanjim/nui.nvim'
+# neo tree end
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-lightline.vim
 '''
+
+# :Copilot setup, :help copilot
+[[plugins]]
+repo = 'github/copilot.vim'
+
+[[plugins]]
+repo = 'nvim-telescope/telescope.nvim'
+depends = ['nvim-lua/plenary.nvim']
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-telescope.vim
+'''
+
+# :TSInstallinfo/TSUpdate <lang>/:TSUpdate all
+# parser generator/incremental parsing library
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
 
 # vimからGit
 [[plugins]]
@@ -43,102 +126,11 @@ hook_add = '''
   nnoremap <silent> [fugitive]b :Gblame<CR>
 '''
 
-# gitで管理しているファイル編集時に差分を表示, 重い(更新タイミングを少なくして軽量化中)
-#[[plugins]]
-#repo = 'airblade/vim-gitgutter'
-## http://wonderwall.hatenablog.com/entry/2016/03/26/211710
-#hook_add = '''
-#  let g:gitgutter_realtime = 0
-#  let g:gitgutter_eager = 0
-#'''
-
 [[plugins]]
 repo = 'vim-scripts/Align'
 
 [[plugins]]
 repo = 'Shougo/vinarise'
-
-[[plugins]]
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-hook_add = '''
-  nnoremap <C-q> :FZFileList<CR>
-  command! FZFileList call fzf#run({
-    \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
-    \ 'sink': 'e'})
-  command! Fmru FZFMru
-  command! FZFMru call fzf#run({
-    \  'source':  v:oldfiles,
-    \  'sink':    'tabe',
-    \  'options': '-m -x +s',
-    \  'down':    '40%'})
-'''
-
-[[plugins]]
-repo = 'glidenote/memolist.vim'
-# detail: http://blog.glidenote.com/blog/2012/03/26/memolist.vim/
-hook_add = '''
-  let g:memolist_path = "$HOME/memo"
-  let g:memolist_gfixgrep             = 1
-  let g:memolist_filename_prefix_none = 1
-  nnoremap mn  :MemoNew<CR>
-  nnoremap mg  :MemoGrep<CR>
-'''
-
-# deoplete
-[[plugins]]
-repo = 'Shougo/neoyank.vim'
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_event = 'InsertCharPre'
-depends = ['roxma/nvim-yarp', 'roxma/vim-hug-neovim-rpc']
-hook_source = '''
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 0
-  let g:deoplete#auto_complete_start_length = 1
-  let g:deoplete#enable_camel_case = 0
-  let g:deoplete#enable_ignore_case = 0
-  let g:deoplete#enable_refresh_always = 0
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#max_list = 10000
-  " Tab補完
-  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-    \ neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-
-# disabled
-#[[plugins]]
-#repo = 'yuratomo/w3m.vim'
-#hook_add = '''
-#  let g:w3m#command = '/usr/bin/w3m'
-#  let g:w3m#external_browser = 'google-chrome-stable'
-#  let g:w3m#homepage = "http://www.google.co.jp/"
-#  let g:w3m#hit_a_hint_key = 'f'
-#  let g:w3m#lang = 'en_US'
-#'''
-
-[[plugins]]
-repo = 'dense-analysis/ale'
-hook_add = '''
-  source ~/.vim/userautoload/plugins/plugins-ale.vim
-'''
-[[plugins]]
-repo = 'maximbaz/lightline-ale'
-depends = ['lightline.vim', 'ale']
-
-[[plugins]]
-repo = 'tpope/vim-commentary'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
@@ -158,3 +150,13 @@ hook_add = '''
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
+
+# ale
+#[[plugins]]
+#repo = 'dense-analysis/ale'
+#hook_add = '''
+#  source ~/.vim/userautoload/plugins/plugins-ale.vim
+#'''
+#[[plugins]]
+#repo = 'maximbaz/lightline-ale'
+#depends = ['lightline.vim', 'ale']
