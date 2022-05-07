@@ -8,3 +8,5 @@ configstore/
 brasero/
 banshee-1/
 audacious/
+vim/userautoload/node_modules
+yarn.lock
