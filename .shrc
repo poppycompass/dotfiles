@@ -21,6 +21,9 @@ export TEX=$HOME/work/template/tex
 export TC=$HOME/work/templates/ctf
 export XDG_CONFIG_HOME=$HOME/dotfiles
 
+# rootless docker
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+
 # scalaenv
 #export PATH="${PATH}:${HOME}/.scalaenv/bin"
 #eval "$(scalaenv init -)"
