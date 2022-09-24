@@ -19,7 +19,7 @@ export CTF=$HOME/Downloads/ctf
 export LAB=$HOME/work/lab
 export TEX=$HOME/work/template/tex
 export TC=$HOME/work/templates/ctf
-export XDG_CONFIG_HOME=$HOME/dotfiles
+export XDG_CONFIG_HOME=$HOME/.config
 
 # rootless docker
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
