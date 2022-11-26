@@ -65,6 +65,13 @@ ln -sf ~/dotfiles/vim/userautoload ~/.vim/
 ln -sf ~/dotfiles/vim/snippets ~/.vim/
 ln -sf ~/.vim ~/dotfiles/nvim
 ln -sf ~/dotfiles/.vimrc ~/dotfiles/nvim/init.vim
+
+mkdir -p ~/.config/nvim
+ln -sf ~/dotfiles/vim/after ~/.config/nvim
+ln -sf ~/dotfiles/vim/colors ~/.config/nvim
+ln -sf ~/dotfiles/vim/userautoload ~/.config/nvim
+ln -sf ~/dotfiles/vim/snippets ~/.config/nvim
+
 ln -sf ~/dotfiles/xmonad.hs ~/.xmonad/xmonad.hs
 chsh -s /bin/zsh
 
