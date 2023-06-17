@@ -5,6 +5,9 @@ repo = 'Shougo/dein.vim'
 # ddc
 [[plugins]]
 repo = 'vim-denops/denops.vim'
+hook_add = '''
+  call denops#server#start()
+'''
 [[plugins]]
 repo = 'vim-denops/denops-helloworld.vim'
 [[plugins]]
@@ -45,15 +48,20 @@ depends = ['Shougo/ddc.vim']
 repo = 'Shougo/ddu.vim'
 depends = ['vim-denops/denops.vim']
 [[plugins]]
+repo = 'Shougo/ddu-ui-filer'
+hook_add = '''
+  source ~/.vim/userautoload/plugins/plugins-ddu-ui-filer.vim
+'''
+[[plugins]]
+repo = 'Shougo/ddu-kind-file'
+[[plugins]]
+repo = 'Shougo/ddu-column-filename'
+[[plugins]]
 repo = 'Shougo/ddu-ui-ff'
 [[plugins]]
 repo = 'Shougo/ddu-source-file'
 [[plugins]]
 repo = 'Shougo/ddu-source-register'
-[[plugins]]
-repo = 'kuuote/ddu-source-mr'
-[[plugins]]
-repo = 'lambdalisue/mr.vim'
 [[plugins]]
 repo = 'shun/ddu-source-buffer'
 [[plugins]]
@@ -96,11 +104,6 @@ repo = 'itchyny/lightline.vim'
 hook_add = '''
   source ~/.vim/userautoload/plugins/plugins-lightline.vim
 '''
-
-# :Copilot setup, :help copilot
-[[plugins]]
-repo = 'github/copilot.vim'
-
 [[plugins]]
 repo = 'nvim-telescope/telescope.nvim'
 depends = ['nvim-lua/plenary.nvim']
@@ -132,14 +135,11 @@ repo = 'vim-scripts/Align'
 [[plugins]]
 repo = 'Shougo/vinarise'
 
-[[plugins]]
-repo = 'neoclide/coc.nvim'
-hook_add = '''
-  source ~/.vim/userautoload/plugins/plugins-coc.vim
-  nnoremap <silent>,h :sp<CR>:Defx<CR>
-  nnoremap <silent>,v :vsplit<CR>:Defx<CR>
-  nnoremap <silent>,e :Defx -split=vertical -winwidth=30 -direction=topleft<CR>
-'''
+#[[plugins]]
+#repo = 'neoclide/coc.nvim'
+#hook_add = '''
+#  source ~/.vim/userautoload/plugins/plugins-coc.vim
+#'''
 
 # :help sonictemplate-vim-writetemplate
 [[plugins]]
