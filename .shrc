@@ -28,6 +28,10 @@ export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
 #export PATH="${PATH}:${HOME}/.scalaenv/bin"
 #eval "$(scalaenv init -)"
 
+#pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/shims:$PATH"
+eval "$(pyenv init -)"
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
   xterm-color) color_prompt=yes;;
